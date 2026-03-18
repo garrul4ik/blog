@@ -4,357 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ǝuǝƃ {iq=143}</title>
-    <meta name="description" content="ǝuǝƃ {iq=143} — Write where you think. Publish where they look.">
-
+    <meta name="description" content="ǝuǝƃ {iq=143} - Typewriter style listing.">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap');
-
         :root {
-            --black: #0a0a0a;
-            --white: #fafafa;
-            --red: #e63222;
-            --blue: #2244cc;
-            --yellow: #ffcc00;
-            --gray-100: #f2f2f2;
-            --gray-300: #cccccc;
-            --gray-500: #888888;
-            --grid-unit: 8px;
-            --col-width: min(800px, 90vw);
+            --paper: #f3ede0;
+            --ink: #292421;
+            --muted: #5d554f;
+            --accent: #8f2a1d;
+            --rule: #d5c8b2;
+            --max-width: 860px;
         }
-
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-size: 17px;
-            -webkit-font-smoothing: antialiased;
-        }
-
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background: var(--white);
-            color: var(--black);
-            line-height: 1.6;
+            margin: 0;
+            font-family: "Courier Prime", "Courier New", monospace;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.7;
         }
-
-        /* --- Geometric Decoration --- */
-        .geo-bar {
-            height: calc(var(--grid-unit) * 1);
-            background: var(--red);
-            width: 100%;
-        }
-
-        .geo-sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: calc(var(--grid-unit) * 1);
-            height: 100vh;
-            background: var(--blue);
-            z-index: 100;
-        }
-
-        /* --- Layout --- */
-        .index-wrapper {
-            margin-left: calc(var(--grid-unit) * 1);
-            min-height: 100vh;
-        }
-
-        .index-header {
-            max-width: var(--col-width);
-            margin: 0 auto;
-            padding: calc(var(--grid-unit) * 10) calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 6);
-        }
-
-        .index-title {
-            font-size: clamp(2.8rem, 6vw, 4.5rem);
-            font-weight: 700;
-            line-height: 0.95;
-            letter-spacing: -0.04em;
+        .wrap { max-width: var(--max-width); margin: 0 auto; padding: 54px 24px; }
+        h1 {
+            margin: 0;
+            font-size: clamp(2.2rem, 5vw, 3.1rem);
+            letter-spacing: 0.03em;
             text-transform: uppercase;
-            margin-bottom: calc(var(--grid-unit) * 2);
         }
-
-        .index-title .accent {
-            color: var(--red);
-        }
-
-        .index-subtitle {
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--gray-500);
-            max-width: 50ch;
-        }
-
-        /* --- Divider --- */
-        .index-divider {
-            max-width: var(--col-width);
-            margin: 0 auto;
-            padding: 0 calc(var(--grid-unit) * 3);
-        }
-
-        .index-divider hr {
-            border: none;
-            height: 3px;
-            background: var(--black);
-        }
-
-        /* --- Post List --- */
-        .post-list {
-            list-style: none;
-            max-width: var(--col-width);
-            margin: 0 auto;
-            padding: 0 calc(var(--grid-unit) * 3);
-        }
-
-        .post-item {
-            padding: calc(var(--grid-unit) * 4) 0;
-            border-bottom: 1px solid var(--gray-300);
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: calc(var(--grid-unit) * 3);
-            align-items: start;
-        }
-
-        .post-item:first-child {
-            padding-top: calc(var(--grid-unit) * 5);
-        }
-
-        .post-item-link {
-            text-decoration: none;
-            color: inherit;
-            display: contents;
-        }
-
-        .post-item-date-col {
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--gray-500);
-            padding-top: calc(var(--grid-unit) * 0.5);
-        }
-
-        .post-item-date-col .reading-time {
-            display: block;
-            margin-top: calc(var(--grid-unit) * 0.5);
-            color: var(--red);
-            font-weight: 700;
-        }
-
-        .post-item-content {
-            min-width: 0;
-        }
-
-        .post-item-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: -0.01em;
-            text-transform: uppercase;
-            margin-bottom: calc(var(--grid-unit) * 1);
-            transition: color 0.15s;
-        }
-
-        .post-item-link:hover .post-item-title {
-            color: var(--blue);
-        }
-
-        .post-item-excerpt {
-            font-size: 0.9rem;
-            color: var(--gray-500);
-            line-height: 1.5;
-            margin-bottom: calc(var(--grid-unit) * 1.5);
-        }
-
-        .post-item-tags {
-            display: flex;
-            gap: calc(var(--grid-unit) * 0.75);
-            flex-wrap: wrap;
-        }
-
-        .post-item-tags span {
-            font-size: 0.6rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--white);
-            background: var(--black);
-            padding: 2px calc(var(--grid-unit) * 1);
-        }
-
-        /* --- Counter decoration --- */
-        .post-item {
-            counter-increment: posts;
-        }
-
-        .post-item-date-col::before {
-            content: counter(posts, decimal-leading-zero);
-            display: block;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--gray-300);
-            line-height: 1;
-            margin-bottom: calc(var(--grid-unit) * 1.5);
-        }
-
-        .post-list {
-            counter-reset: posts;
-        }
-
-        /* --- Empty State --- */
-        .empty-state {
-            max-width: var(--col-width);
-            margin: 0 auto;
-            padding: calc(var(--grid-unit) * 12) calc(var(--grid-unit) * 3);
-            text-align: center;
-        }
-
-        .empty-state p {
-            font-size: 1rem;
-            color: var(--gray-500);
-            margin-bottom: calc(var(--grid-unit) * 2);
-        }
-
-        .empty-state code {
-            font-family: 'SF Mono', monospace;
-            font-size: 0.82rem;
-            background: var(--gray-100);
-            border: 1px solid var(--gray-300);
-            padding: 4px 8px;
-        }
-
-        /* --- Footer --- */
-        .index-footer {
-            max-width: var(--col-width);
-            margin: 0 auto;
-            padding: calc(var(--grid-unit) * 6) calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 10);
-        }
-
-        .index-footer p {
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--gray-500);
-        }
-
-        /* --- Responsive --- */
-        @media (max-width: 640px) {
-            html { font-size: 15px; }
-
-            .index-header {
-                padding: calc(var(--grid-unit) * 6) calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 4);
-            }
-
-            .post-list {
-                padding: 0 calc(var(--grid-unit) * 2);
-            }
-
-            .post-item {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .post-item-date-col {
-                display: flex;
-                align-items: center;
-                gap: calc(var(--grid-unit) * 2);
-                margin-bottom: calc(var(--grid-unit) * 1);
-            }
-
-            .post-item-date-col::before {
-                font-size: 1.2rem;
-                margin-bottom: 0;
-            }
-
-            .post-item-date-col .reading-time {
-                display: inline;
-                margin-top: 0;
-            }
-
-            .index-divider {
-                padding: 0 calc(var(--grid-unit) * 2);
-            }
-
-            .index-footer {
-                padding: calc(var(--grid-unit) * 4) calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 6);
-            }
+        .subtitle { margin: 10px 0 30px; color: var(--muted); }
+        .list { list-style: none; margin: 0; padding: 0; }
+        .card { border-top: 1px dashed var(--rule); padding: 18px 0; }
+        .card:last-child { border-bottom: 1px dashed var(--rule); }
+        .card a { text-decoration: none; color: inherit; display: block; }
+        .meta { color: var(--muted); font-size: 0.92rem; }
+        h2 { margin: 6px 0 8px; font-size: 1.35rem; color: var(--accent); }
+        .excerpt { margin: 0; color: var(--muted); }
+        .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+        .tags span {
+            font-size: 0.78rem;
+            color: var(--accent);
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 1px;
         }
     </style>
 </head>
 <body>
-    <!-- Bauhaus geometric elements -->
-    <div class="geo-sidebar"></div>
-
-    <div class="index-wrapper">
-        <div class="geo-bar"></div>
-
-        <header class="index-header">
-            <h1 class="index-title">ǝuǝƃ {iq=143}<span class="accent">.</span></h1>
-            <p class="index-subtitle">Write where you think. Publish where they look. Own everything in between.</p>
-        </header>
-
-        <div class="index-divider"><hr></div>
-
+    <main class="wrap">
+        <h1>ǝuǝƃ {iq=143}</h1>
+        <p class="subtitle">Typewriter edition</p>
         
-        <ol class="post-list">
+        <ul class="list">
             
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/pro-messendzher-kham/" class="post-item-link">
-                    <div class="post-item-date-col">
-                        <time datetime="2026-03-17T15:37:03.228543+00:00">March 17, 2026</time>
-                        <span class="reading-time">1 min</span>
-                    </div>
-                    <div class="post-item-content">
-                        <h2 class="post-item-title">Про мессенджер Хам</h2>
-                        <p class="post-item-excerpt">Про мессенджер MAX: если кратко, то не ставьте. Если припрёт, ставьте на отдельный смартфон, купленный на блошином рынке, который не жалко выбросить.</p>
-                        
-                    </div>
+            <li class="card">
+                <a href="https://garrul4ik.github.io/blog/posts/polzovatelskoe-soglashenie-ispolzovaniia-onlain-servisa-donvpn/">
+                    <div class="meta">March 18, 2026 • 3 min read</div>
+                    <h2>Пользовательское соглашение использования онлайн-сервиса DonVPN</h2>
+                    <p class="excerpt">Пользовательское соглашение использования онлайн-сервиса DonVPN</p>
+                    
                 </a>
             </li>
             
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/generatsiia-parolia-na-32-simvola/" class="post-item-link">
-                    <div class="post-item-date-col">
-                        <time datetime="2026-03-17T15:32:10.978853+00:00">March 17, 2026</time>
-                        <span class="reading-time">1 min</span>
-                    </div>
-                    <div class="post-item-content">
-                        <h2 class="post-item-title">генерация пароля на 32 символа</h2>
-                        <p class="post-item-excerpt">> [!done] 
+            <li class="card">
+                <a href="https://garrul4ik.github.io/blog/posts/pro-messendzher-kham/">
+                    <div class="meta">March 17, 2026 • 1 min read</div>
+                    <h2>Про мессенджер Хам</h2>
+                    <p class="excerpt">Про мессенджер MAX: если кратко, то не ставьте. Если припрёт, ставьте на отдельный смартфон, купленный на блошином рынке, который не жалко выбросить.</p>
+                    
+                </a>
+            </li>
+            
+            <li class="card">
+                <a href="https://garrul4ik.github.io/blog/posts/generatsiia-parolia-na-32-simvola/">
+                    <div class="meta">March 17, 2026 • 1 min read</div>
+                    <h2>генерация пароля на 32 символа</h2>
+                    <p class="excerpt">> [!done] 
 > openssl rand -base64 32</p>
-                        
-                    </div>
+                    
                 </a>
             </li>
             
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/opredelenie-smysla-zhizni-po-velleru/" class="post-item-link">
-                    <div class="post-item-date-col">
-                        <time datetime="2026-03-17T15:29:35.177195+00:00">March 17, 2026</time>
-                        <span class="reading-time">1 min</span>
-                    </div>
-                    <div class="post-item-content">
-                        <h2 class="post-item-title">Определение смысла жизни по Веллеру</h2>
-                        <p class="post-item-excerpt">> [!quote] 
+            <li class="card">
+                <a href="https://garrul4ik.github.io/blog/posts/opredelenie-smysla-zhizni-po-velleru/">
+                    <div class="meta">March 17, 2026 • 1 min read</div>
+                    <h2>Определение смысла жизни по Веллеру</h2>
+                    <p class="excerpt">> [!quote] 
 > Осознание и ощущение своей причастности к великому, благому, необходимому, славному делу. Которое значительней и выше нас и нашей личной жизни.</p>
-                        
-                    </div>
+                    
                 </a>
             </li>
             
-        </ol>
+        </ul>
         
-
-        <footer class="index-footer">
-            <p>Published with note2cms — the past-browser publishing protocol</p>
-        </footer>
-    </div>
+    </main>
 </body>
 </html>
