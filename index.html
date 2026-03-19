@@ -4,51 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ǝuǝƃ {iq=143}</title>
-    <meta name="description" content="ǝuǝƃ {iq=143} - AnuPpuccin style listing.">
+    <meta name="description" content="ǝuǝƃ {iq=143} - Blue Topaz style listing.">
     <style>
         :root {
-            --bg: #11111b;
-            --surface: #1e1e2e;
-            --surface-2: #313244;
-            --text: #cdd6f4;
-            --muted: #a6adc8;
-            --accent: #cba6f7;
-            --accent-2: #89b4fa;
-            --rule: #45475a;
-            --radius: 14px;
-            --max-width: 900px;
+            --bg: #f5faff;
+            --surface: #ffffff;
+            --text: #1f2d3d;
+            --muted: #5b7088;
+            --accent: #0b84ff;
+            --accent-2: #00b3c7;
+            --rule: #d9e7f5;
+            --max-width: 920px;
         }
         * { box-sizing: border-box; }
         body {
             margin: 0;
-            font-family: "Inter", "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top right, #181825, var(--bg));
+            font-family: "Segoe UI", "Inter", sans-serif;
+            background: linear-gradient(180deg, var(--bg), #ecf7ff);
             color: var(--text);
             line-height: 1.65;
         }
-        .wrap { max-width: var(--max-width); margin: 0 auto; padding: 52px 20px; }
-        h1 { margin: 0; font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -0.02em; }
-        .subtitle { color: var(--muted); margin: 10px 0 36px; }
-        .list { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+        .wrap { max-width: var(--max-width); margin: 0 auto; padding: 54px 22px; }
+        h1 { margin: 0; font-size: clamp(2.2rem, 5vw, 3rem); }
+        .subtitle { margin: 8px 0 34px; color: var(--muted); }
+        .list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
         .card {
-            background: color-mix(in srgb, var(--surface) 88%, black);
+            background: var(--surface);
             border: 1px solid var(--rule);
-            border-radius: var(--radius);
-            padding: 18px;
+            border-radius: 12px;
+            padding: 16px 18px;
+            box-shadow: 0 8px 24px rgba(11, 132, 255, 0.08);
         }
         .card a { text-decoration: none; color: inherit; display: block; }
         .meta { color: var(--muted); font-size: 0.9rem; }
-        h2 { margin: 6px 0 8px; font-size: 1.3rem; }
-        .excerpt { color: var(--muted); margin: 0; }
-        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+        h2 { margin: 6px 0 7px; font-size: 1.28rem; }
+        .excerpt { margin: 0; color: var(--muted); }
+        .tags { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 12px; }
         .tags span {
-            font-size: 0.75rem;
-            color: var(--accent);
-            border: 1px solid var(--accent-2);
+            font-size: 0.74rem;
+            padding: 2px 9px;
             border-radius: 999px;
-            padding: 2px 10px;
+            border: 1px solid color-mix(in srgb, var(--accent) 40%, white);
+            color: var(--accent);
+            background: color-mix(in srgb, var(--accent-2) 16%, white);
         }
-        .empty { color: var(--muted); padding: 48px 0; text-align: center; }
     </style>
 </head>
 <body>
