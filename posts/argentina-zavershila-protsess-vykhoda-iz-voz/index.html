@@ -11,52 +11,52 @@
     <meta property="og:url" content="https://garrul4ik.github.io/blog/posts/argentina-zavershila-protsess-vykhoda-iz-voz/">
     <style>
         :root {
-            --bg: #f5faff;
-            --surface: #ffffff;
-            --text: #1f2d3d;
-            --muted: #5b7088;
-            --accent: #0b84ff;
-            --accent-2: #00b3c7;
-            --rule: #d9e7f5;
-            --max-width: 780px;
+            --bg: #2e3440;
+            --surface: #3b4252;
+            --surface-2: #434c5e;
+            --text: #eceff4;
+            --muted: #d8dee9;
+            --accent: #88c0d0;
+            --accent-2: #81a1c1;
+            --rule: #4c566a;
+            --max-width: 760px;
         }
         * { box-sizing: border-box; }
         body {
             margin: 0;
-            font-family: "Segoe UI", "Inter", sans-serif;
-            background: linear-gradient(180deg, var(--bg), #ecf7ff);
+            font-family: "IBM Plex Sans", "Inter", sans-serif;
+            background: var(--bg);
             color: var(--text);
             line-height: 1.75;
         }
         .wrap { max-width: var(--max-width); margin: 0 auto; padding: 54px 22px; }
-        .meta { color: var(--muted); font-size: 0.9rem; }
-        h1 { margin: 8px 0 14px; font-size: clamp(2rem, 5vw, 2.7rem); }
+        .meta { color: var(--muted); font-size: 0.88rem; }
+        h1 { margin: 8px 0 14px; font-size: clamp(2rem, 5vw, 2.7rem); color: var(--accent); }
         .tags { display: flex; gap: 7px; flex-wrap: wrap; margin: 0 0 22px; }
         .tags span {
-            font-size: 0.74rem;
-            padding: 2px 9px;
-            border-radius: 999px;
-            border: 1px solid color-mix(in srgb, var(--accent) 40%, white);
+            font-size: 0.72rem;
             color: var(--accent);
-            background: color-mix(in srgb, var(--accent-2) 16%, white);
+            border: 1px solid var(--accent-2);
+            border-radius: 6px;
+            padding: 1px 7px;
+            background: color-mix(in srgb, var(--surface-2) 85%, black);
         }
         article {
             background: var(--surface);
             border: 1px solid var(--rule);
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 24px;
-            box-shadow: 0 8px 24px rgba(11, 132, 255, 0.08);
         }
         article a { color: var(--accent); }
         article pre {
-            background: #f0f7ff;
+            background: color-mix(in srgb, var(--surface-2) 85%, black);
             border: 1px solid var(--rule);
             border-radius: 10px;
             padding: 14px;
             overflow-x: auto;
         }
         article code {
-            background: #f0f7ff;
+            background: color-mix(in srgb, var(--surface-2) 85%, black);
             border: 1px solid var(--rule);
             border-radius: 6px;
             padding: 1px 6px;
