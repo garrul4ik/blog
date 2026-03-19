@@ -13,47 +13,56 @@
     <meta property="og:url" content="https://garrul4ik.github.io/blog/posts/opredelenie-smysla-zhizni-po-velleru/">
     <style>
         :root {
-            --paper: #f3ede0;
-            --ink: #292421;
-            --muted: #5d554f;
-            --accent: #8f2a1d;
-            --rule: #d5c8b2;
-            --max-width: 760px;
+            --bg: #0c0b1a;
+            --surface: #16132e;
+            --text: #f6f3ff;
+            --muted: #c3b6ff;
+            --accent: #ff4fd8;
+            --accent-2: #39ff14;
+            --rule: #302a5a;
+            --max-width: 780px;
         }
         * { box-sizing: border-box; }
         body {
             margin: 0;
-            font-family: "Courier Prime", "Courier New", monospace;
-            background: var(--paper);
-            color: var(--ink);
-            line-height: 1.75;
+            font-family: "Orbitron", "Inter", sans-serif;
+            background: radial-gradient(circle at top, #1d1550, var(--bg));
+            color: var(--text);
+            line-height: 1.7;
         }
-        .wrap { max-width: var(--max-width); margin: 0 auto; padding: 54px 24px; }
-        .meta { color: var(--muted); font-size: 0.92rem; }
-        h1 {
-            margin: 8px 0 14px;
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-            color: var(--accent);
-        }
+        .wrap { max-width: var(--max-width); margin: 0 auto; padding: 56px 22px; }
+        .meta { color: var(--muted); font-size: 0.9rem; }
+        h1 { margin: 8px 0 14px; font-size: clamp(2rem, 6vw, 2.9rem); color: var(--accent); }
         .tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 22px; }
         .tags span {
-            font-size: 0.78rem;
-            color: var(--accent);
-            border-bottom: 1px solid var(--accent);
-            padding-bottom: 1px;
+            font-size: 0.74rem;
+            color: var(--accent-2);
+            border: 1px solid var(--accent-2);
+            border-radius: 999px;
+            padding: 2px 10px;
         }
-        article { border-top: 1px dashed var(--rule); border-bottom: 1px dashed var(--rule); padding: 22px 0; }
-        article a { color: var(--accent); }
+        article {
+            background: var(--surface);
+            border: 1px solid var(--rule);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 0 24px rgba(255, 79, 216, 0.15);
+        }
+        article a { color: var(--accent-2); }
         article pre {
-            border: 1px dashed var(--rule);
+            background: #120f2a;
+            border: 1px solid var(--rule);
+            border-radius: 10px;
             padding: 14px;
             overflow-x: auto;
-            background: #f7f2e8;
         }
-        article code { background: #f7f2e8; border: 1px solid var(--rule); padding: 1px 6px; }
-        .back { display: inline-block; margin-top: 24px; color: var(--accent); text-decoration: none; }
+        article code {
+            background: #120f2a;
+            border: 1px solid var(--rule);
+            border-radius: 6px;
+            padding: 1px 6px;
+        }
+        .back { display: inline-block; margin-top: 24px; color: var(--accent-2); text-decoration: none; }
     </style>
 </head>
 <body>
