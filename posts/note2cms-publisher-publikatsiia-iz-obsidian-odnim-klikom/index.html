@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>note2cms-publisher: Публикация из Obsidian одним кликом — ǝuǝƃ {iq=143}</title>
+    <meta name="description" content="оригинальный бэкенд">
+    <meta property="og:title" content="note2cms-publisher: Публикация из Obsidian одним кликом">
+    <meta property="og:description" content="оригинальный бэкенд">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://garrul4ik.github.io/blog/posts/note2cms-publisher-publikatsiia-iz-obsidian-odnim-klikom/">
+    <link rel="canonical" href="https://garrul4ik.github.io/blog/posts/note2cms-publisher-publikatsiia-iz-obsidian-odnim-klikom/">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 15px;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            border: 4px solid #000000;
+            min-height: 100vh;
+        }
+
+        /* --- Header --- */
+        .post-header {
+            padding: 2rem 2rem 1.5rem;
+            border-bottom: 4px solid #000000;
+        }
+
+        .post-meta {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .post-meta span::before {
+            content: "[";
+        }
+        .post-meta span::after {
+            content: "]";
+        }
+
+        .post-title {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.15;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            word-break: break-word;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .post-tags span {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            border: 2px solid #000000;
+            padding: 0.15rem 0.5rem;
+            font-weight: 700;
+        }
+
+        /* --- Content --- */
+        .post-content {
+            padding: 2rem;
+            max-width: 72ch;
+        }
+
+        .post-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-content h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 3rem 0 0.8rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #000000;
+        }
+
+        .post-content h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 2rem 0 0.6rem;
+        }
+
+        .post-content h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 1.5rem 0 0.5rem;
+            text-decoration: underline;
+        }
+
+        .post-content a {
+            color: #000000;
+            text-decoration: none;
+            border-bottom: 2px solid #000000;
+            font-weight: 700;
+        }
+
+        .post-content a:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .post-content blockquote {
+            border-left: 4px solid #000000;
+            padding: 0.8rem 1rem;
+            margin: 1.5rem 0;
+            background: #f0f0f0;
+        }
+
+        .post-content blockquote p {
+            margin-bottom: 0.4rem;
+        }
+
+        .post-content blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        .post-content ul, .post-content ol {
+            padding-left: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .post-content li {
+            margin-bottom: 0.3rem;
+        }
+
+        .post-content code {
+            font-family: inherit;
+            background: #f0f0f0;
+            border: 1px solid #cccccc;
+            padding: 1px 4px;
+            font-size: 0.9rem;
+        }
+
+        .post-content pre {
+            background: #000000;
+            color: #ffffff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            border: none;
+        }
+
+        .post-content pre code {
+            background: none;
+            border: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border: 4px solid #000000;
+            margin: 1.5rem 0;
+        }
+
+        .post-content hr {
+            border: none;
+            border-top: 4px solid #000000;
+            margin: 2.5rem 0;
+        }
+
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+        }
+
+        .post-content th, .post-content td {
+            border: 2px solid #000000;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        .post-content th {
+            font-weight: 700;
+            text-transform: uppercase;
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .post-content em {
+            font-style: italic;
+        }
+
+        .post-content strong {
+            font-weight: 700;
+        }
+
+        /* --- Footer --- */
+        .post-footer {
+            padding: 1.5rem 2rem;
+            border-top: 4px solid #000000;
+        }
+
+        .post-footer a {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000000;
+            text-decoration: none;
+            border: 2px solid #000000;
+            padding: 0.4rem 0.8rem;
+            display: inline-block;
+            transition: all 0.1s;
+        }
+
+        .post-footer a:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 640px) {
+            body { border-width: 3px; }
+            .post-header { padding: 1.5rem; }
+            .post-content { padding: 1.5rem; }
+            .post-title { font-size: 1.5rem; }
+            .post-footer { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <header class="post-header">
+            <div class="post-meta">
+                <span><time datetime="2026-03-21T13:53:06.631020+00:00">March 21, 2026</time></span>
+                <span>2 min</span>
+            </div>
+            <h1 class="post-title">note2cms-publisher: Публикация из Obsidian одним кликом</h1>
+            
+        </header>
+
+        <div class="post-content">
+            <p><a href="https://github.com/mortalezz/note2cms">оригинальный бэкенд</a></p>
+<p><strong>Пишите в Obsidian — публикуйте мгновенно, без лишних телодвижений.</strong></p>
+<p>Hey everyone,</p>
+<p>Я собрал Obsidian-плагин поверх этого бэкенда, и честно считаю, что вся эта связка — просто блестящая в своей простоте.</p>
+<p>Она убирает почти всё трение между написанием заметки и её публикацией. Именно так и должны работать инструменты для заметок, если вы хотите быстро делиться идеями, а не бороться с инструментарием.</p>
+<h3 id="_1">В чём суть</h3>
+<p>Пишете в Obsidian как обычно → жмёте «Publish» → заметка сразу становится живой публикацией.</p>
+<p>Без переключения контекста, без ручного экспорта, без традиционного интерфейса CMS.</p>
+<p>Ваша заметка в Markdown остаётся единственным источником правды. Бэкенд превращает её в пост, а плагин даёт полностью родной опыт внутри Obsidian, а не «прикрученный сбоку» функционал.</p>
+<h3 id="_2">Что умеет плагин</h3>
+<ul>
+<li><strong>One-click Publish</strong> — публикация в один клик</li>
+<li><strong>Preview перед публикацией</strong></li>
+<li><strong>Bulk publishing</strong> — массовая публикация</li>
+<li><strong>Управление постами прямо из vault</strong>: редактирование, удаление</li>
+<li><strong>Редактирование существующих постов</strong> — плагин запрашивает оригинальный Markdown через <code>/posts/{slug}/source</code>, открывает его в модальном окне, вы правите и публикуете обновление на месте</li>
+<li>Полная двусторонняя синхронизация: вы никогда не заперты в «чёрном ящике» — всегда можете забрать свой Markdown обратно</li>
+</ul>
+<h3 id="happy-path">Реальная надёжность (а не только happy path)</h3>
+<ul>
+<li>Очередь при отсутствии интернета</li>
+<li>Автоматические повторы</li>
+<li>Опциональный режим «только по Wi-Fi»</li>
+<li>Защита от случайной публикации с мобильного устройства</li>
+<li>Гибкий выбор: по папке или по тегу <code>#publish</code></li>
+</ul>
+<p>Потому что мы все пишем с разных устройств и сетей, которые не всегда стабильны.</p>
+<h3 id="ux">UX и прозрачность</h3>
+<p>Все действия максимально явные и понятные:
+- Чёткие кнопки Edit / Delete
+- Панель настроек с прямой ссылкой на репозиторий
+- Никакой «магии», которая скрывает, что происходит под капотом</p>
+<h3 id="_3">Архитектура, которая радует</h3>
+<p>Бэкенд остаётся намеренно минимальным, а клиент может развиваться быстро и независимо.</p>
+<p>API не навязывает ни рендерер, ни стек фронтенда. Плагин может добавлять любые удобные workflow’ы сам. В итоге система получается модульной, поддерживаемой и легко расширяемой — без превращения в тяжеловесную publishing-платформу.</p>
+<h3 id="_4">Для кого это</h3>
+<p>Если ваша цель звучит как<br />
+<strong>«Пиши там, где думаешь — публикуй там, где читают»</strong>,  </p>
+<p>то эта связка очень близко подходит к идеалу:</p>
+<ul>
+<li>Markdown-first  </li>
+<li>Максимально быстрое получение обратной связи  </li>
+<li>Минимум церемоний  </li>
+<li>Полное владение своим контентом от черновика до опубликованной страницы</li>
+</ul>
+<hr />
+<p><strong>Репозиторий плагина:</strong><br />
+<a href="https://github.com/garrul4ik/note2cms-publisher">note2cms-publisher</a></p>
+<p>Буду рад звёздам ⭐, issues и pull-request’ам!</p>
+<h1 id="obsidian-obsidianplugin-note2cms-markdown-publishing-indiehacking-pkm">Obsidian #ObsidianPlugin #note2cms #Markdown #Publishing #IndieHacking #PKM</h1>
+        </div>
+    </article>
+
+    <footer class="post-footer">
+        <a href="https://garrul4ik.github.io/blog/posts/">← All Posts</a>
+    </footer>
+</body>
+</html>
