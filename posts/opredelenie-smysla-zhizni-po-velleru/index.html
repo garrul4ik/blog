@@ -14,127 +14,226 @@
     <link rel="canonical" href="https://garrul4ik.github.io/blog/posts/opredelenie-smysla-zhizni-po-velleru/">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap');
 
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --ink: #1a1714;
+            --paper: #f5f0e8;
+            --wash: #e8e0d0;
+            --vermillion: #cc3333;
+            --stone: #6b5f52;
+            --faded: #9a8f80;
+            --max-width: 40rem;
         }
 
-        html {
-            font-size: 15px;
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --ink: #e0d8cc;
+                --paper: #171412;
+                --wash: #221e1a;
+                --vermillion: #e04040;
+                --stone: #9a8e80;
+                --faded: #5a5248;
+            }
         }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 18px; }
 
         body {
-            font-family: 'IBM Plex Mono', 'Courier New', monospace;
-            background: #ffffff;
-            color: #000000;
-            line-height: 1.6;
-            border: 4px solid #000000;
+            font-family: 'Cormorant Garamond', 'Noto Sans JP', Georgia, serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.8;
             min-height: 100vh;
+        }
+
+        /* Subtle paper texture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .post-wrapper {
+            position: relative;
+            z-index: 1;
         }
 
         /* --- Header --- */
         .post-header {
-            padding: 2rem 2rem 1.5rem;
-            border-bottom: 4px solid #000000;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 6rem 1.5rem 3rem;
+            text-align: center;
         }
 
         .post-meta {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 1rem;
-            display: flex;
-            gap: 1rem;
+            color: var(--stone);
+            margin-bottom: 2rem;
         }
 
-        .post-meta span::before {
-            content: "[";
-        }
-        .post-meta span::after {
-            content: "]";
+        .post-meta .sep {
+            margin: 0 0.8rem;
+            color: var(--faded);
         }
 
         .post-title {
-            font-size: 2rem;
-            font-weight: 700;
-            line-height: 1.15;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            word-break: break-word;
+            font-size: 2.6rem;
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* The trick: ink brushstroke under title */
+        .post-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: var(--vermillion);
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: brushstroke 1.2s ease-out 0.5s forwards;
+        }
+
+        @keyframes brushstroke {
+            0% { transform: scaleX(0); opacity: 0.3; }
+            60% { transform: scaleX(1.05); opacity: 1; }
+            100% { transform: scaleX(1); opacity: 0.8; }
         }
 
         .post-tags {
             display: flex;
-            gap: 0.5rem;
+            justify-content: center;
+            gap: 0.6rem;
             flex-wrap: wrap;
         }
 
         .post-tags span {
-            font-size: 0.7rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            border: 2px solid #000000;
+            color: var(--stone);
             padding: 0.15rem 0.5rem;
-            font-weight: 700;
+            border: 1px solid var(--faded);
         }
 
         /* --- Content --- */
         .post-content {
-            padding: 2rem;
-            max-width: 72ch;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 1.5rem 5rem;
         }
 
         .post-content p {
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.6rem;
+            font-weight: 400;
+            font-size: 1.05rem;
         }
 
         .post-content h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin: 3rem 0 0.8rem;
-            padding-top: 1.5rem;
-            border-top: 2px solid #000000;
+            font-size: 1.6rem;
+            font-weight: 400;
+            margin: 3.5rem 0 1rem;
+            padding-bottom: 0.4rem;
+            position: relative;
+        }
+
+        /* Brushstroke under h2 — appears on scroll */
+        .post-content h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 3rem;
+            height: 2px;
+            background: var(--vermillion);
+            opacity: 0.7;
+            transition: width 0.6s ease;
+        }
+
+        .post-content h2:hover::after {
+            width: 100%;
         }
 
         .post-content h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin: 2rem 0 0.6rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 2.5rem 0 0.8rem;
+            color: var(--ink);
         }
 
         .post-content h4 {
-            font-size: 0.85rem;
-            font-weight: 700;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            margin: 1.5rem 0 0.5rem;
-            text-decoration: underline;
+            color: var(--stone);
+            margin: 2rem 0 0.6rem;
         }
 
         .post-content a {
-            color: #000000;
+            color: var(--ink);
             text-decoration: none;
-            border-bottom: 2px solid #000000;
-            font-weight: 700;
+            border-bottom: 1px solid var(--vermillion);
+            transition: border-width 0.2s;
         }
 
         .post-content a:hover {
-            background: #000000;
-            color: #ffffff;
+            border-bottom-width: 2px;
         }
 
+        /* The trick: blockquotes get a vermillion chop mark */
         .post-content blockquote {
-            border-left: 4px solid #000000;
-            padding: 0.8rem 1rem;
-            margin: 1.5rem 0;
-            background: #f0f0f0;
+            border: none;
+            padding: 1.5rem 2rem 1.5rem 2.5rem;
+            margin: 2.5rem 0;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--stone);
+            position: relative;
+            background: transparent;
+        }
+
+        .post-content blockquote::before {
+            content: "";
+            position: absolute;
+            top: 0.8rem;
+            left: 0;
+            width: 4px;
+            height: calc(100% - 1.6rem);
+            background: var(--vermillion);
+            opacity: 0.5;
+        }
+
+        /* Red chop mark (hanko) */
+        .post-content blockquote::after {
+            content: "◆";
+            position: absolute;
+            bottom: -0.5rem;
+            right: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--vermillion);
+            opacity: 0.4;
+            font-style: normal;
         }
 
         .post-content blockquote p {
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
         }
 
         .post-content blockquote p:last-child {
@@ -142,133 +241,138 @@
         }
 
         .post-content ul, .post-content ol {
-            padding-left: 2rem;
-            margin-bottom: 1.2rem;
+            padding-left: 1.5rem;
+            margin-bottom: 1.6rem;
         }
 
         .post-content li {
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.4rem;
+            font-weight: 400;
+        }
+
+        .post-content li::marker {
+            color: var(--vermillion);
         }
 
         .post-content code {
-            font-family: inherit;
-            background: #f0f0f0;
-            border: 1px solid #cccccc;
-            padding: 1px 4px;
-            font-size: 0.9rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: 0.82rem;
+            background: var(--wash);
+            padding: 2px 5px;
+            border-radius: 2px;
         }
 
         .post-content pre {
-            background: #000000;
-            color: #ffffff;
+            background: var(--ink);
+            color: var(--paper);
             padding: 1.5rem;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
             overflow-x: auto;
-            border: none;
+            border-radius: 2px;
         }
 
         .post-content pre code {
             background: none;
-            border: none;
-            color: inherit;
             padding: 0;
+            color: inherit;
+            font-size: 0.8rem;
+            line-height: 1.7;
         }
 
         .post-content img {
             max-width: 100%;
             height: auto;
-            border: 4px solid #000000;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
         }
 
         .post-content hr {
             border: none;
-            border-top: 4px solid #000000;
-            margin: 2.5rem 0;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .post-content hr::after {
+            content: "◇ ◇ ◇";
+            color: var(--faded);
+            font-size: 0.7rem;
+            letter-spacing: 0.5rem;
         }
 
         .post-content table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
-            font-size: 0.85rem;
+            margin: 2rem 0;
+            font-size: 0.9rem;
         }
 
         .post-content th, .post-content td {
-            border: 2px solid #000000;
-            padding: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid var(--wash);
             text-align: left;
         }
 
         .post-content th {
-            font-weight: 700;
+            font-size: 0.72rem;
+            font-weight: 500;
             text-transform: uppercase;
-            background: #000000;
-            color: #ffffff;
-        }
-
-        .post-content em {
-            font-style: italic;
-        }
-
-        .post-content strong {
-            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--stone);
         }
 
         /* --- Footer --- */
         .post-footer {
-            padding: 1.5rem 2rem;
-            border-top: 4px solid #000000;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 6rem;
+            border-top: 1px solid var(--wash);
+            text-align: center;
         }
 
         .post-footer a {
-            font-size: 0.8rem;
-            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: #000000;
+            color: var(--stone);
             text-decoration: none;
-            border: 2px solid #000000;
-            padding: 0.4rem 0.8rem;
-            display: inline-block;
-            transition: all 0.1s;
+            transition: color 0.2s;
         }
 
         .post-footer a:hover {
-            background: #000000;
-            color: #ffffff;
+            color: var(--vermillion);
         }
 
-        /* --- Responsive --- */
         @media (max-width: 640px) {
-            body { border-width: 3px; }
-            .post-header { padding: 1.5rem; }
-            .post-content { padding: 1.5rem; }
-            .post-title { font-size: 1.5rem; }
-            .post-footer { padding: 1.5rem; }
+            html { font-size: 16px; }
+            .post-header { padding: 4rem 1.2rem 2rem; }
+            .post-title { font-size: 2rem; }
+            .post-content { padding: 0 1.2rem 4rem; }
         }
     </style>
 </head>
 <body>
-    <article>
-        <header class="post-header">
-            <div class="post-meta">
-                <span><time datetime="2026-03-21T20:58:38.952604+00:00">March 21, 2026</time></span>
-                <span>1 min</span>
-            </div>
-            <h1 class="post-title">Определение смысла жизни по Веллеру</h1>
-            
-        </header>
+    <div class="post-wrapper">
+        <article>
+            <header class="post-header">
+                <div class="post-meta">
+                    <time datetime="2026-04-01T07:56:43.419512+00:00">April 1, 2026</time>
+                    <span class="sep">·</span>
+                    <span>1 min read</span>
+                </div>
+                <h1 class="post-title">Определение смысла жизни по Веллеру</h1>
+                
+            </header>
 
-        <div class="post-content">
-            <blockquote>
+            <div class="post-content">
+                <blockquote>
 <p>[!quote] 
 Осознание и ощущение своей причастности к великому, благому, необходимому, славному делу. Которое значительней и выше нас и нашей личной жизни.</p>
 </blockquote>
-        </div>
-    </article>
+            </div>
+        </article>
 
-    <footer class="post-footer">
-        <a href="https://garrul4ik.github.io/blog/posts/">← All Posts</a>
-    </footer>
+        <footer class="post-footer">
+            <a href="https://garrul4ik.github.io/blog/posts/">← All posts</a>
+        </footer>
+    </div>
 </body>
 </html>
