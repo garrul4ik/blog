@@ -6,251 +6,96 @@
     <title>stenAgram</title>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&family=DM+Mono:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
-        :root {
-            --bg: #111111;
-            --surface: #1a1a1a;
-            --amber: #d4943a;
-            --amber-dim: #a07030;
-            --amber-glow: rgba(212, 148, 58, 0.08);
-            --text: #c8c0b4;
-            --text-dim: #706860;
-            --border: #2a2520;
-            --max-width: 42rem;
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { font-size: 17px; }
+        html { font-size: 15px; }
 
         body {
-            font-family: 'Source Serif 4', Georgia, serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.75;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            border: 4px solid #000000;
             min-height: 100vh;
         }
 
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
-            pointer-events: none;
-        }
-
-        .index-wrapper { position: relative; z-index: 1; }
-
-        .safelight {
-            height: 2px;
-            background: linear-gradient(90deg, transparent 0%, var(--amber) 20%, var(--amber) 80%, transparent 100%);
-            opacity: 0.6;
-        }
-
         .index-header {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 5rem 1.5rem 2.5rem;
+            padding: 2rem;
+            border-bottom: 4px solid #000000;
         }
 
         .index-title {
-            font-size: 2rem;
-            font-weight: 300;
-            color: var(--amber);
-            margin-bottom: 0.4rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
         }
 
         .index-subtitle {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--text-dim);
-        }
-
-        .divider {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        .divider hr {
-            border: none;
-            height: 1px;
-            background: var(--border);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
 
         /* --- Post List --- */
         .post-list {
             list-style: none;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0.5rem 1.5rem 4rem;
         }
 
         .post-item {
-            border-bottom: 1px solid var(--border);
-            position: relative;
+            border-bottom: 2px solid #000000;
         }
 
         .post-item-link {
             display: block;
-            padding: 1.8rem 0 1.8rem 2.5rem;
+            padding: 1.2rem 2rem;
             text-decoration: none;
             color: inherit;
-            transition: background 0.3s;
-        }
-
-        /* The trick: amber exposure bar on the left — height based on reading time */
-        .post-item-link::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 1.8rem;
-            width: 3px;
-            height: 0;
-            background: var(--amber);
-            opacity: 0.2;
-            transition: opacity 0.4s, box-shadow 0.4s;
-        }
-
-        /* Reading time fills: 1min=15%, up to ~10min=100% */
-        
-        .post-item:nth-child(1) .post-item-link::before {
-            height: min(calc(3 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(2) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(3) .post-item-link::before {
-            height: min(calc(8 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(4) .post-item-link::before {
-            height: min(calc(25 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(5) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(6) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(7) .post-item-link::before {
-            height: min(calc(2 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(8) .post-item-link::before {
-            height: min(calc(2 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(9) .post-item-link::before {
-            height: min(calc(18 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(10) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(11) .post-item-link::before {
-            height: min(calc(16 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(12) .post-item-link::before {
-            height: min(calc(3 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(13) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(14) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(15) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(16) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(17) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(18) .post-item-link::before {
-            height: min(calc(12 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(19) .post-item-link::before {
-            height: min(calc(3 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(20) .post-item-link::before {
-            height: min(calc(31 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(21) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(22) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(23) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(24) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-        .post-item:nth-child(25) .post-item-link::before {
-            height: min(calc(1 * 12%), 90%);
-        }
-        
-
-        .post-item-link:hover::before {
-            opacity: 0.9;
-            box-shadow: 0 0 8px var(--amber-glow), 0 0 2px var(--amber-dim);
+            transition: all 0.05s;
         }
 
         .post-item-link:hover {
-            background: var(--amber-glow);
+            background: #000000;
+            color: #ffffff;
         }
 
-        .post-item-meta {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.68rem;
-            color: var(--text-dim);
-            margin-bottom: 0.4rem;
+        .post-item-link:hover .post-item-tags span {
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
+        .post-item-top {
             display: flex;
-            gap: 0.8rem;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.3rem;
         }
 
         .post-item-title {
-            font-size: 1.3rem;
-            font-weight: 400;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
             line-height: 1.3;
-            margin-bottom: 0.4rem;
-            transition: color 0.3s;
         }
 
-        .post-item-link:hover .post-item-title {
-            color: var(--amber);
+        .post-item-meta {
+            font-size: 0.7rem;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .post-item-excerpt {
-            font-size: 0.88rem;
-            font-weight: 300;
-            color: var(--text-dim);
+            font-size: 0.8rem;
             line-height: 1.5;
+            opacity: 0.7;
             margin-bottom: 0.5rem;
         }
 
@@ -261,464 +106,434 @@
         }
 
         .post-item-tags span {
-            font-family: 'DM Mono', monospace;
             font-size: 0.6rem;
-            color: var(--text-dim);
-            opacity: 0.6;
+            text-transform: uppercase;
+            font-weight: 700;
+            border: 1px solid #000000;
+            padding: 0.1rem 0.35rem;
         }
 
         /* --- Empty --- */
         .empty-state {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 6rem 1.5rem;
+            padding: 4rem 2rem;
             text-align: center;
-            color: var(--text-dim);
-            font-weight: 300;
-            font-style: italic;
+        }
+
+        .empty-state p {
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state code {
+            font-family: inherit;
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border: 1px solid #cccccc;
         }
 
         /* --- Footer --- */
         .index-footer {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 2rem 1.5rem 4rem;
-        }
-
-        .index-footer p {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.68rem;
-            color: var(--text-dim);
-            opacity: 0.5;
+            padding: 1rem 2rem;
+            border-top: 4px solid #000000;
+            font-size: 0.7rem;
+            text-transform: uppercase;
         }
 
         @media (max-width: 640px) {
-            html { font-size: 15px; }
-            .index-header { padding: 3.5rem 1.2rem 2rem; }
-            .post-list { padding: 0.5rem 1.2rem 3rem; }
-            .post-item-link { padding-left: 1.5rem; }
+            body { border-width: 3px; }
+            .post-item-link { padding: 1rem 1.5rem; }
+            .post-item-top { flex-direction: column; gap: 0; }
+            .index-header { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="index-wrapper">
-        <div class="safelight"></div>
+    <header class="index-header">
+        <h1 class="index-title">stenAgram</h1>
+        <p class="index-subtitle">Write where you think. Publish where they look. Own everything in between.</p>
+    </header>
 
-        <header class="index-header">
-            <h1 class="index-title">stenAgram</h1>
-            <p class="index-subtitle">Write where you think. Publish where they look. Own everything in between.</p>
-        </header>
-
-        <div class="divider"><hr></div>
-
+    
+    <ul class="post-list">
         
-        <ul class="post-list">
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/prompt-generator-for-prompt-generation/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-04-01T07:50:59.401774+00:00">April 1, 2026</time>
-                        <span>3 min</span>
-                    </div>
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/prompt-generator-for-prompt-generation/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Prompt Generator for prompt generation</h2>
-                    <p class="post-item-excerpt">Role and Identity
+                    <span class="post-item-meta">[April 1, 2026] [3min]</span>
+                </div>
+                <p class="post-item-excerpt">Role and Identity
 You are Prompt Enginer, a master-architect of prompts with deep expertise in designing system instructions for AI agents. Your specialization encompasses creating highly effective…</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/liudi-v-sovremennom-shou-biznese-deliatsia-na-dva-tipa-blin-kto-on-takoi-i-blin/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-25T17:42:46.656492+00:00">March 25, 2026</time>
-                        <span>1 min</span>
-                    </div>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/liudi-v-sovremennom-shou-biznese-deliatsia-na-dva-tipa-blin-kto-on-takoi-i-blin/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Люди в современном шоу-бизнесе делятся на два типа - "блин, кто он такой?" и "блин, он ещё живой?"</h2>
-                    <p class="post-item-excerpt">Source: ruh666</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/pro-blizhnii-vostok-mnenie-ne-moe/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-24T19:22:41.647110+00:00">March 24, 2026</time>
-                        <span>8 min</span>
-                    </div>
+                    <span class="post-item-meta">[March 25, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">Source: ruh666</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/pro-blizhnii-vostok-mnenie-ne-moe/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Про ближний восток мнение (не моё)</h2>
-                    <p class="post-item-excerpt">Source: Закрытый канал ARANEA</p>
+                    <span class="post-item-meta">[March 24, 2026] [8min]</span>
+                </div>
+                <p class="post-item-excerpt">Source: Закрытый канал ARANEA</p>
+                
+                <div class="post-item-tags">
                     
-                    <div class="post-item-tags">
-                        
-                        <span>crypto</span>
-                        
-                        <span>newworldorder</span>
-                        
-                        <span>мир</span>
-                        
-                        <span>события</span>
-                        
-                    </div>
+                    <span>crypto</span>
                     
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/openclaw-extracted-prompts-generalized/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-23T12:26:59.928530+00:00">March 23, 2026</time>
-                        <span>25 min</span>
-                    </div>
+                    <span>newworldorder</span>
+                    
+                    <span>мир</span>
+                    
+                    <span>события</span>
+                    
+                </div>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/openclaw-extracted-prompts-generalized/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">OpenClaw: Extracted Prompts (Generalized)</h2>
-                    <p class="post-item-excerpt">22 copy/paste-ready prompts for building your own AI agent system. Each prompt builds a functional system or implements a proven best practice you can hand to an AI coding assistant.</p>
+                    <span class="post-item-meta">[March 23, 2026] [25min]</span>
+                </div>
+                <p class="post-item-excerpt">22 copy/paste-ready prompts for building your own AI agent system. Each prompt builds a functional system or implements a proven best practice you can hand to an AI coding assistant.</p>
+                
+                <div class="post-item-tags">
                     
-                    <div class="post-item-tags">
-                        
-                        <span>openclaw</span>
-                        
-                        <span>prompts</span>
-                        
-                        <span>ai</span>
-                        
-                    </div>
+                    <span>openclaw</span>
                     
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/molodoi-sherlok-tv-series-2026-7-6-action-adventure-mystery/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-23T09:36:54.237078+00:00">March 23, 2026</time>
-                        <span>1 min</span>
-                    </div>
+                    <span>prompts</span>
+                    
+                    <span>ai</span>
+                    
+                </div>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/molodoi-sherlok-tv-series-2026-7-6-action-adventure-mystery/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Молодой Шерлок (TV Series 2026– ) ⭐ 7.6 | Action, Adventure, Mystery</h2>
-                    <p class="post-item-excerpt">Play trailer 1:48</p>
+                    <span class="post-item-meta">[March 23, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">Play trailer 1:48</p>
+                
+                <div class="post-item-tags">
                     
-                    <div class="post-item-tags">
-                        
-                        <span>clippings</span>
-                        
-                        <span>spy</span>
-                        
-                        <span>action</span>
-                        
-                        <span>adventure</span>
-                        
-                        <span>mystery</span>
-                        
-                    </div>
+                    <span>clippings</span>
                     
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/hamlet-soliloquy/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="1603-01-01">January 1, 1603</time>
-                        <span>1 min</span>
-                    </div>
+                    <span>spy</span>
+                    
+                    <span>action</span>
+                    
+                    <span>adventure</span>
+                    
+                    <span>mystery</span>
+                    
+                </div>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/hamlet-soliloquy/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Hamlet, Prince of Denmark</h2>
-                    <p class="post-item-excerpt">A famous soliloquy from Shakespeare</p>
+                    <span class="post-item-meta">[January 1, 1603] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">A famous soliloquy from Shakespeare</p>
+                
+                <div class="post-item-tags">
                     
-                    <div class="post-item-tags">
-                        
-                        <span>tragedy</span>
-                        
-                        <span>shakespeare</span>
-                        
-                        <span>to be or not to be</span>
-                        
-                    </div>
+                    <span>tragedy</span>
                     
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/alternativnyi-telegramm-klient-telega-vkliuchil-rezhim-pri-kotorom-on-vidit-vsiu/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-21T15:02:18.174363+00:00">March 21, 2026</time>
-                        <span>2 min</span>
-                    </div>
+                    <span>shakespeare</span>
+                    
+                    <span>to be or not to be</span>
+                    
+                </div>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/alternativnyi-telegramm-klient-telega-vkliuchil-rezhim-pri-kotorom-on-vidit-vsiu/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Альтернативный Телеграмм-клиент «Телега» включил режим при котором он видит всю вашу переписку, а сама переписка проходит через сервера в России, связанные с VK</h2>
-                    <p class="post-item-excerpt">Source: Doomberg</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/note2cms-publisher-publikatsiia-iz-obsidian-odnim-klikom/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-21T13:55:53.710651+00:00">March 21, 2026</time>
-                        <span>2 min</span>
-                    </div>
+                    <span class="post-item-meta">[March 21, 2026] [2min]</span>
+                </div>
+                <p class="post-item-excerpt">Source: Doomberg</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/note2cms-publisher-publikatsiia-iz-obsidian-odnim-klikom/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">note2cms-publisher: Публикация из Obsidian одним кликом</h2>
-                    <p class="post-item-excerpt">оригинальный бэкенд</p>
+                    <span class="post-item-meta">[March 21, 2026] [2min]</span>
+                </div>
+                <p class="post-item-excerpt">оригинальный бэкенд</p>
+                
+                <div class="post-item-tags">
                     
-                    <div class="post-item-tags">
-                        
-                        <span>obsidian</span>
-                        
-                        <span>obsidianplugin</span>
-                        
-                        <span>note2cms</span>
-                        
-                        <span>markdown</span>
-                        
-                        <span>publishing</span>
-                        
-                        <span>indiehacking</span>
-                        
-                        <span>pbpp</span>
-                        
-                    </div>
+                    <span>obsidian</span>
                     
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/pochemu-spartantsy-samurai-i-milliardery-delali-odno-i-to-zhe/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-20T21:31:04.122712+00:00">March 20, 2026</time>
-                        <span>18 min</span>
-                    </div>
+                    <span>obsidianplugin</span>
+                    
+                    <span>note2cms</span>
+                    
+                    <span>markdown</span>
+                    
+                    <span>publishing</span>
+                    
+                    <span>indiehacking</span>
+                    
+                    <span>pbpp</span>
+                    
+                </div>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/pochemu-spartantsy-samurai-i-milliardery-delali-odno-i-to-zhe/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Почему спартанцы, самураи и миллиардеры делали одно и то же?</h2>
-                    <p class="post-item-excerpt">На протяжении всей истории лучшие мировые спортсмены знали то, чего не знает большинство из нас.</p>
+                    <span class="post-item-meta">[March 20, 2026] [18min]</span>
+                </div>
+                <p class="post-item-excerpt">На протяжении всей истории лучшие мировые спортсмены знали то, чего не знает большинство из нас.</p>
+                
+                <div class="post-item-tags">
                     
-                    <div class="post-item-tags">
-                        
-                        <span>clippings</span>
-                        
-                        <span>минимализм</span>
-                        
-                        <span>философия</span>
-                        
-                    </div>
+                    <span>clippings</span>
                     
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/novosti-regulirovanie-ssha/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-20T21:35:53.553780+00:00">March 20, 2026</time>
-                        <span>1 min</span>
-                    </div>
+                    <span>минимализм</span>
+                    
+                    <span>философия</span>
+                    
+                </div>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/novosti-regulirovanie-ssha/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">🔈Новости  ⚖️Регулирование  США🇺🇸 </h2>
-                    <p class="post-item-excerpt">Source: SpartaBTC. Финансы. Криптовалюты. Социология. Психология.(SpartaBTC)</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/rise-of-the-ai-soldiers/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-20T21:09:09.356974+00:00">March 20, 2026</time>
-                        <span>16 min</span>
-                    </div>
+                    <span class="post-item-meta">[March 20, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">Source: SpartaBTC. Финансы. Криптовалюты. Социология. Психология.(SpartaBTC)</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/rise-of-the-ai-soldiers/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Rise of the AI Soldiers</h2>
-                    <p class="post-item-excerpt">A Phantom MK-1 humanoid robot, produced by San Francisco–based Foundation, at the firm’s headquarters on Feb. 25 Mattia Balsamini for TIME</p>
+                    <span class="post-item-meta">[March 20, 2026] [16min]</span>
+                </div>
+                <p class="post-item-excerpt">A Phantom MK-1 humanoid robot, produced by San Francisco–based Foundation, at the firm’s headquarters on Feb. 25 Mattia Balsamini for TIME</p>
+                
+                <div class="post-item-tags">
                     
-                    <div class="post-item-tags">
-                        
-                        <span>clippings</span>
-                        
-                    </div>
+                    <span>clippings</span>
                     
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/o-velikom-alberte-legende-finiksa/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-20T13:43:06.746354+00:00">March 20, 2026</time>
-                        <span>3 min</span>
-                    </div>
+                </div>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/o-velikom-alberte-legende-finiksa/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">🎶 О Великом  Альберте, Легенде Финикса 🎶</h2>
-                    <p class="post-item-excerpt">О, внемлите же, о благородные умы и дерзновенные сердца,  
+                    <span class="post-item-meta">[March 20, 2026] [3min]</span>
+                </div>
+                <p class="post-item-excerpt">О, внемлите же, о благородные умы и дерзновенные сердца,  
 ибо ныне не песнь — но буря славы сорвётся с уст моих,  
 и имя ей — Альберт, властелин судьбы своей,  
 чей дух возвышается над миром, как…</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/chitatel-prislal-veseluiu-novost-na-britanskikh-gosuslugakh-polgoda-mozhno-bylo/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-20T18:43:27.730340+00:00">March 20, 2026</time>
-                        <span>1 min</span>
-                    </div>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/chitatel-prislal-veseluiu-novost-na-britanskikh-gosuslugakh-polgoda-mozhno-bylo/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Читатель прислал веселую новость: на британских госуслугах полгода можно было смотреть и менять данные любых компаний</h2>
-                    <p class="post-item-excerpt">Source: Информация опасносте</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/glava-belgorodskoi-oblasti-zachital-zhaloby-mestnykh-zhitelei-na-otkliuchenie-in/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-20T19:31:17.024091+00:00">March 20, 2026</time>
-                        <span>1 min</span>
-                    </div>
+                    <span class="post-item-meta">[March 20, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">Source: Информация опасносте</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/glava-belgorodskoi-oblasti-zachital-zhaloby-mestnykh-zhitelei-na-otkliuchenie-in/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Глава Белгородской области зачитал жалобы местных жителей на отключение интернета и согласился с тем, что «РКН надо судить»</h2>
-                    <p class="post-item-excerpt">Source: SVTV NEWS — "Либертарианское" СМИ</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/roskomnadzor-ne-spravliaetsia-s-totalnoi-blokirovkoi-servisov-iz-za-telegram-for/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-19T11:09:27.636717+00:00">March 19, 2026</time>
-                        <span>1 min</span>
-                    </div>
+                    <span class="post-item-meta">[March 20, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">Source: SVTV NEWS — "Либертарианское" СМИ</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/roskomnadzor-ne-spravliaetsia-s-totalnoi-blokirovkoi-servisov-iz-za-telegram-for/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Роскомнадзор не справляется с тотальной блокировкой сервисов из-за Telegram — Forbes</h2>
-                    <p class="post-item-excerpt">Source: SVTV NEWS — "Либертарианское" СМИ</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/v-pravitelstve-predlozhili-obiazat-razrabotchikov-vnedriat-traditsionnye-tsennos/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-20T20:14:06.688538+00:00">March 20, 2026</time>
-                        <span>1 min</span>
-                    </div>
+                    <span class="post-item-meta">[March 19, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">Source: SVTV NEWS — "Либертарианское" СМИ</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/v-pravitelstve-predlozhili-obiazat-razrabotchikov-vnedriat-traditsionnye-tsennos/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">В правительстве предложили обязать разработчиков внедрять традиционные ценности в ИИ</h2>
-                    <p class="post-item-excerpt">Source: SVTV NEWS — "Либертарианское" СМИ</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/mortalezz-openclaw-bash-script-to-provision-openclaw-kimi-2-5-tailscale-on-fresh/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-19T09:39:17.545451+00:00">March 19, 2026</time>
-                        <span>1 min</span>
-                    </div>
+                    <span class="post-item-meta">[March 20, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">Source: SVTV NEWS — "Либертарианское" СМИ</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/mortalezz-openclaw-bash-script-to-provision-openclaw-kimi-2-5-tailscale-on-fresh/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">mortalezz/openclaw: Bash script to provision Openclaw + Kimi 2.5 + Tailscale on fresh Ubuntu box</h2>
-                    <p class="post-item-excerpt">Skip to content</p>
+                    <span class="post-item-meta">[March 19, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">Skip to content</p>
+                
+                <div class="post-item-tags">
                     
-                    <div class="post-item-tags">
-                        
-                        <span>clippings</span>
-                        
-                    </div>
+                    <span>clippings</span>
                     
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/openclaw-prompts-build-your-own-ai-assistant/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-19T09:34:41.154605+00:00">March 19, 2026</time>
-                        <span>12 min</span>
-                    </div>
+                </div>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/openclaw-prompts-build-your-own-ai-assistant/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">OpenClaw Prompts - Build Your Own AI Assistant</h2>
-                    <p class="post-item-excerpt">Prompts to recreate each piece of the OpenClaw system. Use these with any AI coding assistant.</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/chekhov-beseda-pianogo-s-trezvym-chertom/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-19T06:26:50.497971+00:00">March 19, 2026</time>
-                        <span>3 min</span>
-                    </div>
+                    <span class="post-item-meta">[March 19, 2026] [12min]</span>
+                </div>
+                <p class="post-item-excerpt">Prompts to recreate each piece of the OpenClaw system. Use these with any AI coding assistant.</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/chekhov-beseda-pianogo-s-trezvym-chertom/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Чехов - Беседа пьяного с трезвым чёртом</h2>
-                    <p class="post-item-excerpt">Антон Павлович Чехов  
+                    <span class="post-item-meta">[March 19, 2026] [3min]</span>
+                </div>
+                <p class="post-item-excerpt">Антон Павлович Чехов  
   
 Беседа пьяного с трезвым чёртом</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/nikolai-leskov-tupeinyi-khudozhnik/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-19T06:27:00.469200+00:00">March 19, 2026</time>
-                        <span>31 min</span>
-                    </div>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/nikolai-leskov-tupeinyi-khudozhnik/" class="post-item-link">
+                <div class="post-item-top">
                     <h2 class="post-item-title">Николай Лесков - ТУПЕЙНЫЙ ХУДОЖНИК</h2>
-                    <p class="post-item-excerpt">Николай Семёнович Лесков  
+                    <span class="post-item-meta">[March 19, 2026] [31min]</span>
+                </div>
+                <p class="post-item-excerpt">Николай Семёнович Лесков  
 ТУПЕЙНЫЙ ХУДОЖНИК  
 Рассказ на могиле
 > (Святой памяти благословенного дня 19-го февраля 1861 г.)
 >  Души их во благих водворятся.
 > > Погребальная песнь</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/minzdrav-reshil-napravliat-k-psikhologu-zhenshchin-kotorye-ne-planiruiut-detei/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-18T15:42:30.737877+00:00">March 18, 2026</time>
-                        <span>1 min</span>
-                    </div>
-                    <h2 class="post-item-title">Минздрав решил направлять к психологу женщин, которые не планируют детей</h2>
-                    <p class="post-item-excerpt">Forwarded from SVTV NEWS — Либертарианское СМИ</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/argentina-zavershila-protsess-vykhoda-iz-voz/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-18T15:19:59.444551+00:00">March 18, 2026</time>
-                        <span>1 min</span>
-                    </div>
-                    <h2 class="post-item-title">Аргентина завершила процесс выхода из ВОЗ</h2>
-                    <p class="post-item-excerpt">Forwarded from SVTV NEWS — Либертарианское СМИ</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/pro-messendzher-kham/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-17T15:37:03.228543+00:00">March 17, 2026</time>
-                        <span>1 min</span>
-                    </div>
-                    <h2 class="post-item-title">Про мессенджер Хам</h2>
-                    <p class="post-item-excerpt">Про мессенджер MAX: если кратко, то не ставьте. Если припрёт, ставьте на отдельный смартфон, купленный на блошином рынке, который не жалко выбросить.</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/generatsiia-parolia-na-32-simvola/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-17T15:32:10.978853+00:00">March 17, 2026</time>
-                        <span>1 min</span>
-                    </div>
-                    <h2 class="post-item-title">генерация пароля на 32 символа</h2>
-                    <p class="post-item-excerpt">> [!done] 
-> openssl rand -base64 32</p>
-                    
-                </a>
-            </li>
-            
-            <li class="post-item">
-                <a href="https://garrul4ik.github.io/blog/posts/opredelenie-smysla-zhizni-po-velleru/" class="post-item-link">
-                    <div class="post-item-meta">
-                        <time datetime="2026-03-17T15:29:35.177195+00:00">March 17, 2026</time>
-                        <span>1 min</span>
-                    </div>
-                    <h2 class="post-item-title">Определение смысла жизни по Веллеру</h2>
-                    <p class="post-item-excerpt">> [!quote] 
-> Осознание и ощущение своей причастности к великому, благому, необходимому, славному делу. Которое значительней и выше нас и нашей личной жизни.</p>
-                    
-                </a>
-            </li>
-            
-        </ul>
+                
+            </a>
+        </li>
         
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/minzdrav-reshil-napravliat-k-psikhologu-zhenshchin-kotorye-ne-planiruiut-detei/" class="post-item-link">
+                <div class="post-item-top">
+                    <h2 class="post-item-title">Минздрав решил направлять к психологу женщин, которые не планируют детей</h2>
+                    <span class="post-item-meta">[March 18, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">Forwarded from SVTV NEWS — Либертарианское СМИ</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/argentina-zavershila-protsess-vykhoda-iz-voz/" class="post-item-link">
+                <div class="post-item-top">
+                    <h2 class="post-item-title">Аргентина завершила процесс выхода из ВОЗ</h2>
+                    <span class="post-item-meta">[March 18, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">Forwarded from SVTV NEWS — Либертарианское СМИ</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/pro-messendzher-kham/" class="post-item-link">
+                <div class="post-item-top">
+                    <h2 class="post-item-title">Про мессенджер Хам</h2>
+                    <span class="post-item-meta">[March 17, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">Про мессенджер MAX: если кратко, то не ставьте. Если припрёт, ставьте на отдельный смартфон, купленный на блошином рынке, который не жалко выбросить.</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/generatsiia-parolia-na-32-simvola/" class="post-item-link">
+                <div class="post-item-top">
+                    <h2 class="post-item-title">генерация пароля на 32 символа</h2>
+                    <span class="post-item-meta">[March 17, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">> [!done] 
+> openssl rand -base64 32</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/opredelenie-smysla-zhizni-po-velleru/" class="post-item-link">
+                <div class="post-item-top">
+                    <h2 class="post-item-title">Определение смысла жизни по Веллеру</h2>
+                    <span class="post-item-meta">[March 17, 2026] [1min]</span>
+                </div>
+                <p class="post-item-excerpt">> [!quote] 
+> Осознание и ощущение своей причастности к великому, благому, необходимому, славному делу. Которое значительней и выше нас и нашей личной жизни.</p>
+                
+            </a>
+        </li>
+        
+    </ul>
+    
 
-        <footer class="index-footer">
-            <p>note2cms — past-browser publishing protocol</p>
-        </footer>
-    </div>
+    <footer class="index-footer">
+        <p>note2cms — past-browser publishing protocol</p>
+    </footer>
 </body>
 </html>
