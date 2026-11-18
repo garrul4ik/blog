@@ -4,300 +4,206 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>stenAgram</title>
-    <meta name="description" content="stenAgram — Write where you think. Publish where they look.">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,300;0,7..72,400;0,7..72,500;0,7..72,600;1,7..72,300;1,7..72,400&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
 
         :root {
-            --black: #0a0a0a;
-            --white: #fafafa;
-            --red: #e63222;
-            --blue: #2244cc;
-            --yellow: #ffcc00;
-            --gray-100: #f2f2f2;
-            --gray-300: #cccccc;
-            --gray-500: #888888;
-            --grid-unit: 8px;
-            --col-width: min(800px, 90vw);
+            --ink: #1f1c18;
+            --paper: #faf8f3;
+            --cream: #f0ebe0;
+            --margin-red: #c44040;
+            --pencil: #6b6058;
+            --faded: #a89e92;
+            --max-width: 38rem;
+            --margin-line: 4rem;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --black: #f0f0f0;
-                --white: #0e0e0e;
-                --red: #ff4436;
-                --blue: #4466ee;
-                --yellow: #ffdd33;
-                --gray-100: #1a1a1a;
-                --gray-300: #333333;
-                --gray-500: #888888;
+                --ink: #ddd8d0;
+                --paper: #161412;
+                --cream: #1e1b18;
+                --margin-red: #d45050;
+                --pencil: #9a9088;
+                --faded: #4a4440;
             }
         }
 
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-size: 17px;
-            -webkit-font-smoothing: antialiased;
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 17px; }
 
         body {
-            font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background: var(--white);
-            color: var(--black);
-            line-height: 1.6;
-        }
-
-        /* --- Geometric Decoration --- */
-        .geo-bar {
-            height: calc(var(--grid-unit) * 1);
-            background: var(--red);
-            width: 100%;
-        }
-
-        .geo-sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: calc(var(--grid-unit) * 1);
-            height: 100vh;
-            background: var(--blue);
-            z-index: 100;
-        }
-
-        /* --- Layout --- */
-        .index-wrapper {
-            margin-left: calc(var(--grid-unit) * 1);
+            font-family: 'Literata', 'Palatino', Georgia, serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.8;
             min-height: 100vh;
         }
 
-        .index-header {
-            max-width: var(--col-width);
+        a { cursor: crosshair; }
+
+        .manuscript {
+            position: relative;
+            max-width: calc(var(--max-width) + 6rem);
             margin: 0 auto;
-            padding: calc(var(--grid-unit) * 10) calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 6);
+        }
+
+        .manuscript::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: var(--margin-line);
+            width: 1px;
+            height: 100%;
+            background: var(--margin-red);
+            opacity: 0.2;
+        }
+
+        .index-header {
+            margin: 0 0 0 calc(var(--margin-line) + 2rem);
+            padding: 5rem 1.5rem 2rem 0;
         }
 
         .index-title {
-            font-size: clamp(2.8rem, 6vw, 4.5rem);
-            font-weight: 700;
-            line-height: 0.95;
-            letter-spacing: -0.04em;
-            text-transform: uppercase;
-            margin-bottom: calc(var(--grid-unit) * 2);
-        }
-
-        .index-title .accent {
-            color: var(--red);
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
         }
 
         .index-subtitle {
-            font-size: 0.8rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--gray-500);
-            max-width: 50ch;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.75rem;
+            color: var(--pencil);
         }
 
-        /* --- Divider --- */
-        .index-divider {
-            max-width: var(--col-width);
-            margin: 0 auto;
-            padding: 0 calc(var(--grid-unit) * 3);
+        .divider {
+            margin: 0 0 0 calc(var(--margin-line) + 2rem);
+            padding-right: 1.5rem;
         }
 
-        .index-divider hr {
+        .divider hr {
             border: none;
-            height: 3px;
-            background: var(--black);
+            height: 1px;
+            background: var(--faded);
         }
 
         /* --- Post List --- */
         .post-list {
             list-style: none;
-            max-width: var(--col-width);
-            margin: 0 auto;
-            padding: 0 calc(var(--grid-unit) * 3);
+            margin: 0 0 0 calc(var(--margin-line) + 2rem);
+            padding: 0.5rem 1.5rem 4rem 0;
+            counter-reset: entries;
         }
 
         .post-item {
-            padding: calc(var(--grid-unit) * 4) 0;
-            border-bottom: 1px solid var(--gray-300);
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: calc(var(--grid-unit) * 3);
-            align-items: start;
+            padding: 1.8rem 0;
+            border-bottom: 1px solid var(--cream);
+            position: relative;
+            counter-increment: entries;
         }
 
-        .post-item:first-child {
-            padding-top: calc(var(--grid-unit) * 5);
+        /* The trick: entry number appears in the margin like a handwritten annotation */
+        .post-item::before {
+            content: counter(entries);
+            position: absolute;
+            left: calc(-2rem - var(--margin-line) + 0.8rem);
+            top: 2rem;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.75rem;
+            color: var(--margin-red);
+            opacity: 0.35;
+            transition: opacity 0.3s;
+        }
+
+        .post-item:hover::before {
+            opacity: 0.8;
         }
 
         .post-item-link {
+            display: block;
             text-decoration: none;
             color: inherit;
-            display: contents;
         }
 
-        .post-item-date-col {
+        .post-item-meta {
+            font-family: 'Courier Prime', monospace;
             font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--gray-500);
-            padding-top: calc(var(--grid-unit) * 0.5);
-        }
-
-        .post-item-date-col .reading-time {
-            display: block;
-            margin-top: calc(var(--grid-unit) * 0.5);
-            color: var(--red);
-            font-weight: 700;
-        }
-
-        .post-item-content {
-            min-width: 0;
+            color: var(--pencil);
+            margin-bottom: 0.4rem;
         }
 
         .post-item-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: -0.01em;
-            text-transform: uppercase;
-            margin-bottom: calc(var(--grid-unit) * 1);
-            transition: color 0.15s;
+            font-size: 1.25rem;
+            font-weight: 500;
+            line-height: 1.3;
+            margin-bottom: 0.4rem;
+            transition: color 0.2s;
         }
 
         .post-item-link:hover .post-item-title {
-            color: var(--blue);
+            color: var(--margin-red);
         }
 
         .post-item-excerpt {
             font-size: 0.9rem;
-            color: var(--gray-500);
+            font-weight: 300;
+            color: var(--pencil);
             line-height: 1.5;
-            margin-bottom: calc(var(--grid-unit) * 1.5);
+            margin-bottom: 0.5rem;
         }
 
         .post-item-tags {
             display: flex;
-            gap: calc(var(--grid-unit) * 0.75);
+            gap: 0.4rem;
             flex-wrap: wrap;
         }
 
         .post-item-tags span {
-            font-size: 0.6rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--white);
-            background: var(--black);
-            padding: 2px calc(var(--grid-unit) * 1);
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.62rem;
+            color: var(--pencil);
+            background: var(--cream);
+            padding: 0.1rem 0.4rem;
         }
 
-        /* --- Counter decoration --- */
-        .post-item {
-            counter-increment: posts;
-        }
-
-        .post-item-date-col::before {
-            content: counter(posts, decimal-leading-zero);
-            display: block;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--gray-300);
-            line-height: 1;
-            margin-bottom: calc(var(--grid-unit) * 1.5);
-        }
-
-        .post-list {
-            counter-reset: posts;
-        }
-
-        /* --- Empty State --- */
+        /* --- Empty --- */
         .empty-state {
-            max-width: var(--col-width);
-            margin: 0 auto;
-            padding: calc(var(--grid-unit) * 12) calc(var(--grid-unit) * 3);
-            text-align: center;
-        }
-
-        .empty-state p {
-            font-size: 1rem;
-            color: var(--gray-500);
-            margin-bottom: calc(var(--grid-unit) * 2);
-        }
-
-        .empty-state code {
-            font-family: 'SF Mono', monospace;
-            font-size: 0.82rem;
-            background: var(--gray-100);
-            border: 1px solid var(--gray-300);
-            padding: 4px 8px;
+            margin: 0 0 0 calc(var(--margin-line) + 2rem);
+            padding: 5rem 1.5rem;
+            color: var(--pencil);
+            font-style: italic;
+            font-weight: 300;
         }
 
         /* --- Footer --- */
         .index-footer {
-            max-width: var(--col-width);
-            margin: 0 auto;
-            padding: calc(var(--grid-unit) * 6) calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 10);
+            margin: 0 0 0 calc(var(--margin-line) + 2rem);
+            padding: 2rem 1.5rem 4rem 0;
         }
 
         .index-footer p {
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--gray-500);
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.68rem;
+            color: var(--faded);
         }
 
-        /* --- Responsive --- */
         @media (max-width: 640px) {
             html { font-size: 15px; }
 
-            .index-header {
-                padding: calc(var(--grid-unit) * 6) calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 4);
+            .manuscript::before { display: none; }
+
+            .index-header,
+            .post-list,
+            .empty-state,
+            .index-footer,
+            .divider {
+                margin-left: 0;
+                padding-left: 1.2rem;
+                padding-right: 1.2rem;
             }
 
-            .post-list {
-                padding: 0 calc(var(--grid-unit) * 2);
-            }
-
-            .post-item {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .post-item-date-col {
-                display: flex;
-                align-items: center;
-                gap: calc(var(--grid-unit) * 2);
-                margin-bottom: calc(var(--grid-unit) * 1);
-            }
-
-            .post-item-date-col::before {
-                font-size: 1.2rem;
-                margin-bottom: 0;
-            }
-
-            .post-item-date-col .reading-time {
-                display: inline;
-                margin-top: 0;
-            }
-
-            .index-divider {
-                padding: 0 calc(var(--grid-unit) * 2);
-            }
-
-            .index-footer {
-                padding: calc(var(--grid-unit) * 4) calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 6);
-            }
+            .post-item::before { display: none; }
         }
     </style>
     <link rel="alternate" type="application/rss+xml" title="stenAgram RSS" href="https://garrul4ik.github.io/blog/feed.xml">
@@ -1027,18 +933,13 @@
 }</style>
 </head>
 <body>
-    <!-- Bauhaus geometric elements -->
-    <div class="geo-sidebar"></div>
-
-    <div class="index-wrapper">
-        <div class="geo-bar"></div>
-
+    <div class="manuscript">
         <header class="index-header">
-            <h1 class="index-title">stenAgram<span class="accent">.</span></h1>
+            <h1 class="index-title">stenAgram</h1>
             <p class="index-subtitle">Write where you think. Publish where they look. Own everything in between.</p>
         </header>
 
-        <div class="index-divider"><hr></div>
+        <div class="divider"><hr></div>
 
         <nav class="n2c-site-nav" aria-label="Site navigation">
     <a href="https://garrul4ik.github.io/blog/posts/">Все посты</a>
@@ -1072,29 +973,26 @@
             
             <li class="post-item">
                 <a href="https://garrul4ik.github.io/blog/posts/molodoi-sherlok-tv-series-2026-7-6-action-adventure-mystery/" class="post-item-link">
-                    <div class="post-item-date-col">
-                        <time datetime="2026-04-01T08:20:35.440799+00:00">1 апреля 2026</time>
-                        <span class="reading-time">1 мин</span>
+                    <div class="post-item-meta">
+                        <time datetime="2026-04-01T08:20:35.440799+00:00">1 апреля 2026</time> · 1 мин чтения
                     </div>
-                    <div class="post-item-content">
-                        <h2 class="post-item-title">Молодой Шерлок (TV Series 2026– ) ⭐ 7.6 | Action, Adventure, Mystery</h2>
-                        <p class="post-item-excerpt">Play trailer 1:48</p>
+                    <h2 class="post-item-title">Молодой Шерлок (TV Series 2026– ) ⭐ 7.6 | Action, Adventure, Mystery</h2>
+                    <p class="post-item-excerpt">Play trailer 1:48</p>
+                    
+                    <div class="post-item-tags">
                         
-                        <div class="post-item-tags">
-                            
-                            <span>clippings</span>
-                            
-                            <span>spy</span>
-                            
-                            <span>action</span>
-                            
-                            <span>adventure</span>
-                            
-                            <span>mystery</span>
-                            
-                        </div>
+                        <span>clippings</span>
+                        
+                        <span>spy</span>
+                        
+                        <span>action</span>
+                        
+                        <span>adventure</span>
+                        
+                        <span>mystery</span>
                         
                     </div>
+                    
                 </a>
             </li>
             
@@ -1103,7 +1001,7 @@
         
 
         <footer class="index-footer">
-            <p>Published with note2cms — the past-browser publishing protocol</p>
+            <p>note2cms — past-browser publishing protocol</p>
         </footer>
     </div>
 </body>
