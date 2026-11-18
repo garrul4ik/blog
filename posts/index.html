@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -36,7 +36,6 @@
             text-transform: uppercase;
             line-height: 1.1;
             margin-bottom: 0.5rem;
-            overflow: hidden;
         }
 
         .index-subtitle {
@@ -60,9 +59,6 @@
             text-decoration: none;
             color: inherit;
             transition: all 0.05s;
-            position: relative;
-            overflow: hidden;
-            isolation: isolate;
         }
 
         .post-item-link:hover {
@@ -142,113 +138,11 @@
             text-transform: uppercase;
         }
 
-        .title-reveal {
-            animation: title-reveal 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        @keyframes title-reveal {
-            from {
-                clip-path: inset(0 100% 0 0);
-                transform: translateX(-0.5rem);
-                opacity: 0;
-            }
-            to {
-                clip-path: inset(0 0 0 0);
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .title-split .char {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(0.45em);
-            animation: char-in 0.4s ease-out forwards;
-            animation-delay: calc(var(--char-index) * 25ms);
-            will-change: transform;
-        }
-
-        .title-split .char.space {
-            width: 0.32em;
-        }
-
-        @keyframes char-in {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .title-split.wave .char {
-            animation: char-drift 1.8s ease-in-out infinite;
-            animation-delay: calc(var(--char-index) * 35ms);
-        }
-
-        .title-split.wave .char-even {
-            --char-drift: -0.12em;
-        }
-
-        .title-split.wave .char-odd {
-            --char-drift: 0.12em;
-        }
-
-        @keyframes char-drift {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(var(--char-drift));
-            }
-        }
-
-        .click-ripple {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 0.7rem;
-            height: 0.7rem;
-            border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            background: #000000;
-            opacity: 0.22;
-            pointer-events: none;
-            animation: ripple 0.55s ease-out forwards;
-            z-index: 0;
-        }
-
-        .post-item-link:hover .click-ripple {
-            background: #ffffff;
-            opacity: 0.26;
-        }
-
-        @keyframes ripple {
-            to {
-                transform: translate(-50%, -50%) scale(42);
-                opacity: 0;
-            }
-        }
-
         @media (max-width: 640px) {
             body { border-width: 3px; }
             .post-item-link { padding: 1rem 1.5rem; }
             .post-item-top { flex-direction: column; gap: 0; }
             .index-header { padding: 1.5rem; }
-            .title-split.wave .char { animation: none; }
-        }
-
-        @media (hover: none) {
-            .title-split.wave .char { animation: none; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .title-reveal,
-            .title-split .char,
-            .title-split.wave .char,
-            .click-ripple {
-                animation: none !important;
-                transform: none !important;
-                opacity: 1 !important;
-            }
         }
     </style>
     <link rel="alternate" type="application/rss+xml" title="stenAgram RSS" href="https://garrul4ik.github.io/blog/feed.xml">
@@ -818,7 +712,7 @@
 </head>
 <body>
     <header class="index-header">
-        <h1 class="index-title title-reveal" data-animated-title>stenAgram</h1>
+        <h1 class="index-title">stenAgram</h1>
         <p class="index-subtitle">Write where you think. Publish where they look. Own everything in between.</p>
     </header>
 
@@ -836,7 +730,18 @@
     <ul class="post-list">
         
         <li class="post-item">
-            <a href="https://garrul4ik.github.io/blog/posts/dario-amodei-daimon-asmodei/" class="post-item-link" data-ripple>
+            <a href="https://garrul4ik.github.io/blog/posts/post-s-kartinkami/" class="post-item-link">
+                <div class="post-item-top">
+                    <h2 class="post-item-title">Пост с картинками</h2>
+                    <span class="post-item-meta">[18 ноября 2026] [1мин]</span>
+                </div>
+                <p class="post-item-excerpt">Делаю такие вот обложки для инсты:</p>
+                
+            </a>
+        </li>
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/dario-amodei-daimon-asmodei/" class="post-item-link">
                 <div class="post-item-top">
                     <h2 class="post-item-title">Дарио Амодей → Даймон Асмодей</h2>
                     <span class="post-item-meta">[18 ноября 2026] [1мин]</span>
@@ -883,64 +788,7 @@
 
 
     <footer class="index-footer">
-        <p>note2cms &mdash; past-browser publishing protocol</p>
+        <p>note2cms — past-browser publishing protocol</p>
     </footer>
-
-    <script>
-        (function () {
-            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            function splitTitle(el) {
-                if (!el || reduceMotion) {
-                    return;
-                }
-                var text = el.textContent || '';
-                if (!text.trim()) {
-                    return;
-                }
-
-                el.setAttribute('aria-label', text);
-                el.textContent = '';
-                el.classList.add('title-split');
-
-                Array.from(text).forEach(function (ch, idx) {
-                    var span = document.createElement('span');
-                    span.className = 'char ' + (idx % 2 === 0 ? 'char-even' : 'char-odd');
-                    span.style.setProperty('--char-index', idx);
-                    if (ch === ' ') {
-                        span.classList.add('space');
-                        span.innerHTML = '&nbsp;';
-                    } else {
-                        span.textContent = ch;
-                    }
-                    el.appendChild(span);
-                });
-
-                window.setTimeout(function () {
-                    el.classList.add('wave');
-                }, 750);
-            }
-
-            function attachRipple(el) {
-                if (!el || reduceMotion) {
-                    return;
-                }
-                el.addEventListener('click', function (event) {
-                    var rect = el.getBoundingClientRect();
-                    var ripple = document.createElement('span');
-                    ripple.className = 'click-ripple';
-                    ripple.style.left = (event.clientX - rect.left) + 'px';
-                    ripple.style.top = (event.clientY - rect.top) + 'px';
-                    el.appendChild(ripple);
-                    window.setTimeout(function () {
-                        ripple.remove();
-                    }, 600);
-                });
-            }
-
-            splitTitle(document.querySelector('[data-animated-title]'));
-            document.querySelectorAll('[data-ripple]').forEach(attachRipple);
-        })();
-    </script>
 </body>
 </html>
