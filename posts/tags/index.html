@@ -4,9 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>stenAgram</title>
+    <meta name="description" content="stenAgram — Write where you think. Publish where they look.">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            --black: #0a0a0a;
+            --white: #fafafa;
+            --red: #e63222;
+            --blue: #2244cc;
+            --yellow: #ffcc00;
+            --gray-100: #f2f2f2;
+            --gray-300: #cccccc;
+            --gray-500: #888888;
+            --grid-unit: 8px;
+            --col-width: min(800px, 90vw);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --black: #f0f0f0;
+                --white: #0e0e0e;
+                --red: #ff4436;
+                --blue: #4466ee;
+                --yellow: #ffdd33;
+                --gray-100: #1a1a1a;
+                --gray-300: #333333;
+                --gray-500: #888888;
+            }
+        }
 
         *, *::before, *::after {
             margin: 0;
@@ -14,141 +41,270 @@
             box-sizing: border-box;
         }
 
-        html { font-size: 15px; }
+        html {
+            font-size: 17px;
+            -webkit-font-smoothing: antialiased;
+        }
 
         body {
-            font-family: 'IBM Plex Mono', 'Courier New', monospace;
-            background: #ffffff;
-            color: #000000;
+            font-family: 'Instrument Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: var(--white);
+            color: var(--black);
             line-height: 1.6;
-            border: 4px solid #000000;
+        }
+
+        /* --- Geometric Decoration --- */
+        .geo-bar {
+            height: calc(var(--grid-unit) * 1);
+            background: var(--red);
+            width: 100%;
+        }
+
+        .geo-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: calc(var(--grid-unit) * 1);
+            height: 100vh;
+            background: var(--blue);
+            z-index: 100;
+        }
+
+        /* --- Layout --- */
+        .index-wrapper {
+            margin-left: calc(var(--grid-unit) * 1);
             min-height: 100vh;
         }
 
         .index-header {
-            padding: 2rem;
-            border-bottom: 4px solid #000000;
+            max-width: var(--col-width);
+            margin: 0 auto;
+            padding: calc(var(--grid-unit) * 10) calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 6);
         }
 
         .index-title {
-            font-size: 1.8rem;
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
             font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.04em;
             text-transform: uppercase;
-            line-height: 1.1;
-            margin-bottom: 0.5rem;
+            margin-bottom: calc(var(--grid-unit) * 2);
+        }
+
+        .index-title .accent {
+            color: var(--red);
         }
 
         .index-subtitle {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            color: var(--gray-500);
+            max-width: 50ch;
+        }
+
+        /* --- Divider --- */
+        .index-divider {
+            max-width: var(--col-width);
+            margin: 0 auto;
+            padding: 0 calc(var(--grid-unit) * 3);
+        }
+
+        .index-divider hr {
+            border: none;
+            height: 3px;
+            background: var(--black);
         }
 
         /* --- Post List --- */
         .post-list {
             list-style: none;
+            max-width: var(--col-width);
+            margin: 0 auto;
+            padding: 0 calc(var(--grid-unit) * 3);
         }
 
         .post-item {
-            border-bottom: 2px solid #000000;
+            padding: calc(var(--grid-unit) * 4) 0;
+            border-bottom: 1px solid var(--gray-300);
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: calc(var(--grid-unit) * 3);
+            align-items: start;
+        }
+
+        .post-item:first-child {
+            padding-top: calc(var(--grid-unit) * 5);
         }
 
         .post-item-link {
-            display: block;
-            padding: 1.2rem 2rem;
             text-decoration: none;
             color: inherit;
-            transition: all 0.05s;
+            display: contents;
         }
 
-        .post-item-link:hover {
-            background: #000000;
-            color: #ffffff;
+        .post-item-date-col {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            padding-top: calc(var(--grid-unit) * 0.5);
         }
 
-        .post-item-link:hover .post-item-tags span {
-            border-color: #ffffff;
-            color: #ffffff;
+        .post-item-date-col .reading-time {
+            display: block;
+            margin-top: calc(var(--grid-unit) * 0.5);
+            color: var(--red);
+            font-weight: 700;
         }
 
-        .post-item-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 1rem;
-            margin-bottom: 0.3rem;
+        .post-item-content {
+            min-width: 0;
         }
 
         .post-item-title {
-            font-size: 1rem;
+            font-size: 1.35rem;
             font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
             text-transform: uppercase;
-            line-height: 1.3;
+            margin-bottom: calc(var(--grid-unit) * 1);
+            transition: color 0.15s;
         }
 
-        .post-item-meta {
-            font-size: 0.7rem;
-            white-space: nowrap;
-            flex-shrink: 0;
+        .post-item-link:hover .post-item-title {
+            color: var(--blue);
         }
 
         .post-item-excerpt {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            color: var(--gray-500);
             line-height: 1.5;
-            opacity: 0.7;
-            margin-bottom: 0.5rem;
+            margin-bottom: calc(var(--grid-unit) * 1.5);
         }
 
         .post-item-tags {
             display: flex;
-            gap: 0.4rem;
+            gap: calc(var(--grid-unit) * 0.75);
             flex-wrap: wrap;
         }
 
         .post-item-tags span {
             font-size: 0.6rem;
-            text-transform: uppercase;
             font-weight: 700;
-            border: 1px solid #000000;
-            padding: 0.1rem 0.35rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--white);
+            background: var(--black);
+            padding: 2px calc(var(--grid-unit) * 1);
         }
 
-        /* --- Empty --- */
+        /* --- Counter decoration --- */
+        .post-item {
+            counter-increment: posts;
+        }
+
+        .post-item-date-col::before {
+            content: counter(posts, decimal-leading-zero);
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gray-300);
+            line-height: 1;
+            margin-bottom: calc(var(--grid-unit) * 1.5);
+        }
+
+        .post-list {
+            counter-reset: posts;
+        }
+
+        /* --- Empty State --- */
         .empty-state {
-            padding: 4rem 2rem;
+            max-width: var(--col-width);
+            margin: 0 auto;
+            padding: calc(var(--grid-unit) * 12) calc(var(--grid-unit) * 3);
             text-align: center;
         }
 
         .empty-state p {
-            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--gray-500);
+            margin-bottom: calc(var(--grid-unit) * 2);
         }
 
         .empty-state code {
-            font-family: inherit;
-            background: #f0f0f0;
-            padding: 2px 6px;
-            border: 1px solid #cccccc;
+            font-family: 'SF Mono', monospace;
+            font-size: 0.82rem;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            padding: 4px 8px;
         }
 
         /* --- Footer --- */
         .index-footer {
-            padding: 1rem 2rem;
-            border-top: 4px solid #000000;
-            font-size: 0.7rem;
-            text-transform: uppercase;
+            max-width: var(--col-width);
+            margin: 0 auto;
+            padding: calc(var(--grid-unit) * 6) calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 10);
         }
 
+        .index-footer p {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+        }
+
+        /* --- Responsive --- */
         @media (max-width: 640px) {
-            body { border-width: 3px; }
-            .post-item-link { padding: 1rem 1.5rem; }
-            .post-item-top { flex-direction: column; gap: 0; }
-            .index-header { padding: 1.5rem; }
+            html { font-size: 15px; }
+
+            .index-header {
+                padding: calc(var(--grid-unit) * 6) calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 4);
+            }
+
+            .post-list {
+                padding: 0 calc(var(--grid-unit) * 2);
+            }
+
+            .post-item {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .post-item-date-col {
+                display: flex;
+                align-items: center;
+                gap: calc(var(--grid-unit) * 2);
+                margin-bottom: calc(var(--grid-unit) * 1);
+            }
+
+            .post-item-date-col::before {
+                font-size: 1.2rem;
+                margin-bottom: 0;
+            }
+
+            .post-item-date-col .reading-time {
+                display: inline;
+                margin-top: 0;
+            }
+
+            .index-divider {
+                padding: 0 calc(var(--grid-unit) * 2);
+            }
+
+            .index-footer {
+                padding: calc(var(--grid-unit) * 4) calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 6);
+            }
         }
     </style>
     <link rel="alternate" type="application/rss+xml" title="stenAgram RSS" href="https://garrul4ik.github.io/blog/feed.xml">
 <link rel="alternate" type="application/atom+xml" title="stenAgram Atom" href="https://garrul4ik.github.io/blog/atom.xml">
 
 <meta name="twitter:card" content="summary">
+
 
 
     <style>/* note2cms shared components — inherits each theme's palette via CSS fallbacks */
@@ -536,7 +692,8 @@
         page-break-inside: avoid;
     }
     .n2c-carousel-nav,
-    .n2c-lightbox {
+    .n2c-lightbox,
+    .n2c-share-bar {
         display: none !important;
     }
 }
@@ -704,15 +861,182 @@
     margin: 0.35rem 0 0;
     color: var(--n2c-muted);
     font-size: 0.9rem;
+}
+
+/* --- Pinned Post (Full Card on Index, Compact Banner on Archive/Tag Pages) --- */
+.n2c-pinned-card {
+    max-width: var(--col-width, var(--max-width, 100%));
+    margin: 0 auto 2rem;
+    padding: 1.15rem 1.25rem;
+    border: 1px solid var(--n2c-rule);
+    border-left: 3px solid var(--n2c-accent);
+    border-radius: 4px;
+    background: var(--n2c-surface);
+}
+
+.n2c-pinned-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem 0.65rem;
+    font-size: 0.78rem;
+    color: var(--n2c-muted);
+    margin-bottom: 0.55rem;
+}
+
+.n2c-pinned-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--n2c-accent);
+}
+
+.n2c-pinned-heading {
+    margin: 0 0 0.45rem;
+    font-size: 1.35rem;
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+.n2c-pinned-title {
+    color: var(--n2c-fg);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.n2c-pinned-title:hover {
+    color: var(--n2c-accent);
+}
+
+.n2c-pinned-excerpt {
+    margin: 0;
+    color: var(--n2c-muted);
+    font-size: 0.94rem;
+    line-height: 1.55;
+}
+
+.n2c-pinned-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+}
+
+.n2c-pinned-tag {
+    font-size: 0.74rem;
+    padding: 0.15rem 0.5rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 3px;
+    color: var(--n2c-muted);
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-pinned-tag:hover {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-pinned-compact {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    max-width: var(--col-width, var(--max-width, 100%));
+    margin: 0 auto 1.5rem;
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--n2c-rule);
+    border-left: 3px solid var(--n2c-accent);
+    border-radius: 4px;
+    background: var(--n2c-surface);
+    text-decoration: none;
+    color: var(--n2c-fg);
+    font-size: 0.88rem;
+    transition: border-color 0.15s ease;
+}
+
+.n2c-pinned-compact:hover {
+    border-color: var(--n2c-accent);
+}
+
+.n2c-pinned-compact .n2c-pinned-badge {
+    flex-shrink: 0;
+}
+
+.n2c-pinned-compact-title {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.n2c-pinned-arrow {
+    margin-left: auto;
+    color: var(--n2c-accent);
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+}
+
+.n2c-pinned-compact:hover .n2c-pinned-arrow {
+    transform: translateX(2px);
+}
+
+/* --- Post Share Bar --- */
+.n2c-share-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1.75rem;
+}
+
+.n2c-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 4px;
+    background: var(--n2c-surface);
+    color: var(--n2c-fg);
+    font-family: inherit;
+    font-size: 0.84rem;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.n2c-share-btn:hover,
+.n2c-share-btn:focus-visible {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+    outline: none;
+}
+
+.n2c-share-btn.is-copied {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
 }</style>
 </head>
 <body>
-    <header class="index-header">
-        <h1 class="index-title">stenAgram</h1>
-        <p class="index-subtitle">Write where you think. Publish where they look. Own everything in between.</p>
-    </header>
+    <!-- Bauhaus geometric elements -->
+    <div class="geo-sidebar"></div>
 
-    <nav class="n2c-site-nav" aria-label="Site navigation">
+    <div class="index-wrapper">
+        <div class="geo-bar"></div>
+
+        <header class="index-header">
+            <h1 class="index-title">stenAgram<span class="accent">.</span></h1>
+            <p class="index-subtitle">Write where you think. Publish where they look. Own everything in between.</p>
+        </header>
+
+        <div class="index-divider"><hr></div>
+
+        <nav class="n2c-site-nav" aria-label="Site navigation">
     <a href="https://garrul4ik.github.io/blog/posts/">Все посты</a>
     <a href="https://garrul4ik.github.io/blog/posts/tags/" aria-current="page">Теги</a>
     
@@ -721,6 +1045,7 @@
     
     <a href="https://garrul4ik.github.io/blog/feed.xml" class="n2c-nav-spacer">RSS</a>
 </nav>
+
 
         
         <section class="n2c-tags-section" aria-label="Все теги">
@@ -864,8 +1189,9 @@
         
         
 
-    <footer class="index-footer">
-        <p>note2cms — past-browser publishing protocol</p>
-    </footer>
+        <footer class="index-footer">
+            <p>Published with note2cms — the past-browser publishing protocol</p>
+        </footer>
+    </div>
 </body>
 </html>
