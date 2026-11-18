@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пост с картинками — stenAgram</title>
+    <meta name="description" content="Делаю такие вот обложки для инсты:">
+    <meta property="og:title" content="Пост с картинками">
+    <meta property="og:description" content="Делаю такие вот обложки для инсты:">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://garrul4ik.github.io/blog/posts/post-s-kartinkami/">
+    <link rel="canonical" href="https://garrul4ik.github.io/blog/posts/post-s-kartinkami/">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 15px;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            border: 4px solid #000000;
+            min-height: 100vh;
+        }
+
+        /* --- Header --- */
+        .post-header {
+            padding: 2rem 2rem 1.5rem;
+            border-bottom: 4px solid #000000;
+        }
+
+        .post-meta {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .post-meta span::before {
+            content: "[";
+        }
+        .post-meta span::after {
+            content: "]";
+        }
+
+        .post-title {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.15;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            word-break: break-word;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .post-tags span {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            border: 2px solid #000000;
+            padding: 0.15rem 0.5rem;
+            font-weight: 700;
+        }
+
+        /* --- Content --- */
+        .post-content {
+            padding: 2rem;
+            max-width: 72ch;
+        }
+
+        .post-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-content h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 3rem 0 0.8rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #000000;
+        }
+
+        .post-content h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 2rem 0 0.6rem;
+        }
+
+        .post-content h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 1.5rem 0 0.5rem;
+            text-decoration: underline;
+        }
+
+        .post-content a {
+            color: #000000;
+            text-decoration: none;
+            border-bottom: 2px solid #000000;
+            font-weight: 700;
+        }
+
+        .post-content a:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .post-content blockquote {
+            border-left: 4px solid #000000;
+            padding: 0.8rem 1rem;
+            margin: 1.5rem 0;
+            background: #f0f0f0;
+        }
+
+        .post-content blockquote p {
+            margin-bottom: 0.4rem;
+        }
+
+        .post-content blockquote p:last-child {
+            margin-bottom: 0;
+        }
+
+        .post-content ul, .post-content ol {
+            padding-left: 2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .post-content li {
+            margin-bottom: 0.3rem;
+        }
+
+        .post-content code {
+            font-family: inherit;
+            background: #f0f0f0;
+            border: 1px solid #cccccc;
+            padding: 1px 4px;
+            font-size: 0.9rem;
+        }
+
+        .post-content pre {
+            background: #000000;
+            color: #ffffff;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            border: none;
+        }
+
+        .post-content pre code {
+            background: none;
+            border: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border: 4px solid #000000;
+            margin: 1.5rem 0;
+        }
+
+        .post-content hr {
+            border: none;
+            border-top: 4px solid #000000;
+            margin: 2.5rem 0;
+        }
+
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+        }
+
+        .post-content th, .post-content td {
+            border: 2px solid #000000;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        .post-content th {
+            font-weight: 700;
+            text-transform: uppercase;
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .post-content em {
+            font-style: italic;
+        }
+
+        .post-content strong {
+            font-weight: 700;
+        }
+
+        /* --- Footer --- */
+        .post-footer {
+            padding: 1.5rem 2rem;
+            border-top: 4px solid #000000;
+        }
+
+        .post-footer a {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000000;
+            text-decoration: none;
+            border: 2px solid #000000;
+            padding: 0.4rem 0.8rem;
+            display: inline-block;
+            transition: all 0.1s;
+        }
+
+        .post-footer a:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 640px) {
+            body { border-width: 3px; }
+            .post-header { padding: 1.5rem; }
+            .post-content { padding: 1.5rem; }
+            .post-title { font-size: 1.5rem; }
+            .post-footer { padding: 1.5rem; }
+        }
+    </style>
+    <link rel="alternate" type="application/rss+xml" title="stenAgram RSS" href="https://garrul4ik.github.io/blog/feed.xml">
+<link rel="alternate" type="application/atom+xml" title="stenAgram Atom" href="https://garrul4ik.github.io/blog/atom.xml">
+
+<meta property="og:image" content="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/02-terapiya-1-13cbb002.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/02-terapiya-1-13cbb002.png">
+
+
+    <style>/* note2cms shared components — inherits each theme's palette via CSS fallbacks */
+:root {
+    --n2c-bg: var(--bg, var(--paper, var(--white, #faf9f7)));
+    --n2c-surface: var(--surface, var(--cream, var(--code-bg, var(--gray-100, rgba(128, 128, 128, 0.08)))));
+    --n2c-fg: var(--text, var(--ink, var(--black, #1a1a1a)));
+    --n2c-muted: var(--muted, var(--dim, var(--text-dim, var(--pencil, var(--stone, var(--gray-500, #6b6560))))));
+    --n2c-accent: var(--accent, var(--vermillion, var(--red, var(--green, var(--pink, var(--amber, var(--margin-red, #c45d3e)))))));
+    --n2c-rule: var(--rule, var(--border, var(--gray-300, var(--wash, rgba(128, 128, 128, 0.28)))));
+}
+
+/* --- Site Navigation & Tag Filter Banner --- */
+.n2c-site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin: 1rem 0 2rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--n2c-rule);
+    border-bottom: 1px solid var(--n2c-rule);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+.n2c-site-nav a {
+    color: var(--n2c-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.n2c-site-nav a:hover,
+.n2c-site-nav a[aria-current="page"] {
+    color: var(--n2c-accent);
+}
+
+.n2c-nav-spacer {
+    margin-left: auto;
+}
+
+.n2c-tag-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 0 0 1.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--n2c-rule);
+    background: var(--n2c-surface);
+    border-radius: 4px;
+    font-size: 0.92rem;
+}
+
+.n2c-tag-banner a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+}
+
+.n2c-tag-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.n2c-tag-link:hover span {
+    border-color: var(--n2c-accent);
+    opacity: 0.85;
+}
+
+/* --- Tags Cloud Page --- */
+.n2c-tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: 1.5rem 0 3rem;
+}
+
+.n2c-tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--n2c-rule);
+    background: var(--n2c-surface);
+    color: var(--n2c-fg);
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-tag-pill:hover {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-tag-count {
+    font-size: 0.78em;
+    color: var(--n2c-muted);
+}
+
+/* --- Pagination (Zero-JS) --- */
+.n2c-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 2.5rem 0 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--n2c-rule);
+    font-size: 0.9rem;
+}
+
+.n2c-page-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.n2c-page-link,
+.n2c-page-current,
+.n2c-page-ellipsis,
+.n2c-page-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.55rem;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.n2c-page-link,
+.n2c-page-nav {
+    color: var(--n2c-fg);
+    border: 1px solid var(--n2c-rule);
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-page-link:hover,
+.n2c-page-nav:hover {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-page-current {
+    background: var(--n2c-accent);
+    color: #ffffff;
+    border: 1px solid var(--n2c-accent);
+    font-weight: 600;
+}
+
+.n2c-page-ellipsis {
+    color: var(--n2c-muted);
+}
+
+.n2c-page-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* --- Pure-CSS Scroll-Snap Image Carousel (Strictly Zero JS) --- */
+.n2c-carousel {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.n2c-carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 0.75rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 6px;
+    background: var(--n2c-surface);
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+}
+
+.n2c-carousel-track:focus-visible {
+    outline: 2px solid var(--n2c-accent);
+    outline-offset: 2px;
+}
+
+.n2c-carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.n2c-lightbox-trigger {
+    display: block;
+    width: 100%;
+    cursor: zoom-in;
+    text-decoration: none;
+}
+
+.n2c-carousel-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 72vh;
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+.n2c-carousel[style*="--n2c-ratio"] .n2c-carousel-slide img {
+    aspect-ratio: var(--n2c-ratio);
+    object-fit: cover;
+}
+
+.n2c-slide-caption {
+    padding: 0.5rem 0.75rem 0.65rem;
+    font-size: 0.85rem;
+    color: var(--n2c-muted);
+    text-align: center;
+}
+
+.n2c-carousel-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 0.65rem;
+}
+
+.n2c-carousel-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.65rem;
+    height: 1.65rem;
+    padding: 0 0.4rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    color: var(--n2c-muted);
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-carousel-dot:hover,
+.n2c-carousel-dot:focus-visible {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-carousel-caption {
+    margin-top: 0.45rem;
+    font-size: 0.82rem;
+    color: var(--n2c-muted);
+    text-align: center;
+}
+
+/* Progressive pure-CSS scroll buttons for supporting browsers */
+@supports selector(::scroll-button(left)) {
+    .n2c-carousel-track::scroll-button(left),
+    .n2c-carousel-track::scroll-button(right) {
+        background: var(--n2c-surface);
+        color: var(--n2c-fg);
+        border: 1px solid var(--n2c-rule);
+        border-radius: 999px;
+        width: 2.1rem;
+        height: 2.1rem;
+        cursor: pointer;
+        opacity: 0.85;
+    }
+    .n2c-carousel-track::scroll-button(left) {
+        content: "‹";
+    }
+    .n2c-carousel-track::scroll-button(right) {
+        content: "›";
+    }
+}
+
+/* Pure-CSS :target Lightbox */
+.n2c-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.n2c-lightbox:target {
+    display: flex;
+}
+
+.n2c-lightbox-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    cursor: zoom-out;
+}
+
+.n2c-lightbox-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 92vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.n2c-lightbox-inner img {
+    max-width: 88vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.n2c-lightbox-close,
+.n2c-lightbox-prev,
+.n2c-lightbox-next {
+    position: fixed;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: rgba(25, 25, 25, 0.82);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    text-decoration: none;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.n2c-lightbox-close {
+    top: 1rem;
+    right: 1rem;
+}
+
+.n2c-lightbox-prev {
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.n2c-lightbox-next {
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.n2c-lightbox-caption {
+    margin-top: 0.75rem;
+    color: #e8e8e8;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .n2c-carousel-track {
+        scroll-behavior: auto;
+    }
+}
+
+@media print {
+    .n2c-carousel-track {
+        display: block;
+        overflow: visible;
+        border: none;
+    }
+    .n2c-carousel-slide {
+        margin-bottom: 1rem;
+        page-break-inside: avoid;
+    }
+    .n2c-carousel-nav,
+    .n2c-lightbox {
+        display: none !important;
+    }
+}
+
+/* --- Series Box, Prev/Next Post Navigation, Related Posts --- */
+.n2c-series {
+    margin: 0 0 2rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--n2c-rule);
+    border-left: 3px solid var(--n2c-accent);
+    background: var(--n2c-surface);
+    border-radius: 4px;
+    font-size: 0.92rem;
+}
+
+.n2c-series summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--n2c-fg);
+}
+
+.n2c-series ol {
+    margin: 0.75rem 0 0 1.25rem;
+    padding: 0;
+}
+
+.n2c-series li {
+    margin: 0.3rem 0;
+}
+
+.n2c-series li a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+}
+
+.n2c-series li a:hover {
+    text-decoration: underline;
+}
+
+.n2c-post-extras {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--n2c-rule);
+}
+
+.n2c-post-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.n2c-post-nav-item {
+    display: block;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 4px;
+    background: var(--n2c-surface);
+    text-decoration: none;
+    color: var(--n2c-fg);
+    transition: border-color 0.15s ease;
+}
+
+.n2c-post-nav-item:hover {
+    border-color: var(--n2c-accent);
+}
+
+.n2c-post-nav-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--n2c-muted);
+    margin-bottom: 0.25rem;
+}
+
+.n2c-post-nav-title {
+    display: block;
+    font-weight: 500;
+    color: var(--n2c-accent);
+}
+
+.n2c-related {
+    margin-top: 1.5rem;
+}
+
+.n2c-related h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--n2c-muted);
+    margin-bottom: 0.75rem;
+}
+
+.n2c-related ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.n2c-related li {
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--n2c-rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.92rem;
+}
+
+.n2c-related li a {
+    color: var(--n2c-fg);
+    text-decoration: none;
+}
+
+.n2c-related li a:hover {
+    color: var(--n2c-accent);
+}
+
+.n2c-related-date {
+    color: var(--n2c-muted);
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
+/* --- Search Page --- */
+.n2c-search-box {
+    margin: 1.5rem 0 2.5rem;
+}
+
+.n2c-search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 4px;
+    background: var(--n2c-surface);
+    color: var(--n2c-fg);
+    margin-bottom: 1.25rem;
+}
+
+.n2c-search-input:focus {
+    outline: 2px solid var(--n2c-accent);
+    border-color: var(--n2c-accent);
+}
+
+.n2c-search-results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.n2c-search-results li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--n2c-rule);
+}
+
+.n2c-search-results a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.n2c-search-results p {
+    margin: 0.35rem 0 0;
+    color: var(--n2c-muted);
+    font-size: 0.9rem;
+}</style>
+</head>
+<body>
+    <article>
+        <header class="post-header">
+            <div class="post-meta">
+                <span><time datetime="2026-11-18T11:58:52.438131+00:00">18 ноября 2026</time></span>
+                <span>1 min</span>
+            </div>
+            <h1 class="post-title">Пост с картинками</h1>
+            
+        </header>
+
+        <div class="post-content">
+            
+<p>Делаю такие вот обложки для инсты:</p>
+<p>Обложки для хайлайтов · «Глубина и Свет»
+Сланцево-синий графит и тёплая слоновая кость/шампань · Антиква Cormorant Garamond + Округлый гротеск Nunito</p>
+<figure aria-label="Gallery 1" aria-roledescription="carousel" class="n2c-carousel">
+<div class="n2c-carousel-track" tabindex="0">
+<figure class="n2c-carousel-slide" id="n2c-g1-s1"><a aria-label="Image 1" class="n2c-lightbox-trigger" href="#n2c-lb-g1-s1"><img alt="" decoding="async" height="1333" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/02-terapiya-1-13cbb002.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/02-terapiya-1-13cbb002-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/02-terapiya-1-13cbb002-750w.webp 750w" width="750" /></a></figure>
+<figure class="n2c-carousel-slide" id="n2c-g1-s2"><a aria-label="Image 2" class="n2c-lightbox-trigger" href="#n2c-lb-g1-s2"><img alt="" decoding="async" height="1333" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/03-otzyvy-ac105ff3.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/03-otzyvy-ac105ff3-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/03-otzyvy-ac105ff3-750w.webp 750w" width="750" /></a></figure>
+<figure class="n2c-carousel-slide" id="n2c-g1-s3"><a aria-label="Image 3" class="n2c-lightbox-trigger" href="#n2c-lb-g1-s3"><img alt="" decoding="async" height="1333" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/04-dom-5-chuvstv-9ac46e76.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/04-dom-5-chuvstv-9ac46e76-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/04-dom-5-chuvstv-9ac46e76-750w.webp 750w" width="750" /></a></figure>
+<figure class="n2c-carousel-slide" id="n2c-g1-s4"><a aria-label="Image 4" class="n2c-lightbox-trigger" href="#n2c-lb-g1-s4"><img alt="" decoding="async" height="1333" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/05-zhizn-kak-ona-est-4cc5fbac.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/05-zhizn-kak-ona-est-4cc5fbac-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/05-zhizn-kak-ona-est-4cc5fbac-750w.webp 750w" width="750" /></a></figure>
+<figure class="n2c-carousel-slide" id="n2c-g1-s5"><a aria-label="Image 5" class="n2c-lightbox-trigger" href="#n2c-lb-g1-s5"><img alt="" decoding="async" height="1333" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/06-praktiki-9833136f.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/06-praktiki-9833136f-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/06-praktiki-9833136f-750w.webp 750w" width="750" /></a></figure>
+<figure class="n2c-carousel-slide" id="n2c-g1-s6"><a aria-label="Image 6" class="n2c-lightbox-trigger" href="#n2c-lb-g1-s6"><img alt="" decoding="async" height="1333" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/07-zapis-anonsy-a798931b.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/07-zapis-anonsy-a798931b-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/07-zapis-anonsy-a798931b-750w.webp 750w" width="750" /></a></figure>
+</div>
+<nav aria-label="Gallery navigation" class="n2c-carousel-nav"><a aria-label="1 / 6" class="n2c-carousel-dot" href="#n2c-g1-s1">1</a><a aria-label="2 / 6" class="n2c-carousel-dot" href="#n2c-g1-s2">2</a><a aria-label="3 / 6" class="n2c-carousel-dot" href="#n2c-g1-s3">3</a><a aria-label="4 / 6" class="n2c-carousel-dot" href="#n2c-g1-s4">4</a><a aria-label="5 / 6" class="n2c-carousel-dot" href="#n2c-g1-s5">5</a><a aria-label="6 / 6" class="n2c-carousel-dot" href="#n2c-g1-s6">6</a></nav>
+<figcaption class="n2c-carousel-caption">Фото: 6</figcaption>
+</figure>
+<p>Карусель должна нормально выглядеть в любом Markdown-просмотрщике (заметки = источник правды), поэтому:</p>
+<ol>
+<li><strong>Автоматически:</strong> абзац, состоящий только из ≥ 2 картинок (без пустой строки между ними), становится каруселью.</li>
+<li><strong>Либо явно, с опциями</strong> (через <code>md_in_html</code>/контейнер).</li>
+<li>Obsidian-эмбеды <code>![](01.jpg)</code> тоже распознаются.</li>
+<li>Флаг <code>carousel: false</code> во frontmatter или <code>GALLERY_AUTO=false</code> отключает автодетект.</li>
+</ol>
+<div aria-modal="true" class="n2c-lightbox" id="n2c-lb-g1-s1" role="dialog"><a aria-label="Закрыть" class="n2c-lightbox-backdrop" href="#n2c-g1-s1"></a><div class="n2c-lightbox-inner"><a aria-label="Закрыть" class="n2c-lightbox-close" href="#n2c-g1-s1">×</a><a aria-label="Назад" class="n2c-lightbox-prev" href="#n2c-lb-g1-s6">‹</a><img alt="" decoding="async" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/02-terapiya-1-13cbb002.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/02-terapiya-1-13cbb002-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/02-terapiya-1-13cbb002-750w.webp 750w" /><a aria-label="Вперёд" class="n2c-lightbox-next" href="#n2c-lb-g1-s2">›</a></div>
+</div>
+<div aria-modal="true" class="n2c-lightbox" id="n2c-lb-g1-s2" role="dialog"><a aria-label="Закрыть" class="n2c-lightbox-backdrop" href="#n2c-g1-s2"></a><div class="n2c-lightbox-inner"><a aria-label="Закрыть" class="n2c-lightbox-close" href="#n2c-g1-s2">×</a><a aria-label="Назад" class="n2c-lightbox-prev" href="#n2c-lb-g1-s1">‹</a><img alt="" decoding="async" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/03-otzyvy-ac105ff3.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/03-otzyvy-ac105ff3-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/03-otzyvy-ac105ff3-750w.webp 750w" /><a aria-label="Вперёд" class="n2c-lightbox-next" href="#n2c-lb-g1-s3">›</a></div>
+</div>
+<div aria-modal="true" class="n2c-lightbox" id="n2c-lb-g1-s3" role="dialog"><a aria-label="Закрыть" class="n2c-lightbox-backdrop" href="#n2c-g1-s3"></a><div class="n2c-lightbox-inner"><a aria-label="Закрыть" class="n2c-lightbox-close" href="#n2c-g1-s3">×</a><a aria-label="Назад" class="n2c-lightbox-prev" href="#n2c-lb-g1-s2">‹</a><img alt="" decoding="async" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/04-dom-5-chuvstv-9ac46e76.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/04-dom-5-chuvstv-9ac46e76-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/04-dom-5-chuvstv-9ac46e76-750w.webp 750w" /><a aria-label="Вперёд" class="n2c-lightbox-next" href="#n2c-lb-g1-s4">›</a></div>
+</div>
+<div aria-modal="true" class="n2c-lightbox" id="n2c-lb-g1-s4" role="dialog"><a aria-label="Закрыть" class="n2c-lightbox-backdrop" href="#n2c-g1-s4"></a><div class="n2c-lightbox-inner"><a aria-label="Закрыть" class="n2c-lightbox-close" href="#n2c-g1-s4">×</a><a aria-label="Назад" class="n2c-lightbox-prev" href="#n2c-lb-g1-s3">‹</a><img alt="" decoding="async" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/05-zhizn-kak-ona-est-4cc5fbac.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/05-zhizn-kak-ona-est-4cc5fbac-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/05-zhizn-kak-ona-est-4cc5fbac-750w.webp 750w" /><a aria-label="Вперёд" class="n2c-lightbox-next" href="#n2c-lb-g1-s5">›</a></div>
+</div>
+<div aria-modal="true" class="n2c-lightbox" id="n2c-lb-g1-s5" role="dialog"><a aria-label="Закрыть" class="n2c-lightbox-backdrop" href="#n2c-g1-s5"></a><div class="n2c-lightbox-inner"><a aria-label="Закрыть" class="n2c-lightbox-close" href="#n2c-g1-s5">×</a><a aria-label="Назад" class="n2c-lightbox-prev" href="#n2c-lb-g1-s4">‹</a><img alt="" decoding="async" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/06-praktiki-9833136f.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/06-praktiki-9833136f-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/06-praktiki-9833136f-750w.webp 750w" /><a aria-label="Вперёд" class="n2c-lightbox-next" href="#n2c-lb-g1-s6">›</a></div>
+</div>
+<div aria-modal="true" class="n2c-lightbox" id="n2c-lb-g1-s6" role="dialog"><a aria-label="Закрыть" class="n2c-lightbox-backdrop" href="#n2c-g1-s6"></a><div class="n2c-lightbox-inner"><a aria-label="Закрыть" class="n2c-lightbox-close" href="#n2c-g1-s6">×</a><a aria-label="Назад" class="n2c-lightbox-prev" href="#n2c-lb-g1-s5">‹</a><img alt="" decoding="async" loading="lazy" sizes="(max-width: 768px) 100vw, 768px" src="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/07-zapis-anonsy-a798931b.png" srcset="https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/07-zapis-anonsy-a798931b-480w.webp 480w, https://garrul4ik.github.io/blog/posts/assets/post-s-kartinkami/07-zapis-anonsy-a798931b-750w.webp 750w" /><a aria-label="Вперёд" class="n2c-lightbox-next" href="#n2c-lb-g1-s1">›</a></div>
+</div>
+
+<aside class="n2c-post-extras" aria-label="Post navigation">
+    
+    <nav class="n2c-post-nav">
+        
+        <a href="https://garrul4ik.github.io/blog/posts/dario-amodei-daimon-asmodei/" class="n2c-post-nav-item" rel="prev">
+            <span class="n2c-post-nav-label">← Предыдущий пост</span>
+            <span class="n2c-post-nav-title">Дарио Амодей → Даймон Асмодей</span>
+        </a>
+        
+        
+    </nav>
+    
+
+    
+</aside>
+
+        </div>
+    </article>
+
+    <footer class="post-footer">
+        <a href="https://garrul4ik.github.io/blog/posts/">← Все посты</a>
+    </footer>
+</body>
+</html>
