@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rise of the AI Soldiers — stenAgram</title>
+    <title>Rise of the AI Soldiers &mdash; stenAgram</title>
     <meta name="description" content="A Phantom MK-1 humanoid robot, produced by San Francisco–based Foundation, at the firm’s headquarters on Feb. 25 Mattia Balsamini for TIME">
     <meta property="og:title" content="Rise of the AI Soldiers">
     <meta property="og:description" content="A Phantom MK-1 humanoid robot, produced by San Francisco–based Foundation, at the firm’s headquarters on Feb. 25 Mattia Balsamini for TIME">
@@ -51,6 +51,7 @@
         .post-meta span::before {
             content: "[";
         }
+
         .post-meta span::after {
             content: "]";
         }
@@ -62,6 +63,7 @@
             text-transform: uppercase;
             margin-bottom: 1rem;
             word-break: break-word;
+            overflow: hidden;
         }
 
         .post-tags {
@@ -117,6 +119,9 @@
             text-decoration: none;
             border-bottom: 2px solid #000000;
             font-weight: 700;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
         }
 
         .post-content a:hover {
@@ -229,11 +234,101 @@
             padding: 0.4rem 0.8rem;
             display: inline-block;
             transition: all 0.1s;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
         }
 
         .post-footer a:hover {
             background: #000000;
             color: #ffffff;
+        }
+
+        .title-reveal {
+            animation: title-reveal 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes title-reveal {
+            from {
+                clip-path: inset(0 100% 0 0);
+                transform: translateX(-0.5rem);
+                opacity: 0;
+            }
+            to {
+                clip-path: inset(0 0 0 0);
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .title-split .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(0.45em);
+            animation: char-in 0.4s ease-out forwards;
+            animation-delay: calc(var(--char-index) * 25ms);
+            will-change: transform;
+        }
+
+        .title-split .char.space {
+            width: 0.32em;
+        }
+
+        @keyframes char-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title-split.wave .char {
+            animation: char-drift 1.8s ease-in-out infinite;
+            animation-delay: calc(var(--char-index) * 35ms);
+        }
+
+        .title-split.wave .char-even {
+            --char-drift: -0.12em;
+        }
+
+        .title-split.wave .char-odd {
+            --char-drift: 0.12em;
+        }
+
+        @keyframes char-drift {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(var(--char-drift));
+            }
+        }
+
+        .click-ripple {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: #000000;
+            opacity: 0.22;
+            pointer-events: none;
+            animation: ripple 0.55s ease-out forwards;
+            z-index: 0;
+        }
+
+        .post-content a:hover .click-ripple,
+        .post-footer a:hover .click-ripple {
+            background: #ffffff;
+            opacity: 0.26;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: translate(-50%, -50%) scale(32);
+                opacity: 0;
+            }
         }
 
         /* --- Responsive --- */
@@ -243,30 +338,609 @@
             .post-content { padding: 1.5rem; }
             .post-title { font-size: 1.5rem; }
             .post-footer { padding: 1.5rem; }
+            .title-split.wave .char { animation: none; }
+        }
+
+        @media (hover: none) {
+            .title-split.wave .char { animation: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .title-reveal,
+            .title-split .char,
+            .title-split.wave .char,
+            .click-ripple {
+                animation: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
         }
     </style>
+    <link rel="alternate" type="application/rss+xml" title="stenAgram RSS" href="https://garrul4ik.github.io/blog/feed.xml">
+<link rel="alternate" type="application/atom+xml" title="stenAgram Atom" href="https://garrul4ik.github.io/blog/atom.xml">
+
+<meta property="og:image" content="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt67ea352f61409a68/69af7f9e1d80ac655e827657/foundation-labs-ai-soldiers-01.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp&amp;crop=4%3A5">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt67ea352f61409a68/69af7f9e1d80ac655e827657/foundation-labs-ai-soldiers-01.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp&amp;crop=4%3A5">
+
+
+    <style>/* note2cms shared components — inherits each theme's palette via CSS fallbacks */
+:root {
+    --n2c-bg: var(--bg, var(--paper, var(--white, #faf9f7)));
+    --n2c-surface: var(--surface, var(--cream, var(--code-bg, var(--gray-100, rgba(128, 128, 128, 0.08)))));
+    --n2c-fg: var(--text, var(--ink, var(--black, #1a1a1a)));
+    --n2c-muted: var(--muted, var(--dim, var(--text-dim, var(--pencil, var(--stone, var(--gray-500, #6b6560))))));
+    --n2c-accent: var(--accent, var(--vermillion, var(--red, var(--green, var(--pink, var(--amber, var(--margin-red, #c45d3e)))))));
+    --n2c-rule: var(--rule, var(--border, var(--gray-300, var(--wash, rgba(128, 128, 128, 0.28)))));
+}
+
+/* --- Site Navigation & Tag Filter Banner --- */
+.n2c-site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin: 1rem 0 2rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--n2c-rule);
+    border-bottom: 1px solid var(--n2c-rule);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+.n2c-site-nav a {
+    color: var(--n2c-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.n2c-site-nav a:hover,
+.n2c-site-nav a[aria-current="page"] {
+    color: var(--n2c-accent);
+}
+
+.n2c-nav-spacer {
+    margin-left: auto;
+}
+
+.n2c-tag-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 0 0 1.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--n2c-rule);
+    background: var(--n2c-surface);
+    border-radius: 4px;
+    font-size: 0.92rem;
+}
+
+.n2c-tag-banner a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+}
+
+.n2c-tag-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.n2c-tag-link:hover span {
+    border-color: var(--n2c-accent);
+    opacity: 0.85;
+}
+
+/* --- Tags Cloud Page --- */
+.n2c-tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: 1.5rem 0 3rem;
+}
+
+.n2c-tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--n2c-rule);
+    background: var(--n2c-surface);
+    color: var(--n2c-fg);
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-tag-pill:hover {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-tag-count {
+    font-size: 0.78em;
+    color: var(--n2c-muted);
+}
+
+/* --- Pagination (Zero-JS) --- */
+.n2c-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 2.5rem 0 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--n2c-rule);
+    font-size: 0.9rem;
+}
+
+.n2c-page-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.n2c-page-link,
+.n2c-page-current,
+.n2c-page-ellipsis,
+.n2c-page-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.55rem;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.n2c-page-link,
+.n2c-page-nav {
+    color: var(--n2c-fg);
+    border: 1px solid var(--n2c-rule);
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-page-link:hover,
+.n2c-page-nav:hover {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-page-current {
+    background: var(--n2c-accent);
+    color: #ffffff;
+    border: 1px solid var(--n2c-accent);
+    font-weight: 600;
+}
+
+.n2c-page-ellipsis {
+    color: var(--n2c-muted);
+}
+
+.n2c-page-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* --- Pure-CSS Scroll-Snap Image Carousel (Strictly Zero JS) --- */
+.n2c-carousel {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.n2c-carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 0.75rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 6px;
+    background: var(--n2c-surface);
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+}
+
+.n2c-carousel-track:focus-visible {
+    outline: 2px solid var(--n2c-accent);
+    outline-offset: 2px;
+}
+
+.n2c-carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.n2c-lightbox-trigger {
+    display: block;
+    width: 100%;
+    cursor: zoom-in;
+    text-decoration: none;
+}
+
+.n2c-carousel-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 72vh;
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+.n2c-carousel[style*="--n2c-ratio"] .n2c-carousel-slide img {
+    aspect-ratio: var(--n2c-ratio);
+    object-fit: cover;
+}
+
+.n2c-slide-caption {
+    padding: 0.5rem 0.75rem 0.65rem;
+    font-size: 0.85rem;
+    color: var(--n2c-muted);
+    text-align: center;
+}
+
+.n2c-carousel-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 0.65rem;
+}
+
+.n2c-carousel-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.65rem;
+    height: 1.65rem;
+    padding: 0 0.4rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    color: var(--n2c-muted);
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-carousel-dot:hover,
+.n2c-carousel-dot:focus-visible {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-carousel-caption {
+    margin-top: 0.45rem;
+    font-size: 0.82rem;
+    color: var(--n2c-muted);
+    text-align: center;
+}
+
+/* Progressive pure-CSS scroll buttons for supporting browsers */
+@supports selector(::scroll-button(left)) {
+    .n2c-carousel-track::scroll-button(left),
+    .n2c-carousel-track::scroll-button(right) {
+        background: var(--n2c-surface);
+        color: var(--n2c-fg);
+        border: 1px solid var(--n2c-rule);
+        border-radius: 999px;
+        width: 2.1rem;
+        height: 2.1rem;
+        cursor: pointer;
+        opacity: 0.85;
+    }
+    .n2c-carousel-track::scroll-button(left) {
+        content: "‹";
+    }
+    .n2c-carousel-track::scroll-button(right) {
+        content: "›";
+    }
+}
+
+/* Pure-CSS :target Lightbox */
+.n2c-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.n2c-lightbox:target {
+    display: flex;
+}
+
+.n2c-lightbox-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    cursor: zoom-out;
+}
+
+.n2c-lightbox-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 92vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.n2c-lightbox-inner img {
+    max-width: 88vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.n2c-lightbox-close,
+.n2c-lightbox-prev,
+.n2c-lightbox-next {
+    position: fixed;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: rgba(25, 25, 25, 0.82);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    text-decoration: none;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.n2c-lightbox-close {
+    top: 1rem;
+    right: 1rem;
+}
+
+.n2c-lightbox-prev {
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.n2c-lightbox-next {
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.n2c-lightbox-caption {
+    margin-top: 0.75rem;
+    color: #e8e8e8;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .n2c-carousel-track {
+        scroll-behavior: auto;
+    }
+}
+
+@media print {
+    .n2c-carousel-track {
+        display: block;
+        overflow: visible;
+        border: none;
+    }
+    .n2c-carousel-slide {
+        margin-bottom: 1rem;
+        page-break-inside: avoid;
+    }
+    .n2c-carousel-nav,
+    .n2c-lightbox {
+        display: none !important;
+    }
+}
+
+/* --- Series Box, Prev/Next Post Navigation, Related Posts --- */
+.n2c-series {
+    margin: 0 0 2rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--n2c-rule);
+    border-left: 3px solid var(--n2c-accent);
+    background: var(--n2c-surface);
+    border-radius: 4px;
+    font-size: 0.92rem;
+}
+
+.n2c-series summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--n2c-fg);
+}
+
+.n2c-series ol {
+    margin: 0.75rem 0 0 1.25rem;
+    padding: 0;
+}
+
+.n2c-series li {
+    margin: 0.3rem 0;
+}
+
+.n2c-series li a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+}
+
+.n2c-series li a:hover {
+    text-decoration: underline;
+}
+
+.n2c-post-extras {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--n2c-rule);
+}
+
+.n2c-post-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.n2c-post-nav-item {
+    display: block;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 4px;
+    background: var(--n2c-surface);
+    text-decoration: none;
+    color: var(--n2c-fg);
+    transition: border-color 0.15s ease;
+}
+
+.n2c-post-nav-item:hover {
+    border-color: var(--n2c-accent);
+}
+
+.n2c-post-nav-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--n2c-muted);
+    margin-bottom: 0.25rem;
+}
+
+.n2c-post-nav-title {
+    display: block;
+    font-weight: 500;
+    color: var(--n2c-accent);
+}
+
+.n2c-related {
+    margin-top: 1.5rem;
+}
+
+.n2c-related h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--n2c-muted);
+    margin-bottom: 0.75rem;
+}
+
+.n2c-related ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.n2c-related li {
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--n2c-rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.92rem;
+}
+
+.n2c-related li a {
+    color: var(--n2c-fg);
+    text-decoration: none;
+}
+
+.n2c-related li a:hover {
+    color: var(--n2c-accent);
+}
+
+.n2c-related-date {
+    color: var(--n2c-muted);
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
+/* --- Search Page --- */
+.n2c-search-box {
+    margin: 1.5rem 0 2.5rem;
+}
+
+.n2c-search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 4px;
+    background: var(--n2c-surface);
+    color: var(--n2c-fg);
+    margin-bottom: 1.25rem;
+}
+
+.n2c-search-input:focus {
+    outline: 2px solid var(--n2c-accent);
+    border-color: var(--n2c-accent);
+}
+
+.n2c-search-results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.n2c-search-results li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--n2c-rule);
+}
+
+.n2c-search-results a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.n2c-search-results p {
+    margin: 0.35rem 0 0;
+    color: var(--n2c-muted);
+    font-size: 0.9rem;
+}</style>
 </head>
 <body>
     <article>
         <header class="post-header">
             <div class="post-meta">
-                <span><time datetime="2026-04-01T08:20:39.968454+00:00">April 1, 2026</time></span>
+                <span><time datetime="2026-04-01T08:20:39.968454+00:00">1 апреля 2026</time></span>
                 <span>16 min</span>
             </div>
-            <h1 class="post-title">Rise of the AI Soldiers</h1>
+            <h1 class="post-title title-reveal" data-animated-title>Rise of the AI Soldiers</h1>
             
             <div class="post-tags">
                 
-                <span>clippings</span>
+                <a href="https://garrul4ik.github.io/blog/posts/tags/clippings/" class="n2c-tag-link"><span>clippings</span></a>
                 
             </div>
             
         </header>
 
         <div class="post-content">
-            <p><img alt="" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt67ea352f61409a68/69af7f9e1d80ac655e827657/foundation-labs-ai-soldiers-01.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp&amp;crop=4%3A5" /></p>
+            
+<p><img alt="" decoding="async" loading="lazy" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt67ea352f61409a68/69af7f9e1d80ac655e827657/foundation-labs-ai-soldiers-01.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp&amp;crop=4%3A5" /></p>
 <p>A Phantom MK-1 humanoid robot, produced by San Francisco–based Foundation, at the firm’s headquarters on Feb. 25 Mattia Balsamini for TIME</p>
-<p><img alt="Charlie Campbell" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt3b163d8a0b596501/698857f5cd6848125a0a07be/charlie-campbell-time.jpg?branch=production&amp;width=96&amp;quality=75&amp;auto=webp" /></p>
+<p><img alt="Charlie Campbell" decoding="async" loading="lazy" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt3b163d8a0b596501/698857f5cd6848125a0a07be/charlie-campbell-time.jpg?branch=production&amp;width=96&amp;quality=75&amp;auto=webp" /></p>
 <p>Charlie Campbell</p>
 <p>by</p>
 <p>Editor at Large</p>
@@ -275,7 +949,7 @@
 <p>Today, Phantom is being tested in factories and dockyards from Atlanta to Singapore. But its headline claim is to be the world’s first humanoid robot specifically developed for defense applications. Foundation already has research contracts worth a combined $24 million with the U.S. Army, Navy, and Air Force, including what’s known as an SBIR Phase 3, effectively making it an approved military vendor. It’s also due to begin tests with the Marine Corps “methods of entry” course, training Phantoms to put explosives on doors to help troops breach sites more safely.</p>
 <p>In February, two Phantoms were sent to Ukraine—initially for frontline-reconnaissance support. But Foundation is also preparing Phantoms for potential deployment in combat scenarios for the Pentagon, which “continues to explore the development of militarized humanoid prototypes designed to operate alongside war fighters in complex, high-risk environments,” says a spokesman. LeBlanc says the company is also in “very close contact” with the Department of Homeland Security about possible patrol functions for Phantom along the U.S. southern border.</p>
 <p>Advertisement</p>
-<p><img alt="" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blted6c54f5a445d11a/69af7f9f785ca02715cd4ce6/foundation-labs-ai-soldiers-02.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blted6c54f5a445d11a/69af7f9f785ca02715cd4ce6/foundation-labs-ai-soldiers-02.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
 <p>A Phantom robot is hauled back to its feet after toppling over Mattia Balsamini for TIME</p>
 <p>In just a few short years, the rapid proliferation of AI has turned what was once the stuff of dystopian sci-fi into a reality. LeBlanc argues humanoid soldiers are a natural extension of existing autonomous systems like drones. Compared with risking the lives of teenage grunts, with all the political backlash and risks of stress-induced war crimes and trauma, humanoid soldiers offer a more resilient alternative, with greater restraint and precision. Robots do not suffer from fatigue or fear and can operate continuously in extreme conditions while immune from radiation, chemicals, or biological agents. Moreover, LeBlanc believes that giant armies of humanoid robots will eventually nullify each side’s tactical advantage in any conflict much like nuclear deterrents—exponentially decreasing escalation risks.</p>
 <p>Advertisement</p>
@@ -285,9 +959,9 @@
 <p>Moreover, set against a drastic militarization of American society—with heavily armed ICE officers swarming U.S. cities, the National Guard deployed to six states last year, and local police equipped with armored vehicles left over from the Forever Wars—the specter of AI-powered soldiers with opaque mission directives and chains of command has civil-liberty alarm bells clanging. Then add in the well-documented algorithmic biases that are known to blight AI facial-recognition software. Yet in a sign of stripped-away guardrails for AI’s national-security implementation, on Feb. 28 President Donald Trump ordered federal agencies and military contractors to cease business with Anthropic, known as the most safety-conscious of the big AI firms. Anthropic’s contract decreed its technology couldn’t be used to surveil American citizens or program autonomous weapons to kill without human involvement. While both these restrictions chime with current government protocol, the White House refused to be bound by them.</p>
 <p>Advertisement</p>
 <p>And the U.S. is far from alone in exploring humanoid soldiers. Authoritarian regimes including Russia and China are developing the dual-use technology, pitting the West in a contest to create ever more powerful and efficient killing machines in human form. A humanoid-soldier arms race is “already happening,” says Sankaet Pathak, Foundation co-founder and CEO.</p>
-<p><img alt="" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/bltb71e33163564c7a3/69af7f9f44dc722f30f72b3c/foundation-labs-ai-soldiers-06.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/bltb71e33163564c7a3/69af7f9f44dc722f30f72b3c/foundation-labs-ai-soldiers-06.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
 <p>Mike LeBlanc, co-founder of Foundation and a 14-year Marine Corps veteran Mattia Balsamini for TIME</p>
-<p><img alt="" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt939aef49768c476e/69af7fa02230c515c4fb2049/foundation-labs-ai-soldiers-07.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt939aef49768c476e/69af7fa02230c515c4fb2049/foundation-labs-ai-soldiers-07.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
 <p>Sankaet Pathak, co-founder and CEO of Foundation Mattia Balsamini for TIME</p>
 <p>Modern warfare is already hugely automated, from smart mines and antirocket defense shields to laser-guided missiles. The question is how much autonomy is too much. As companies like Foundation race to embody humanoids with lethal functionality, a parallel legal tussle is raging between AI-focused defense companies and international bodies seeking to codify what level of human control is appropriate in war. Lethal autonomous weapon systems are “politically unacceptable” and “morally repugnant,” U.N. Secretary-General António Guterres said last year, in remarks that seem to put the international order on a collision course with AI-focused defense firms with influential backing. TIME can reveal that Eric Trump is an investor and newly appointed chief strategic adviser at Foundation.</p>
 <p>Advertisement</p>
@@ -297,7 +971,7 @@
 <p>Ukraine, which now launches up to 9,000 drones every day, has become the world’s premier testing ground for arms manufacturers—including Western startups—seeking to automate parts of the conventional “kill chain,” the step-by-step process used to identify, engage, and destroy an enemy target. These firms include Foundation, which wants to get Phantoms onto the front line of combat to hone the technology via a “feedback loop” of real-life use cases.</p>
 <p>Advertisement</p>
 <p>“Just like drones, machine guns, or any technology, you first have to get them into the hands of customers,” says Pathak.</p>
-<p><img alt="" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt78f4fa7cb2646f89/69af7f9f035c6f78057a301a/foundation-labs-ai-soldiers-03.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt78f4fa7cb2646f89/69af7f9f035c6f78057a301a/foundation-labs-ai-soldiers-03.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
 <p>Pathak controls a Phantom using a virtual reality headset Mattia Balsamini for TIME</p>
 <p>Increasingly, every aspect of the Ukraine war is being automated. Most stunning has been the proliferation of autonomous drones, which boast software that can navigate payloads over hundreds of miles and lock onto a target. AI-enhanced Ukrainian quadcopters can attack Russian soldiers without humans in the loop when communications fail and remote control becomes impossible. Computer vision can identify and eliminate specific targets, even flying through windows to assassinate individuals. In late January, three bloodied Russian soldiers emerged from a routed building to surrender to an armed Ukrainian ground robot, a kind of small, unmanned tank.</p>
 <p>Advertisement</p>
@@ -305,7 +979,7 @@
 <p>“How many.50-[caliber guns] do we have? How many grenade launchers? How many humvees?” asks LeBlanc. “We need something that can interact with all of these. So having a humanoid really unlocks the entire U.S. military.”</p>
 <p>Advertisement</p>
 <p>Ultimately, wars are won by breaking the enemy’s will. It can leave in body bags or as morale drains away. But even as strikes aimed at the latter, like the Russian energy-infrastructure attacks that have left Ukrainians without heat, can be considered a war crime, LeBlanc argues that such moves are preferable to firebombing a human population—and that they’ll be all that’s left when humans leave the field of war. “Droid battles, with a bunch of drones overhead and humanoids walking out towards each other, becomes an economic conflict,” he says. “I think that’s all for the better.”</p>
-<p><img alt="" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt531a9c8581de5b98/69af7fa0e1b1334a2f3a172f/foundation-labs-ai-soldiers-09.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt531a9c8581de5b98/69af7fa0e1b1334a2f3a172f/foundation-labs-ai-soldiers-09.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
 <p>Inside the arm of a Phantom MK-1 humanoid robot in San Francisco on Feb. 25 Mattia Balsamini for TIME</p>
 <p>There are downsides. Humanoid robots are heavy and expensive, need regular recharging, and are likely to break down. How will they cope with mud, dust, and driving rain? Movement in a humanoid is driven by some 20 motors, each of which must be powered and can be rendered -useless by even a minor glitch. Deploying humanoids alongside regular troops may also bring additional dangers. “If you fall over next to a baby, you know how to land without hurting the baby,” says Prahlad Vadakkepat, an associate professor at the National University of Singapore and founder of the Federation of International Robot-Soccer Association. “Will a humanoid be able to do that?”</p>
 <p>Advertisement</p>
@@ -314,19 +988,19 @@
 <p>“It’s a question of human dignity,” says Peter Asaro, a roboticist, philosopher, and chair of the International Committee for Robot Arms Control. “These machines are not moral or legal agents, and they’ll never understand the ethical implications of their actions.”</p>
 <p>Advertisement</p>
 <hr />
-<p>They may not understand the true gravity, but machines are already making life-and-death judgment calls. An hour’s drive south of San Francisco, Scout AI is working to merge AI with existing American weaponry, including UTVs, tanks, and drones. In February, it ran a test event whereby seven AI agents—software that not only gathers information but then takes the initiative on actions—planned and executed a coordinated attack. After the firm’s Fury AI Orchestrator was told a blue enemy vehicle had last been seen at a certain location, it dispatched various ground and air agents controlling their own assets to identify, locate, and neutralize the target without any further human intervention. “There are agents that can replace all of&hellip; the kill chain,” says Colby Adcock, co-founder and CEO of Scout AI, which is currently negotiating $225 million worth of Pentagon contracts. “And they’re way better and faster and smarter.”</p>
+<p>They may not understand the true gravity, but machines are already making life-and-death judgment calls. An hour’s drive south of San Francisco, Scout AI is working to merge AI with existing American weaponry, including UTVs, tanks, and drones. In February, it ran a test event whereby seven AI agents—software that not only gathers information but then takes the initiative on actions—planned and executed a coordinated attack. After the firm’s Fury AI Orchestrator was told a blue enemy vehicle had last been seen at a certain location, it dispatched various ground and air agents controlling their own assets to identify, locate, and neutralize the target without any further human intervention. “There are agents that can replace all of… the kill chain,” says Colby Adcock, co-founder and CEO of Scout AI, which is currently negotiating $225 million worth of Pentagon contracts. “And they’re way better and faster and smarter.”</p>
 <p>Advertisement</p>
-<p><img alt="" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt1a4b04b23e2f3204/69af7f9fafd29a80b72451ce/foundation-labs-ai-soldiers-05.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt1a4b04b23e2f3204/69af7f9fafd29a80b72451ce/foundation-labs-ai-soldiers-05.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
 <p>A Foundation worker tests Phantom’s stability with an extended boxing glove Mattia Balsamini for TIME</p>
 <p>“We’re the first people to actually do the entire kill chain remotely from the human,” says Collin Otis, Scout AI co-founder and CTO. “What we’re going to see over the next five years is you’re not going to have people flying drones anymore. It just will not make sense. As AI gets integrated everywhere, that will go away.”</p>
 <p>In terms of humanoid soldiers, the technology is “probably a couple years out from deploying them into combat,” says Adcock, who also sits on the board of Figure AI, a humanoid-robot firm founded by his brother Brett.</p>
 <p>Scout AI and Foundation are far from outliers. A burgeoning AI for Defense ecosystem is flourishing across the U.S. Three years after billionaire Palmer Luckey’s Oculus VR company was acquired by Meta, he founded the autonomous-weapons firm Anduril in 2017. Anduril produces a range of AI-empowered kits such as the Roadrunner twin-turbojet-powered drone interceptor, a headset that allows soldiers to see 360 degrees, and an electromagnetic-warfare system that can jam enemy systems to debilitate drone swarms.</p>
 <p>Advertisement</p>
-<p>Luckey also full-throatedly backs autonomous weapons that work with no human intervention. “There’s no moral high ground to making a land mine” rather than a more intelligent weapon, Luckey told <em>60 Minutes</em> last August. Anduril’s Ghost Shark autonomous submarine is already being employed by the Australian navy. Air Marshal Robert Chipman, vice chief of the Australian Defence Force, tells TIME that this key U.S. ally will “continue to invest in and adopt autonomous and uncrewed systems&hellip; improving the survivability and lethality of our force in increasingly contested environments.”</p>
+<p>Luckey also full-throatedly backs autonomous weapons that work with no human intervention. “There’s no moral high ground to making a land mine” rather than a more intelligent weapon, Luckey told <em>60 Minutes</em> last August. Anduril’s Ghost Shark autonomous submarine is already being employed by the Australian navy. Air Marshal Robert Chipman, vice chief of the Australian Defence Force, tells TIME that this key U.S. ally will “continue to invest in and adopt autonomous and uncrewed systems… improving the survivability and lethality of our force in increasingly contested environments.”</p>
 <p>Still, critics of automation say the physical separation between the operator and target turns human beings into “data points,” diminishing the moral weight of killing with a sterile video-game-like process, stripping away the last vestige of human empathy from the battlefield and making it too easy to accept higher rates of casualties that we wouldn’t otherwise.</p>
 <p>Advertisement</p>
 <p>At the same time, if the ability to wage war remotely and autonomously leads to minimal human toll, that in itself may increase risk tolerance, meaning more operations that have higher escalation potential. For instance, it would be a gutsy move for a conventional U.S. Navy vessel to attempt to break any Chinese blockade of self-ruling Taiwan. Sending an unmanned submersible, however, feels less confrontational—as would a People’s Liberation Army decision to sink it. Yet those ostensibly lower-risk scenarios may in fact accelerate an escalatory spiral toward full-blown conflict. If a nation can wage war without the political cost of bringing home flag-draped coffins, will it be more likely to engage in unnecessary conflicts? “The human cost of war sometimes keeps us out of war,” says Kavanagh of Defense Priorities.</p>
-<p><img alt="" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blta89296b489ed80dd/69af7f9ffca7bc2f34bd4022/foundation-labs-ai-soldiers-04.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blta89296b489ed80dd/69af7f9ffca7bc2f34bd4022/foundation-labs-ai-soldiers-04.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
 <p>LeBlanc prepares to hand a shotgun to a Phantom Mattia Balsamini for TIME</p>
 <p>Advertisement</p>
 <p>An additional worry is that AI is far from perfect. As anyone who has used ChatGPT or Google Gemini knows, LLMs make mistakes, known as hallucinations, all the time, as generative tools confidently produce false, misleading, or nonsensical information not based on training data.</p>
@@ -349,7 +1023,7 @@
 <p>Current negotiations in Geneva are focused on a two-tier framework that would apply to autonomous weapons, including drones and humanoid soldiers. First, a total ban on systems that are “inherently unpredictable” or target people using biometric data like facial recognition. Second, strict rules on such factors as the geographic area and duration of autonomous missions, and a “stop-switch” requirement that allows a human to intervene at any time.<br />
 A central legal battlefield is what “control” looks like: human-in-the-loop, whereby automated systems can identify targets but a human must click <em>fire;</em> or human-on-the-loop, whereby a robot operates autonomously but a human monitors and has override protection.</p>
 <p>Advertisement</p>
-<p><img alt="" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt7d7c065d40cbe39a/69af7f9e1d80ac71be827653/foundation-labs-ai-soldiers-10.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://gcp-na-images.contentstack.com/v3/assets/bltea6093859af6183b/blt7d7c065d40cbe39a/69af7f9e1d80ac71be827653/foundation-labs-ai-soldiers-10.JPG?branch=production&amp;width=320&amp;quality=75&amp;auto=webp" /></p>
 <p>A Phantom MK-1 humanoid robot, produced by San Francisco–based Foundation, at the firm’s headquarters on Feb. 25 Mattia Balsamini for TIME</p>
 <p>Whether the U.S. and its adversaries abide by any ruling is another matter, given the way the Trump Administration has repeatedly flouted and mocked international convention, not least when there are billions of dollars in government contracts in the offing.</p>
 <p>“World war is bad,” says Pathak, “but I think a cold war is genuinely a good thing, because it forces everybody to innovate at a very fast pace. We want China to have humanoid robots, we want America to have humanoid robots, everybody to have humanoid robots.”</p>
@@ -358,11 +1032,112 @@ A central legal battlefield is what “control” looks like: human-in-the-loop,
 <p>“Once we get to half a million, each will probably cost less than $20,000,” says Pathak, who eventually envisions thousands-strong swarms of Phantoms conducting complex military operations.</p>
 <p>Scout AI’s Otis says the future will be “massive unmanned system on unmanned system warfare, and then there’s a clear winner and you have a surrender of a nation.” That’s because pitting unmanned systems on humans would be “so catastrophic that no nation is going to want to subject their people to that.” At which point, depending on whom you believe, humanity may be relishing in Pax Automata—or staring down AI armageddon.</p>
 <p>“Right now, what you’re seeing is the first flatfooted and clumsy attempt at how robots are going to fight our wars,” says LeBlanc. “But they’re really waiting for the start of the show.”</p>
+
+<aside class="n2c-post-extras" aria-label="Post navigation">
+    
+    <nav class="n2c-post-nav">
+        
+        <a href="https://garrul4ik.github.io/blog/posts/novosti-regulirovanie-ssha/" class="n2c-post-nav-item" rel="prev">
+            <span class="n2c-post-nav-label">← Предыдущий пост</span>
+            <span class="n2c-post-nav-title">🔈Новости  ⚖️Регулирование  США🇺🇸</span>
+        </a>
+        
+        
+        <a href="https://garrul4ik.github.io/blog/posts/o-velikom-alberte-legende-finiksa/" class="n2c-post-nav-item" rel="next">
+            <span class="n2c-post-nav-label">Следующий пост →</span>
+            <span class="n2c-post-nav-title">🎶 О Великом  Альберте, Легенде Финикса 🎶</span>
+        </a>
+        
+    </nav>
+    
+
+    
+    <div class="n2c-related">
+        <h3>Похожие посты</h3>
+        <ul>
+            
+            <li>
+                <a href="https://garrul4ik.github.io/blog/posts/roskomnadzor-annuliroval-1967-litsenzii-operatorov-sviazi/">Роскомнадзор аннулировал 1967 лицензий операторов связи</a>
+                <span class="n2c-related-date">22 апреля 2026</span>
+            </li>
+            
+            <li>
+                <a href="https://garrul4ik.github.io/blog/posts/mortalezz-openclaw-bash-script-to-provision-openclaw-kimi-2-5-tailscale-on-fresh/">mortalezz/openclaw: Bash script to provision Openclaw + Kimi 2.5 + Tailscale on fresh Ubuntu box</a>
+                <span class="n2c-related-date">1 апреля 2026</span>
+            </li>
+            
+            <li>
+                <a href="https://garrul4ik.github.io/blog/posts/pochemu-spartantsy-samurai-i-milliardery-delali-odno-i-to-zhe/">Почему спартанцы, самураи и миллиардеры делали одно и то же?</a>
+                <span class="n2c-related-date">1 апреля 2026</span>
+            </li>
+            
+        </ul>
+    </div>
+    
+</aside>
+
         </div>
     </article>
 
     <footer class="post-footer">
-        <a href="https://garrul4ik.github.io/blog/posts/">← All Posts</a>
+        <a href="https://garrul4ik.github.io/blog/posts/" data-ripple>&larr; Все посты</a>
     </footer>
+
+    <script>
+        (function () {
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function splitTitle(el) {
+                if (!el || reduceMotion) {
+                    return;
+                }
+                var text = el.textContent || '';
+                if (!text.trim()) {
+                    return;
+                }
+
+                el.setAttribute('aria-label', text);
+                el.textContent = '';
+                el.classList.add('title-split');
+
+                Array.from(text).forEach(function (ch, idx) {
+                    var span = document.createElement('span');
+                    span.className = 'char ' + (idx % 2 === 0 ? 'char-even' : 'char-odd');
+                    span.style.setProperty('--char-index', idx);
+                    if (ch === ' ') {
+                        span.classList.add('space');
+                        span.innerHTML = '&nbsp;';
+                    } else {
+                        span.textContent = ch;
+                    }
+                    el.appendChild(span);
+                });
+
+                window.setTimeout(function () {
+                    el.classList.add('wave');
+                }, 750);
+            }
+
+            function attachRipple(el) {
+                if (!el || reduceMotion) {
+                    return;
+                }
+                el.addEventListener('click', function (event) {
+                    var rect = el.getBoundingClientRect();
+                    var ripple = document.createElement('span');
+                    ripple.className = 'click-ripple';
+                    ripple.style.left = (event.clientX - rect.left) + 'px';
+                    ripple.style.top = (event.clientY - rect.top) + 'px';
+                    el.appendChild(ripple);
+                    window.setTimeout(function () {
+                        ripple.remove();
+                    }, 600);
+                });
+            }
+
+            splitTitle(document.querySelector('[data-animated-title]'));
+            document.querySelectorAll('[data-ripple], .post-content a').forEach(attachRipple);
+        })();
+    </script>
 </body>
 </html>

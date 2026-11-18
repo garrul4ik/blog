@@ -1,0 +1,937 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>stenAgram</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&display=swap');
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { font-size: 15px; }
+
+        body {
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.6;
+            border: 4px solid #000000;
+            min-height: 100vh;
+        }
+
+        .index-header {
+            padding: 2rem;
+            border-bottom: 4px solid #000000;
+        }
+
+        .index-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+
+        .index-subtitle {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        /* --- Post List --- */
+        .post-list {
+            list-style: none;
+        }
+
+        .post-item {
+            border-bottom: 2px solid #000000;
+        }
+
+        .post-item-link {
+            display: block;
+            padding: 1.2rem 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.05s;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .post-item-link:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        .post-item-link:hover .post-item-tags span {
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
+        .post-item-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .post-item-title {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.3;
+        }
+
+        .post-item-meta {
+            font-size: 0.7rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .post-item-excerpt {
+            font-size: 0.8rem;
+            line-height: 1.5;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-item-tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+
+        .post-item-tags span {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            border: 1px solid #000000;
+            padding: 0.1rem 0.35rem;
+        }
+
+        /* --- Empty --- */
+        .empty-state {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .empty-state p {
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state code {
+            font-family: inherit;
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border: 1px solid #cccccc;
+        }
+
+        /* --- Footer --- */
+        .index-footer {
+            padding: 1rem 2rem;
+            border-top: 4px solid #000000;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+
+        .title-reveal {
+            animation: title-reveal 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes title-reveal {
+            from {
+                clip-path: inset(0 100% 0 0);
+                transform: translateX(-0.5rem);
+                opacity: 0;
+            }
+            to {
+                clip-path: inset(0 0 0 0);
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .title-split .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(0.45em);
+            animation: char-in 0.4s ease-out forwards;
+            animation-delay: calc(var(--char-index) * 25ms);
+            will-change: transform;
+        }
+
+        .title-split .char.space {
+            width: 0.32em;
+        }
+
+        @keyframes char-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title-split.wave .char {
+            animation: char-drift 1.8s ease-in-out infinite;
+            animation-delay: calc(var(--char-index) * 35ms);
+        }
+
+        .title-split.wave .char-even {
+            --char-drift: -0.12em;
+        }
+
+        .title-split.wave .char-odd {
+            --char-drift: 0.12em;
+        }
+
+        @keyframes char-drift {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(var(--char-drift));
+            }
+        }
+
+        .click-ripple {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: #000000;
+            opacity: 0.22;
+            pointer-events: none;
+            animation: ripple 0.55s ease-out forwards;
+            z-index: 0;
+        }
+
+        .post-item-link:hover .click-ripple {
+            background: #ffffff;
+            opacity: 0.26;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: translate(-50%, -50%) scale(42);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body { border-width: 3px; }
+            .post-item-link { padding: 1rem 1.5rem; }
+            .post-item-top { flex-direction: column; gap: 0; }
+            .index-header { padding: 1.5rem; }
+            .title-split.wave .char { animation: none; }
+        }
+
+        @media (hover: none) {
+            .title-split.wave .char { animation: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .title-reveal,
+            .title-split .char,
+            .title-split.wave .char,
+            .click-ripple {
+                animation: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+        }
+    </style>
+    <link rel="alternate" type="application/rss+xml" title="stenAgram RSS" href="https://garrul4ik.github.io/blog/feed.xml">
+<link rel="alternate" type="application/atom+xml" title="stenAgram Atom" href="https://garrul4ik.github.io/blog/atom.xml">
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+<link rel="canonical" href="https://garrul4ik.github.io/blog/posts/tags/pbpp/">
+
+    <style>/* note2cms shared components — inherits each theme's palette via CSS fallbacks */
+:root {
+    --n2c-bg: var(--bg, var(--paper, var(--white, #faf9f7)));
+    --n2c-surface: var(--surface, var(--cream, var(--code-bg, var(--gray-100, rgba(128, 128, 128, 0.08)))));
+    --n2c-fg: var(--text, var(--ink, var(--black, #1a1a1a)));
+    --n2c-muted: var(--muted, var(--dim, var(--text-dim, var(--pencil, var(--stone, var(--gray-500, #6b6560))))));
+    --n2c-accent: var(--accent, var(--vermillion, var(--red, var(--green, var(--pink, var(--amber, var(--margin-red, #c45d3e)))))));
+    --n2c-rule: var(--rule, var(--border, var(--gray-300, var(--wash, rgba(128, 128, 128, 0.28)))));
+}
+
+/* --- Site Navigation & Tag Filter Banner --- */
+.n2c-site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin: 1rem 0 2rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--n2c-rule);
+    border-bottom: 1px solid var(--n2c-rule);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+.n2c-site-nav a {
+    color: var(--n2c-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.n2c-site-nav a:hover,
+.n2c-site-nav a[aria-current="page"] {
+    color: var(--n2c-accent);
+}
+
+.n2c-nav-spacer {
+    margin-left: auto;
+}
+
+.n2c-tag-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 0 0 1.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--n2c-rule);
+    background: var(--n2c-surface);
+    border-radius: 4px;
+    font-size: 0.92rem;
+}
+
+.n2c-tag-banner a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+}
+
+.n2c-tag-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.n2c-tag-link:hover span {
+    border-color: var(--n2c-accent);
+    opacity: 0.85;
+}
+
+/* --- Tags Cloud Page --- */
+.n2c-tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: 1.5rem 0 3rem;
+}
+
+.n2c-tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--n2c-rule);
+    background: var(--n2c-surface);
+    color: var(--n2c-fg);
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-tag-pill:hover {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-tag-count {
+    font-size: 0.78em;
+    color: var(--n2c-muted);
+}
+
+/* --- Pagination (Zero-JS) --- */
+.n2c-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 2.5rem 0 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--n2c-rule);
+    font-size: 0.9rem;
+}
+
+.n2c-page-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.n2c-page-link,
+.n2c-page-current,
+.n2c-page-ellipsis,
+.n2c-page-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.55rem;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.n2c-page-link,
+.n2c-page-nav {
+    color: var(--n2c-fg);
+    border: 1px solid var(--n2c-rule);
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-page-link:hover,
+.n2c-page-nav:hover {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-page-current {
+    background: var(--n2c-accent);
+    color: #ffffff;
+    border: 1px solid var(--n2c-accent);
+    font-weight: 600;
+}
+
+.n2c-page-ellipsis {
+    color: var(--n2c-muted);
+}
+
+.n2c-page-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* --- Pure-CSS Scroll-Snap Image Carousel (Strictly Zero JS) --- */
+.n2c-carousel {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.n2c-carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 0.75rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 6px;
+    background: var(--n2c-surface);
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+}
+
+.n2c-carousel-track:focus-visible {
+    outline: 2px solid var(--n2c-accent);
+    outline-offset: 2px;
+}
+
+.n2c-carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.n2c-lightbox-trigger {
+    display: block;
+    width: 100%;
+    cursor: zoom-in;
+    text-decoration: none;
+}
+
+.n2c-carousel-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 72vh;
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+.n2c-carousel[style*="--n2c-ratio"] .n2c-carousel-slide img {
+    aspect-ratio: var(--n2c-ratio);
+    object-fit: cover;
+}
+
+.n2c-slide-caption {
+    padding: 0.5rem 0.75rem 0.65rem;
+    font-size: 0.85rem;
+    color: var(--n2c-muted);
+    text-align: center;
+}
+
+.n2c-carousel-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 0.65rem;
+}
+
+.n2c-carousel-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.65rem;
+    height: 1.65rem;
+    padding: 0 0.4rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    color: var(--n2c-muted);
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-carousel-dot:hover,
+.n2c-carousel-dot:focus-visible {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-carousel-caption {
+    margin-top: 0.45rem;
+    font-size: 0.82rem;
+    color: var(--n2c-muted);
+    text-align: center;
+}
+
+/* Progressive pure-CSS scroll buttons for supporting browsers */
+@supports selector(::scroll-button(left)) {
+    .n2c-carousel-track::scroll-button(left),
+    .n2c-carousel-track::scroll-button(right) {
+        background: var(--n2c-surface);
+        color: var(--n2c-fg);
+        border: 1px solid var(--n2c-rule);
+        border-radius: 999px;
+        width: 2.1rem;
+        height: 2.1rem;
+        cursor: pointer;
+        opacity: 0.85;
+    }
+    .n2c-carousel-track::scroll-button(left) {
+        content: "‹";
+    }
+    .n2c-carousel-track::scroll-button(right) {
+        content: "›";
+    }
+}
+
+/* Pure-CSS :target Lightbox */
+.n2c-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.n2c-lightbox:target {
+    display: flex;
+}
+
+.n2c-lightbox-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    cursor: zoom-out;
+}
+
+.n2c-lightbox-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 92vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.n2c-lightbox-inner img {
+    max-width: 88vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.n2c-lightbox-close,
+.n2c-lightbox-prev,
+.n2c-lightbox-next {
+    position: fixed;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: rgba(25, 25, 25, 0.82);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    text-decoration: none;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.n2c-lightbox-close {
+    top: 1rem;
+    right: 1rem;
+}
+
+.n2c-lightbox-prev {
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.n2c-lightbox-next {
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.n2c-lightbox-caption {
+    margin-top: 0.75rem;
+    color: #e8e8e8;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .n2c-carousel-track {
+        scroll-behavior: auto;
+    }
+}
+
+@media print {
+    .n2c-carousel-track {
+        display: block;
+        overflow: visible;
+        border: none;
+    }
+    .n2c-carousel-slide {
+        margin-bottom: 1rem;
+        page-break-inside: avoid;
+    }
+    .n2c-carousel-nav,
+    .n2c-lightbox {
+        display: none !important;
+    }
+}
+
+/* --- Series Box, Prev/Next Post Navigation, Related Posts --- */
+.n2c-series {
+    margin: 0 0 2rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--n2c-rule);
+    border-left: 3px solid var(--n2c-accent);
+    background: var(--n2c-surface);
+    border-radius: 4px;
+    font-size: 0.92rem;
+}
+
+.n2c-series summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--n2c-fg);
+}
+
+.n2c-series ol {
+    margin: 0.75rem 0 0 1.25rem;
+    padding: 0;
+}
+
+.n2c-series li {
+    margin: 0.3rem 0;
+}
+
+.n2c-series li a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+}
+
+.n2c-series li a:hover {
+    text-decoration: underline;
+}
+
+.n2c-post-extras {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--n2c-rule);
+}
+
+.n2c-post-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.n2c-post-nav-item {
+    display: block;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 4px;
+    background: var(--n2c-surface);
+    text-decoration: none;
+    color: var(--n2c-fg);
+    transition: border-color 0.15s ease;
+}
+
+.n2c-post-nav-item:hover {
+    border-color: var(--n2c-accent);
+}
+
+.n2c-post-nav-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--n2c-muted);
+    margin-bottom: 0.25rem;
+}
+
+.n2c-post-nav-title {
+    display: block;
+    font-weight: 500;
+    color: var(--n2c-accent);
+}
+
+.n2c-related {
+    margin-top: 1.5rem;
+}
+
+.n2c-related h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--n2c-muted);
+    margin-bottom: 0.75rem;
+}
+
+.n2c-related ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.n2c-related li {
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--n2c-rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.92rem;
+}
+
+.n2c-related li a {
+    color: var(--n2c-fg);
+    text-decoration: none;
+}
+
+.n2c-related li a:hover {
+    color: var(--n2c-accent);
+}
+
+.n2c-related-date {
+    color: var(--n2c-muted);
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
+/* --- Search Page --- */
+.n2c-search-box {
+    margin: 1.5rem 0 2.5rem;
+}
+
+.n2c-search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 4px;
+    background: var(--n2c-surface);
+    color: var(--n2c-fg);
+    margin-bottom: 1.25rem;
+}
+
+.n2c-search-input:focus {
+    outline: 2px solid var(--n2c-accent);
+    border-color: var(--n2c-accent);
+}
+
+.n2c-search-results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.n2c-search-results li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--n2c-rule);
+}
+
+.n2c-search-results a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.n2c-search-results p {
+    margin: 0.35rem 0 0;
+    color: var(--n2c-muted);
+    font-size: 0.9rem;
+}</style>
+</head>
+<body>
+    <header class="index-header">
+        <h1 class="index-title title-reveal" data-animated-title>stenAgram</h1>
+        <p class="index-subtitle">Write where you think. Publish where they look. Own everything in between.</p>
+    </header>
+
+    <nav class="n2c-site-nav" aria-label="Site navigation">
+    <a href="https://garrul4ik.github.io/blog/posts/">Все посты</a>
+    <a href="https://garrul4ik.github.io/blog/posts/tags/" aria-current="page">Теги</a>
+    
+    
+    <a href="https://garrul4ik.github.io/blog/posts/search/">Поиск</a>
+    
+    <a href="https://garrul4ik.github.io/blog/feed.xml" class="n2c-nav-spacer">RSS</a>
+</nav>
+
+<div class="n2c-tag-banner">
+    <strong>Тег: #pbpp</strong>
+    <a href="https://garrul4ik.github.io/blog/posts/">← Все посты</a>
+</div>
+
+        
+    <ul class="post-list">
+        
+        <li class="post-item">
+            <a href="https://garrul4ik.github.io/blog/posts/note2cms-publisher-publikatsiia-iz-obsidian-odnim-klikom/" class="post-item-link" data-ripple>
+                <div class="post-item-top">
+                    <h2 class="post-item-title">note2cms-publisher: Публикация из Obsidian одним кликом</h2>
+                    <span class="post-item-meta">[1 апреля 2026] [2мин]</span>
+                </div>
+                <p class="post-item-excerpt">оригинальный бэкенд</p>
+                
+                <div class="post-item-tags">
+                    
+                    <span>obsidian</span>
+                    
+                    <span>obsidianplugin</span>
+                    
+                    <span>note2cms</span>
+                    
+                    <span>markdown</span>
+                    
+                    <span>publishing</span>
+                    
+                    <span>indiehacking</span>
+                    
+                    <span>pbpp</span>
+                    
+                </div>
+                
+            </a>
+        </li>
+        
+    </ul>
+    
+        
+
+    <footer class="index-footer">
+        <p>note2cms &mdash; past-browser publishing protocol</p>
+    </footer>
+
+    <script>
+        (function () {
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function splitTitle(el) {
+                if (!el || reduceMotion) {
+                    return;
+                }
+                var text = el.textContent || '';
+                if (!text.trim()) {
+                    return;
+                }
+
+                el.setAttribute('aria-label', text);
+                el.textContent = '';
+                el.classList.add('title-split');
+
+                Array.from(text).forEach(function (ch, idx) {
+                    var span = document.createElement('span');
+                    span.className = 'char ' + (idx % 2 === 0 ? 'char-even' : 'char-odd');
+                    span.style.setProperty('--char-index', idx);
+                    if (ch === ' ') {
+                        span.classList.add('space');
+                        span.innerHTML = '&nbsp;';
+                    } else {
+                        span.textContent = ch;
+                    }
+                    el.appendChild(span);
+                });
+
+                window.setTimeout(function () {
+                    el.classList.add('wave');
+                }, 750);
+            }
+
+            function attachRipple(el) {
+                if (!el || reduceMotion) {
+                    return;
+                }
+                el.addEventListener('click', function (event) {
+                    var rect = el.getBoundingClientRect();
+                    var ripple = document.createElement('span');
+                    ripple.className = 'click-ripple';
+                    ripple.style.left = (event.clientX - rect.left) + 'px';
+                    ripple.style.top = (event.clientY - rect.top) + 'px';
+                    el.appendChild(ripple);
+                    window.setTimeout(function () {
+                        ripple.remove();
+                    }, 600);
+                });
+            }
+
+            splitTitle(document.querySelector('[data-animated-title]'));
+            document.querySelectorAll('[data-ripple]').forEach(attachRipple);
+        })();
+    </script>
+</body>
+</html>

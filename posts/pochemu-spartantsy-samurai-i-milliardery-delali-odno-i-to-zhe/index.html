@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Почему спартанцы, самураи и миллиардеры делали одно и то же? — stenAgram</title>
+    <title>Почему спартанцы, самураи и миллиардеры делали одно и то же? &mdash; stenAgram</title>
     <meta name="description" content="На протяжении всей истории лучшие мировые спортсмены знали то, чего не знает большинство из нас.">
     <meta property="og:title" content="Почему спартанцы, самураи и миллиардеры делали одно и то же?">
     <meta property="og:description" content="На протяжении всей истории лучшие мировые спортсмены знали то, чего не знает большинство из нас.">
@@ -51,6 +51,7 @@
         .post-meta span::before {
             content: "[";
         }
+
         .post-meta span::after {
             content: "]";
         }
@@ -62,6 +63,7 @@
             text-transform: uppercase;
             margin-bottom: 1rem;
             word-break: break-word;
+            overflow: hidden;
         }
 
         .post-tags {
@@ -117,6 +119,9 @@
             text-decoration: none;
             border-bottom: 2px solid #000000;
             font-weight: 700;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
         }
 
         .post-content a:hover {
@@ -229,11 +234,101 @@
             padding: 0.4rem 0.8rem;
             display: inline-block;
             transition: all 0.1s;
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
         }
 
         .post-footer a:hover {
             background: #000000;
             color: #ffffff;
+        }
+
+        .title-reveal {
+            animation: title-reveal 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes title-reveal {
+            from {
+                clip-path: inset(0 100% 0 0);
+                transform: translateX(-0.5rem);
+                opacity: 0;
+            }
+            to {
+                clip-path: inset(0 0 0 0);
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .title-split .char {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(0.45em);
+            animation: char-in 0.4s ease-out forwards;
+            animation-delay: calc(var(--char-index) * 25ms);
+            will-change: transform;
+        }
+
+        .title-split .char.space {
+            width: 0.32em;
+        }
+
+        @keyframes char-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title-split.wave .char {
+            animation: char-drift 1.8s ease-in-out infinite;
+            animation-delay: calc(var(--char-index) * 35ms);
+        }
+
+        .title-split.wave .char-even {
+            --char-drift: -0.12em;
+        }
+
+        .title-split.wave .char-odd {
+            --char-drift: 0.12em;
+        }
+
+        @keyframes char-drift {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(var(--char-drift));
+            }
+        }
+
+        .click-ripple {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0.7rem;
+            height: 0.7rem;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: #000000;
+            opacity: 0.22;
+            pointer-events: none;
+            animation: ripple 0.55s ease-out forwards;
+            z-index: 0;
+        }
+
+        .post-content a:hover .click-ripple,
+        .post-footer a:hover .click-ripple {
+            background: #ffffff;
+            opacity: 0.26;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: translate(-50%, -50%) scale(32);
+                opacity: 0;
+            }
         }
 
         /* --- Responsive --- */
@@ -243,32 +338,611 @@
             .post-content { padding: 1.5rem; }
             .post-title { font-size: 1.5rem; }
             .post-footer { padding: 1.5rem; }
+            .title-split.wave .char { animation: none; }
+        }
+
+        @media (hover: none) {
+            .title-split.wave .char { animation: none; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .title-reveal,
+            .title-split .char,
+            .title-split.wave .char,
+            .click-ripple {
+                animation: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
         }
     </style>
+    <link rel="alternate" type="application/rss+xml" title="stenAgram RSS" href="https://garrul4ik.github.io/blog/feed.xml">
+<link rel="alternate" type="application/atom+xml" title="stenAgram Atom" href="https://garrul4ik.github.io/blog/atom.xml">
+
+<meta property="og:image" content="https://img2.teletype.in/files/1e/31/1e31e654-c50f-499c-b49d-c6f909c43ea9.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img2.teletype.in/files/1e/31/1e31e654-c50f-499c-b49d-c6f909c43ea9.jpeg">
+
+
+    <style>/* note2cms shared components — inherits each theme's palette via CSS fallbacks */
+:root {
+    --n2c-bg: var(--bg, var(--paper, var(--white, #faf9f7)));
+    --n2c-surface: var(--surface, var(--cream, var(--code-bg, var(--gray-100, rgba(128, 128, 128, 0.08)))));
+    --n2c-fg: var(--text, var(--ink, var(--black, #1a1a1a)));
+    --n2c-muted: var(--muted, var(--dim, var(--text-dim, var(--pencil, var(--stone, var(--gray-500, #6b6560))))));
+    --n2c-accent: var(--accent, var(--vermillion, var(--red, var(--green, var(--pink, var(--amber, var(--margin-red, #c45d3e)))))));
+    --n2c-rule: var(--rule, var(--border, var(--gray-300, var(--wash, rgba(128, 128, 128, 0.28)))));
+}
+
+/* --- Site Navigation & Tag Filter Banner --- */
+.n2c-site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin: 1rem 0 2rem;
+    padding: 0.65rem 0;
+    border-top: 1px solid var(--n2c-rule);
+    border-bottom: 1px solid var(--n2c-rule);
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
+}
+
+.n2c-site-nav a {
+    color: var(--n2c-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.n2c-site-nav a:hover,
+.n2c-site-nav a[aria-current="page"] {
+    color: var(--n2c-accent);
+}
+
+.n2c-nav-spacer {
+    margin-left: auto;
+}
+
+.n2c-tag-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 0 0 1.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--n2c-rule);
+    background: var(--n2c-surface);
+    border-radius: 4px;
+    font-size: 0.92rem;
+}
+
+.n2c-tag-banner a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+}
+
+.n2c-tag-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.n2c-tag-link:hover span {
+    border-color: var(--n2c-accent);
+    opacity: 0.85;
+}
+
+/* --- Tags Cloud Page --- */
+.n2c-tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin: 1.5rem 0 3rem;
+}
+
+.n2c-tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border: 1px solid var(--n2c-rule);
+    background: var(--n2c-surface);
+    color: var(--n2c-fg);
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-tag-pill:hover {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-tag-count {
+    font-size: 0.78em;
+    color: var(--n2c-muted);
+}
+
+/* --- Pagination (Zero-JS) --- */
+.n2c-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 2.5rem 0 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--n2c-rule);
+    font-size: 0.9rem;
+}
+
+.n2c-page-numbers {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.n2c-page-link,
+.n2c-page-current,
+.n2c-page-ellipsis,
+.n2c-page-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.55rem;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.n2c-page-link,
+.n2c-page-nav {
+    color: var(--n2c-fg);
+    border: 1px solid var(--n2c-rule);
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-page-link:hover,
+.n2c-page-nav:hover {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-page-current {
+    background: var(--n2c-accent);
+    color: #ffffff;
+    border: 1px solid var(--n2c-accent);
+    font-weight: 600;
+}
+
+.n2c-page-ellipsis {
+    color: var(--n2c-muted);
+}
+
+.n2c-page-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* --- Pure-CSS Scroll-Snap Image Carousel (Strictly Zero JS) --- */
+.n2c-carousel {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.n2c-carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 0.75rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 6px;
+    background: var(--n2c-surface);
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+}
+
+.n2c-carousel-track:focus-visible {
+    outline: 2px solid var(--n2c-accent);
+    outline-offset: 2px;
+}
+
+.n2c-carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.n2c-lightbox-trigger {
+    display: block;
+    width: 100%;
+    cursor: zoom-in;
+    text-decoration: none;
+}
+
+.n2c-carousel-slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 72vh;
+    object-fit: contain;
+    margin: 0 auto;
+    border-radius: 4px;
+}
+
+.n2c-carousel[style*="--n2c-ratio"] .n2c-carousel-slide img {
+    aspect-ratio: var(--n2c-ratio);
+    object-fit: cover;
+}
+
+.n2c-slide-caption {
+    padding: 0.5rem 0.75rem 0.65rem;
+    font-size: 0.85rem;
+    color: var(--n2c-muted);
+    text-align: center;
+}
+
+.n2c-carousel-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 0.65rem;
+}
+
+.n2c-carousel-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.65rem;
+    height: 1.65rem;
+    padding: 0 0.4rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    color: var(--n2c-muted);
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.n2c-carousel-dot:hover,
+.n2c-carousel-dot:focus-visible {
+    border-color: var(--n2c-accent);
+    color: var(--n2c-accent);
+}
+
+.n2c-carousel-caption {
+    margin-top: 0.45rem;
+    font-size: 0.82rem;
+    color: var(--n2c-muted);
+    text-align: center;
+}
+
+/* Progressive pure-CSS scroll buttons for supporting browsers */
+@supports selector(::scroll-button(left)) {
+    .n2c-carousel-track::scroll-button(left),
+    .n2c-carousel-track::scroll-button(right) {
+        background: var(--n2c-surface);
+        color: var(--n2c-fg);
+        border: 1px solid var(--n2c-rule);
+        border-radius: 999px;
+        width: 2.1rem;
+        height: 2.1rem;
+        cursor: pointer;
+        opacity: 0.85;
+    }
+    .n2c-carousel-track::scroll-button(left) {
+        content: "‹";
+    }
+    .n2c-carousel-track::scroll-button(right) {
+        content: "›";
+    }
+}
+
+/* Pure-CSS :target Lightbox */
+.n2c-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.n2c-lightbox:target {
+    display: flex;
+}
+
+.n2c-lightbox-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    cursor: zoom-out;
+}
+
+.n2c-lightbox-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 92vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.n2c-lightbox-inner img {
+    max-width: 88vw;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.n2c-lightbox-close,
+.n2c-lightbox-prev,
+.n2c-lightbox-next {
+    position: fixed;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: rgba(25, 25, 25, 0.82);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    text-decoration: none;
+    font-size: 1.4rem;
+    line-height: 1;
+}
+
+.n2c-lightbox-close {
+    top: 1rem;
+    right: 1rem;
+}
+
+.n2c-lightbox-prev {
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.n2c-lightbox-next {
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.n2c-lightbox-caption {
+    margin-top: 0.75rem;
+    color: #e8e8e8;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .n2c-carousel-track {
+        scroll-behavior: auto;
+    }
+}
+
+@media print {
+    .n2c-carousel-track {
+        display: block;
+        overflow: visible;
+        border: none;
+    }
+    .n2c-carousel-slide {
+        margin-bottom: 1rem;
+        page-break-inside: avoid;
+    }
+    .n2c-carousel-nav,
+    .n2c-lightbox {
+        display: none !important;
+    }
+}
+
+/* --- Series Box, Prev/Next Post Navigation, Related Posts --- */
+.n2c-series {
+    margin: 0 0 2rem;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--n2c-rule);
+    border-left: 3px solid var(--n2c-accent);
+    background: var(--n2c-surface);
+    border-radius: 4px;
+    font-size: 0.92rem;
+}
+
+.n2c-series summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--n2c-fg);
+}
+
+.n2c-series ol {
+    margin: 0.75rem 0 0 1.25rem;
+    padding: 0;
+}
+
+.n2c-series li {
+    margin: 0.3rem 0;
+}
+
+.n2c-series li a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+}
+
+.n2c-series li a:hover {
+    text-decoration: underline;
+}
+
+.n2c-post-extras {
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--n2c-rule);
+}
+
+.n2c-post-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.n2c-post-nav-item {
+    display: block;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 4px;
+    background: var(--n2c-surface);
+    text-decoration: none;
+    color: var(--n2c-fg);
+    transition: border-color 0.15s ease;
+}
+
+.n2c-post-nav-item:hover {
+    border-color: var(--n2c-accent);
+}
+
+.n2c-post-nav-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--n2c-muted);
+    margin-bottom: 0.25rem;
+}
+
+.n2c-post-nav-title {
+    display: block;
+    font-weight: 500;
+    color: var(--n2c-accent);
+}
+
+.n2c-related {
+    margin-top: 1.5rem;
+}
+
+.n2c-related h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--n2c-muted);
+    margin-bottom: 0.75rem;
+}
+
+.n2c-related ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.n2c-related li {
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--n2c-rule);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.92rem;
+}
+
+.n2c-related li a {
+    color: var(--n2c-fg);
+    text-decoration: none;
+}
+
+.n2c-related li a:hover {
+    color: var(--n2c-accent);
+}
+
+.n2c-related-date {
+    color: var(--n2c-muted);
+    font-size: 0.82rem;
+    white-space: nowrap;
+}
+
+/* --- Search Page --- */
+.n2c-search-box {
+    margin: 1.5rem 0 2.5rem;
+}
+
+.n2c-search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid var(--n2c-rule);
+    border-radius: 4px;
+    background: var(--n2c-surface);
+    color: var(--n2c-fg);
+    margin-bottom: 1.25rem;
+}
+
+.n2c-search-input:focus {
+    outline: 2px solid var(--n2c-accent);
+    border-color: var(--n2c-accent);
+}
+
+.n2c-search-results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.n2c-search-results li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--n2c-rule);
+}
+
+.n2c-search-results a {
+    color: var(--n2c-accent);
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.n2c-search-results p {
+    margin: 0.35rem 0 0;
+    color: var(--n2c-muted);
+    font-size: 0.9rem;
+}</style>
 </head>
 <body>
     <article>
         <header class="post-header">
             <div class="post-meta">
-                <span><time datetime="2026-04-01T08:20:38.709212+00:00">April 1, 2026</time></span>
+                <span><time datetime="2026-04-01T08:20:38.709212+00:00">1 апреля 2026</time></span>
                 <span>18 min</span>
             </div>
-            <h1 class="post-title">Почему спартанцы, самураи и миллиардеры делали одно и то же?</h1>
+            <h1 class="post-title title-reveal" data-animated-title>Почему спартанцы, самураи и миллиардеры делали одно и то же?</h1>
             
             <div class="post-tags">
                 
-                <span>clippings</span>
+                <a href="https://garrul4ik.github.io/blog/posts/tags/clippings/" class="n2c-tag-link"><span>clippings</span></a>
                 
-                <span>минимализм</span>
+                <a href="https://garrul4ik.github.io/blog/posts/tags/%D0%BC%D0%B8%D0%BD%D0%B8%D0%BC%D0%B0%D0%BB%D0%B8%D0%B7%D0%BC/" class="n2c-tag-link"><span>минимализм</span></a>
                 
-                <span>философия</span>
+                <a href="https://garrul4ik.github.io/blog/posts/tags/%D1%84%D0%B8%D0%BB%D0%BE%D1%81%D0%BE%D1%84%D0%B8%D1%8F/" class="n2c-tag-link"><span>философия</span></a>
                 
             </div>
             
         </header>
 
         <div class="post-content">
-            <p>На протяжении всей истории лучшие мировые спортсмены знали то, чего не знает большинство из нас.</p>
+            
+<p>На протяжении всей истории лучшие мировые спортсмены знали то, чего не знает большинство из нас.</p>
 <p>От спартанских воинов до современных миллиардеров — у каждого из них есть нечто, что способствует их успеху.</p>
 <p>Дело не в силе, статусе, деньгах и даже не в гениальности.</p>
 <p>Это то, что вы можете использовать немедленно, чтобы освободить время, улучшить когнитивные способности, и, в качестве бонуса, это один из немногих способов повысить производительность, который позволит вам сэкономить деньги.</p>
@@ -277,17 +951,17 @@
 <p>Это закономерность, которая определила судьбы воинов, художников, олимпийцев, серферов и бизнесменов. Хотя ее часто упускают из виду, она сыграла ключевую роль в их выдающихся достижениях.</p>
 <hr />
 <h2 id="_1">Спартанцы</h2>
-<p><img alt="" src="https://img2.teletype.in/files/1e/31/1e31e654-c50f-499c-b49d-c6f909c43ea9.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img2.teletype.in/files/1e/31/1e31e654-c50f-499c-b49d-c6f909c43ea9.jpeg" /></p>
 <p>Возьмем, к примеру, легендарных спартанцев, чья строгая военная дисциплина и скромный образ жизни были основой их силы.</p>
 <p>Они владели немногим, сосредоточившись вместо этого на совершенствовании своих боевых навыков.</p>
 <p>Обладая минимальными ресурсами, несколько сотен спартанцев сдержали натиск тысяч персидских солдат в Фермопилах, продемонстрировав исключительную военную эффективность и выносливость.</p>
 <h2 id="_2">Стоики</h2>
-<p><img alt="" src="https://img1.teletype.in/files/cd/a8/cda88e2f-6c09-4b6f-97a2-1c595daf453d.png" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img1.teletype.in/files/cd/a8/cda88e2f-6c09-4b6f-97a2-1c595daf453d.png" /></p>
 <p>Вспомним стоиков, таких как Сенека и Марк Аврелий, которые избегали атрибутов богатства, предпочитая жизнь, сосредоточенную на внутренней добродетели и простоте.</p>
 <p>Их философия позволяла им сохранять самообладание и принимать эффективные решения даже в условиях сильного стресса и невзгод.</p>
 <p>Аврелий успешно руководил Римом в период многочисленных кризисов, включая войны и эпидемии чумы, руководствуясь своими стоическими принципами. Принципами, которые сохранились с 300 года до нашей эры.</p>
 <h2 id="_3">Самураи</h2>
-<p><img alt="" src="https://img2.teletype.in/files/98/b5/98b5fc14-3317-44b8-a401-466de71e90f1.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img2.teletype.in/files/98/b5/98b5fc14-3317-44b8-a401-466de71e90f1.jpeg" /></p>
 <p>На Востоке самураи феодальной Японии придерживались бусидо — кодекса, прославлявшего бережливость и дисциплину.</p>
 <p>Их жизнь, лишенная излишеств, стала свидетельством силы сосредоточенности и целеустремленности.</p>
 <p>Рассмотрим самурая Миямото Мусаси.</p>
@@ -319,24 +993,24 @@
 <p>Эта философия называется минимализмом.</p>
 </blockquote>
 <p>Сравните этот подход с тем, с чем ежедневно сталкивается среднестатистический работник интеллектуального труда.</p>
-<p>Вы, наверное, знаете, чем это обычно заканчивается&hellip;</p>
+<p>Вы, наверное, знаете, чем это обычно заканчивается…</p>
 <hr />
 <h2 id="ii">II. Стоимость владения</h2>
 <p>Утром вы собираетесь одеться, ищете свою любимую рубашку, но она теряется в хаосе вашего захламленного шкафа.</p>
-<p><img alt="" src="https://img2.teletype.in/files/1a/66/1a66cf9e-3f97-4dfb-b4d9-88a1e226ac07.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img2.teletype.in/files/1a/66/1a66cf9e-3f97-4dfb-b4d9-88a1e226ac07.jpeg" /></p>
 <p>Одежда нагромождается на одежду, часть её носят очень редко, но вся она борется за место и внимание.</p>
 <p>Вы заглядываете в прачечную и достаёте джинсы из сушилки, только чтобы обнаружить, что они уменьшились в размере.</p>
 <p>Собирая сумку на работу и пытаясь найти зарядное устройство, вы роетесь в ящиках, отодвигая ненужные гаджеты, незнакомые кабели и разные мелочи, которые каким-то образом там оказались.</p>
 <p>Вы собираетесь сварить кофе, забыв, что одолжили электрический чайник другу.</p>
-<p>Спустя неделю, когда его наконец вернули, вещь оказалась помятой&hellip;</p>
+<p>Спустя неделю, когда его наконец вернули, вещь оказалась помятой…</p>
 <p>Вы направляетесь к двери, чтобы поехать на работу, и замечаете груду коробок.</p>
 <p>Вещи, которые вы заказали онлайн импульсивно. Каждая нераскрытая коробка — это незавершенное дело, отложенное решение.</p>
-<p>Вы разрезаете один из них ключами, но обнаруживаете, что товар не соответствует ожиданиям, и его нужно вернуть&hellip;</p>
+<p>Вы разрезаете один из них ключами, но обнаруживаете, что товар не соответствует ожиданиям, и его нужно вернуть…</p>
 <p>Опаздывая, вы, открывая гараж, случайно ударяете часы о стену, оставляя на них царапину.</p>
 <p>На мгновение всё останавливается.</p>
 <p>Ваши мысли зацикливаются на царапине, и, сами того не осознавая, вы проводите первые несколько минут дня, поглощенные этим единственным предметом. И следующие тридцать минут вы не можете перестать думать о нем.</p>
 <p>Вы идёте к машине, разглядывая несколько досок для сёрфинга в гараже, которые просто висят там, собирая пыль, словно незримо грызут вас, напоминая о прежних увлечениях и потраченном впустую времени.</p>
-<p>А по дороге на работу, вместо того чтобы подготовиться к предстоящему дню, вы все еще думаете о проклятой царапине на своих часах&hellip;</p>
+<p>А по дороге на работу, вместо того чтобы подготовиться к предстоящему дню, вы все еще думаете о проклятой царапине на своих часах…</p>
 <hr />
 <h2 id="_7">«Размышления о вещах» — это реальная цена владения.</h2>
 <p>Вещи теряются, повреждаются, их приходится возвращать или ремонтировать, или они становятся препятствием между вами и чем-то другим, более важным для вас.</p>
@@ -345,7 +1019,7 @@
 <p>Его исследования выявили ключевую концепцию, которая впоследствии стала основой для понимания психических процессов, решения проблем и эффективности деятельности.</p>
 <p>Это понятие называется когнитивной нагрузкой.</p>
 <p>Когнитивная нагрузка — это объем информации, который мы удерживаем в рабочей памяти в любой момент времени.</p>
-<p><img alt="" src="https://img1.teletype.in/files/c1/9c/c19cec58-6178-471b-bb9f-9a0ac78c02de.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img1.teletype.in/files/c1/9c/c19cec58-6178-471b-bb9f-9a0ac78c02de.jpeg" /></p>
 <h2 id="_8">Ваш мозг под большой нагрузкой</h2>
 <p>Представьте свой мозг как компьютер.</p>
 <p>Вы знаете, когда вы пользуетесь компьютером, и он начинает зависать?</p>
@@ -366,29 +1040,29 @@
 <p>Слишком много машин, и всё забивается.</p>
 <p>Префронтальная кора головного мозга — ваш когнитивный командный центр, отвечающий за рабочую память, концентрацию внимания и принятие решений, — имеет ограниченную емкость.</p>
 <p>Перегрузите его информацией, и эффективность рухнет. Вам будет трудно сосредоточиться, запомнить и принять решение.</p>
-<p><img alt="" src="https://img1.teletype.in/files/8a/5b/8a5b8411-9981-4540-b08b-41c01d0a6483.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img1.teletype.in/files/8a/5b/8a5b8411-9981-4540-b08b-41c01d0a6483.jpeg" /></p>
 <p>А ещё есть энергия.</p>
 <p>Мозг составляет 2% массы тела, но потребляет 20% его энергии.</p>
 <p>Существует предел того, какой объем обработки данных может выдержать система, после которого производительность начнет снижаться.</p>
 <p>Вероятно, эти ограничения служили эволюционной цели: быстрая обработка нескольких важных сигналов (угроз, ресурсов) была более адаптивной, чем медленная обработка всего.</p>
 <p>В результате возникает порог когнитивной нагрузки.</p>
-<p>Если это превышение произойдет, ваша умственная нейронная сеть начнет давать сбои — подобно компьютеру, который &ldquo;задыхается&rdquo; от слишком большого количества открытых программ.</p>
+<p>Если это превышение произойдет, ваша умственная нейронная сеть начнет давать сбои — подобно компьютеру, который “задыхается” от слишком большого количества открытых программ.</p>
 <p>Вот в чём проблема:</p>
 <p>Каждая потерянная рубашка, каждые поцарапанные часы, каждая невозвращенная взятая напрокат вещь — все это неоправданно увеличивает когнитивную нагрузку.</p>
 <p>Постоянный фоновый шум, не имеющий отношения к вашим целям, перегружает ваше внимание.</p>
 <hr />
 <h2 id="iv">IV. ВЛАДЕНИЕ И СОСТОЯНИЕ ПОТОКА</h2>
 <p>С другой стороны, чем ниже когнитивная нагрузка, тем легче войти в состояние потока.</p>
-<p><img alt="" src="https://img3.teletype.in/files/20/00/200070e4-92a1-4b2e-bca1-bf677a60f322.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img3.teletype.in/files/20/00/200070e4-92a1-4b2e-bca1-bf677a60f322.jpeg" /></p>
 <p>Это оптимальное состояние сознания, при котором мы чувствуем себя и функционируем наилучшим образом.</p>
 <p>Состояние потока может возникнуть только тогда, когда всё наше внимание сосредоточено на настоящем моменте.</p>
 <p>Именно для этого и работают триггеры потока:</p>
 <p>С неврологической точки зрения, они увеличивают выработку веществ, влияющих на концентрацию внимания (таких как дофамин и норадреналин), или снижают когнитивную нагрузку.</p>
-<p>Но вот в чем дело&hellip; материальные вещи могут активно препятствовать этому.</p>
+<p>Но вот в чем дело… материальные вещи могут активно препятствовать этому.</p>
 <blockquote>
 <p>Вещи буквально овладевают разумом, увеличивая когнитивную нагрузку до такой степени, что подавляют состояние потока.</p>
 </blockquote>
-<p><img alt="" src="https://img2.teletype.in/files/1c/21/1c21b763-b251-47c5-b788-fba24ede5ace.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img2.teletype.in/files/1c/21/1c21b763-b251-47c5-b788-fba24ede5ace.jpeg" /></p>
 <p>Вот как следует к этому относиться:</p>
 <p>Каждое принадлежащее вам имущество привлекает к себе определенное внимание.</p>
 <p>Каждая вещь представляет собой фрагмент информации, который мозг должен обработать, требуя ресурсов внимания для распознавания, категоризации и принятия решений, что, в свою очередь, увеличивает когнитивную нагрузку.</p>
@@ -411,10 +1085,10 @@
 </ul>
 <p>Общая суточная концентрация внимания: 4330 секунд или около 1,2 часа в день.</p>
 <p>За год это составляет ошеломляющие 300+ часов, или примерно 14 дней, потраченных только на уход за этими вещами. Это полмесяца непрерывного внимания, посвященного исключительно нескольким предметам.</p>
-<p><img alt="" src="https://img1.teletype.in/files/8a/60/8a60bc13-bf62-4335-a454-0abc9199166c.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img1.teletype.in/files/8a/60/8a60bc13-bf62-4335-a454-0abc9199166c.jpeg" /></p>
 <p>Но вот в чем дело:</p>
 <p>Среднестатистический работник интеллектуального труда владеет гораздо большим количеством вещей, чем пара брюк, iPad, часы, лодка или дом.</p>
-<p>От одежды, игрушек, предметов домашнего обихода, мебели, электроники, средств личной гигиены, книг, старых фотографий, музыкальных инструментов&hellip;</p>
+<p>От одежды, игрушек, предметов домашнего обихода, мебели, электроники, средств личной гигиены, книг, старых фотографий, музыкальных инструментов…</p>
 <blockquote>
 <p>Среднее количество вещей в типичном американском домохозяйстве часто называют цифрой 300 000 предметов.</p>
 </blockquote>
@@ -425,7 +1099,7 @@
 <p>В таких случаях материальные вещи становятся еще более разрушительными для нашего внимания.</p>
 <p>Как сказал крестный отец движения «флоу» Михай Чиксентмихайи:</p>
 <blockquote>
-<p>«Проблема в том, что чем больше эго отождествляется с символами, находящимися вне его собственного «я», тем более уязвимым оно становится&hellip; внезапная потеря имущества приводит к «сужению нашей личности, частичному превращению нас самих в ничто». Чтобы предотвратить свое уничтожение, эго заставляет нас постоянно быть начеку, выискивая все, что может угрожать символам, на которые оно опирается&hellip; что искажает реальность, чтобы она соответствовала потребностям эго».</p>
+<p>«Проблема в том, что чем больше эго отождествляется с символами, находящимися вне его собственного «я», тем более уязвимым оно становится… внезапная потеря имущества приводит к «сужению нашей личности, частичному превращению нас самих в ничто». Чтобы предотвратить свое уничтожение, эго заставляет нас постоянно быть начеку, выискивая все, что может угрожать символам, на которые оно опирается… что искажает реальность, чтобы она соответствовала потребностям эго».</p>
 </blockquote>
 <h2 id="v">V. Как материальные вещи убивают творчество</h2>
 <p>Увеличение когнитивной нагрузки не просто отнимает ваше время и поглощает ресурсы, необходимые для продуктивности и состояния потока.</p>
@@ -435,7 +1109,7 @@
 <p>Каждый раз, когда вы приобретаете новую вещь, это как посадить очередной сорняк в этом саду.</p>
 <p>Каждая минута, потраченная на уход за этим предметом или беспокойство по этому поводу, способствует распространению сорняка.</p>
 <p>Постепенно эти сорняки захватывают сад, оставляя мало места для цветов и растений, способствующих творческому мышлению, решению проблем и самоанализу.</p>
-<p><img alt="" src="https://img4.teletype.in/files/7e/22/7e22108c-61f7-4614-96be-4f464f4beab9.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img4.teletype.in/files/7e/22/7e22108c-61f7-4614-96be-4f464f4beab9.jpeg" /></p>
 <p>Проще говоря: вещи владеют разумом.</p>
 <p>От малого до большого. Вы жонглируете не только текущими потребностями, но и совокупными потребностями, связанными со всеми принадлежащими вам вещами.</p>
 <p>Как продолжил Чиксентмихайи:</p>
@@ -448,7 +1122,7 @@
 <blockquote>
 <p>Короче говоря, минимализм ведет к максимализму в исполнении.</p>
 </blockquote>
-<p><img alt="" src="https://img1.teletype.in/files/44/e3/44e3d172-607d-47cf-9b2f-f9c17b0690f6.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img1.teletype.in/files/44/e3/44e3d172-607d-47cf-9b2f-f9c17b0690f6.jpeg" /></p>
 <h2 id="viii">VIII. КАК ПРИМЕНЯТЬ МИНИМАЛИЗМ ДЛЯ ДОСТИЖЕНИЯ СОСТОЯНИЯ ПОТОКА</h2>
 <p>Итак, как это сделать на практике? Как перейти от максималиста по количеству вещей и минималиста по производительности к максималисту по производительности и минималисту по количеству вещей?</p>
 <p>Для достижения состояния потока и максимальной производительности вам не обязательно полностью придерживаться минимализма. Вместо этого вы можете минимизировать то, что наиболее важно, и получить основную выгоду.</p>
@@ -484,7 +1158,7 @@
 <p>В его доме, Чартвелле, было множество книг, картин и предметов, отражающих его интересы в истории, стратегии и культуре.</p>
 <p>Вещи выбираются не только из соображений практичности, но и в качестве источника вдохновения.</p>
 <p>Он признал: «Все великие вещи просты».</p>
-<p><img alt="" src="https://img3.teletype.in/files/66/d5/66d51ab7-8d64-4cdc-911d-22f7377364a5.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img3.teletype.in/files/66/d5/66d51ab7-8d64-4cdc-911d-22f7377364a5.jpeg" /></p>
 <h2 id="_12">Выбор уровня</h2>
 <p>Идеального уровня не существует — всё зависит от ваших ценностей и целей. У разных людей разная степень когнитивной нагрузки, которую создают материальные вещи.</p>
 <p>Но запомните вот что:</p>
@@ -494,7 +1168,7 @@
 <h2 id="2_1">Шаг 2: Проведите чистку от ненужных вещей.</h2>
 <p>После трех лет жизни в качестве минималистского кочевника я обосновался в доме своей мечты в Лос-Анджелесе.</p>
 <p>Не успел я оглянуться, как всё изменилось.</p>
-<p><img alt="" src="https://img4.teletype.in/files/7a/7d/7a7dbee0-4216-40b9-bc8b-c4644a99bcbf.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img4.teletype.in/files/7a/7d/7a7dbee0-4216-40b9-bc8b-c4644a99bcbf.jpeg" /></p>
 <p>Я заполнил свой огромный дом гаджетами и пищевыми добавками, а из гардеробной вываливалась стильная одежда.</p>
 <p>Теперь мои утра начинались с того, что я распутывал запутанную кучу зарядных устройств, чтобы найти единственный работающий кабель для iPhone, перебирал множество наушников, в основном правых, чтобы найти работающие левые, и копался в шкафу, который был слишком обширен для нашего климата.</p>
 <p>К тому моменту, когда я, шатаясь, добрался до своего домашнего кабинета и оценил, какое из четырех кресел лучше всего способствует продуктивности, мой разум был затуманен и измотан бесчисленными мелкими решениями.</p>
@@ -504,7 +1178,7 @@
 <p>Поэтому я провел генеральную уборку: я вынес из комнаты абсолютно все, кроме кровати и дивана.</p>
 <p>После этого я оставил себе те 15%, которые мне действительно были нужны, а от остального избавился кто-то другой.</p>
 <p>Именно это вам и нужно сделать на данном этапе.</p>
-<p><img alt="" src="https://img2.teletype.in/files/d0/d4/d0d4ddf7-e047-4796-a58c-a8987a3698d0.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img2.teletype.in/files/d0/d4/d0d4ddf7-e047-4796-a58c-a8987a3698d0.jpeg" /></p>
 <h2 id="_13">Как провести чистку</h2>
 <p>Для начала выделите целый день на избавление от ненужных вещей.</p>
 <p>Это может занять меньше времени, но, вероятно, вам понадобится хотя бы один день. Чего вам точно не нужно, так это растягивать процесс на недели и недели. Вы превращаете это в событие и просто выполняете работу.</p>
@@ -520,7 +1194,7 @@
 <p>Критерием оценки каждой вещи является вопрос: является ли этот инструмент инструментом, способствующим развитию моего мастерства и профессиональной деятельности?</p>
 </blockquote>
 <p>Если ответ «да», то оставьте его себе.</p>
-<p>Если ответ &ldquo;нет&rdquo;, то откажитесь: продайте, пожертвуйте, отдайте, сдайте на переработку, выбросьте.</p>
+<p>Если ответ “нет”, то откажитесь: продайте, пожертвуйте, отдайте, сдайте на переработку, выбросьте.</p>
 <p>Выставьте всё на обочину, чтобы забрали, или сложите всё в гараж и пригласите всех своих друзей из социальных сетей заехать в течение следующих 48 часов и забрать всё, что им захочется.</p>
 <p>Это быстрый и увлекательный способ избавиться от лишних вещей и немедленно восстановить значительную часть когнитивных функций.</p>
 <p>Например, если вы занимаетесь бразильским джиу-джитсу, возможно, вы сохраните свое кимоно, пищевые добавки и массажные валики для восстановления.</p>
@@ -530,9 +1204,9 @@
 <p>Для менее агрессивных минималистов</p>
 <p>Критерии отбора для агрессивных минималистов просты. Если вы менее радикальны, вопрос отбора будет другим.</p>
 <blockquote>
-<p>Приобретая каждую вещь, спрашивайте себя: «Что я ожидаю от неё получить&hellip; и стоит ли это затрат на её содержание?»</p>
+<p>Приобретая каждую вещь, спрашивайте себя: «Что я ожидаю от неё получить… и стоит ли это затрат на её содержание?»</p>
 </blockquote>
-<p>Иными словами, с учетом компромисса между когнитивными функциями и производительностью&hellip; стоит ли оно своих денег?</p>
+<p>Иными словами, с учетом компромисса между когнитивными функциями и производительностью… стоит ли оно своих денег?</p>
 <p>Теперь вы получили представление о том, каковы когнитивные, творческие и функциональные издержки владения.</p>
 <p>Иными словами, вопрос можно сформулировать так: «Люблю ли я это больше, чем потенциальные издержки, связанные с потерей внимания и профессиональным ростом?»</p>
 <p>Ответ всегда однозначен: «да» или «нет».</p>
@@ -551,7 +1225,7 @@
 <p>Это шанс избавиться от стресса, хлопот и когнитивной нагрузки, связанных с вашими вещами, и настроиться на оптимальный режим работы.</p>
 <hr />
 <h2 id="3_1">Шаг 3: Поддержание минимализма</h2>
-<p>Вы достигли желаемого оптимального баланса&hellip; теперь вам нужен простой способ его поддержания.</p>
+<p>Вы достигли желаемого оптимального баланса… теперь вам нужен простой способ его поддержания.</p>
 <p>Вот как избежать дисбаланса, который случился со мной после нескольких лет жизни в Лос-Анджелесе.</p>
 <p>К счастью, поддержание чистоты проще и занимает меньше времени, чем избавление от ненужных вещей.</p>
 <p>Все, что требуется, — это эвристический алгоритм для добавления новых объектов в систему.</p>
@@ -571,7 +1245,7 @@
 <p>Психолог Михай Чиксентмихайи провел полезное различие между удовольствием, к которому мы часто стремимся, покупая что-либо, выходящее за рамки необходимого, и наслаждением, которое мы получаем от осмысленного участия в работе и состояния потока.</p>
 <p>Удовольствие не приводит к развитию навыков, личностному росту или лучшему будущему.</p>
 <p>Удовольствие, получаемое через состояние потока, действительно приносит пользу.</p>
-<p><img alt="" src="https://img1.teletype.in/files/c3/cc/c3cc782a-1465-448a-8b16-fbb8a094a92b.jpeg" /></p>
+<p><img alt="" decoding="async" loading="lazy" src="https://img1.teletype.in/files/c3/cc/c3cc782a-1465-448a-8b16-fbb8a094a92b.jpeg" /></p>
 <h2 id="_14">Резервная копия ежегодной очистки</h2>
 <p>Предположим, вы перестали использовать эвристический метод, заключающийся либо в удалении вещи перед её добавлением, либо в сопоставлении стоимости владения с временным выбросом нейрохимических веществ. В этом случае есть запасной вариант: проводите ежегодную «чистку».</p>
 <p>Здесь вам нужно повторить процесс сбора всех своих вещей и подвергнуть их следующему вопросу:</p>
@@ -588,11 +1262,112 @@
 <p>И вы можете внедрить его, просто избавившись от большей части своих вещей, найдя оптимальный баланс минимализма, а затем переосмыслив свое отношение к вещам в долгосрочной перспективе.</p>
 <p>Выбор за вами.</p>
 <p><strong>Продолжайте двигаться по нисходящей спирали накопления или выберите целенаправленный путь сокращения расходов.</strong></p>
+
+<aside class="n2c-post-extras" aria-label="Post navigation">
+    
+    <nav class="n2c-post-nav">
+        
+        <a href="https://garrul4ik.github.io/blog/posts/note2cms-publisher-publikatsiia-iz-obsidian-odnim-klikom/" class="n2c-post-nav-item" rel="prev">
+            <span class="n2c-post-nav-label">← Предыдущий пост</span>
+            <span class="n2c-post-nav-title">note2cms-publisher: Публикация из Obsidian одним кликом</span>
+        </a>
+        
+        
+        <a href="https://garrul4ik.github.io/blog/posts/novosti-regulirovanie-ssha/" class="n2c-post-nav-item" rel="next">
+            <span class="n2c-post-nav-label">Следующий пост →</span>
+            <span class="n2c-post-nav-title">🔈Новости  ⚖️Регулирование  США🇺🇸</span>
+        </a>
+        
+    </nav>
+    
+
+    
+    <div class="n2c-related">
+        <h3>Похожие посты</h3>
+        <ul>
+            
+            <li>
+                <a href="https://garrul4ik.github.io/blog/posts/roskomnadzor-annuliroval-1967-litsenzii-operatorov-sviazi/">Роскомнадзор аннулировал 1967 лицензий операторов связи</a>
+                <span class="n2c-related-date">22 апреля 2026</span>
+            </li>
+            
+            <li>
+                <a href="https://garrul4ik.github.io/blog/posts/mortalezz-openclaw-bash-script-to-provision-openclaw-kimi-2-5-tailscale-on-fresh/">mortalezz/openclaw: Bash script to provision Openclaw + Kimi 2.5 + Tailscale on fresh Ubuntu box</a>
+                <span class="n2c-related-date">1 апреля 2026</span>
+            </li>
+            
+            <li>
+                <a href="https://garrul4ik.github.io/blog/posts/rise-of-the-ai-soldiers/">Rise of the AI Soldiers</a>
+                <span class="n2c-related-date">1 апреля 2026</span>
+            </li>
+            
+        </ul>
+    </div>
+    
+</aside>
+
         </div>
     </article>
 
     <footer class="post-footer">
-        <a href="https://garrul4ik.github.io/blog/posts/">← All Posts</a>
+        <a href="https://garrul4ik.github.io/blog/posts/" data-ripple>&larr; Все посты</a>
     </footer>
+
+    <script>
+        (function () {
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function splitTitle(el) {
+                if (!el || reduceMotion) {
+                    return;
+                }
+                var text = el.textContent || '';
+                if (!text.trim()) {
+                    return;
+                }
+
+                el.setAttribute('aria-label', text);
+                el.textContent = '';
+                el.classList.add('title-split');
+
+                Array.from(text).forEach(function (ch, idx) {
+                    var span = document.createElement('span');
+                    span.className = 'char ' + (idx % 2 === 0 ? 'char-even' : 'char-odd');
+                    span.style.setProperty('--char-index', idx);
+                    if (ch === ' ') {
+                        span.classList.add('space');
+                        span.innerHTML = '&nbsp;';
+                    } else {
+                        span.textContent = ch;
+                    }
+                    el.appendChild(span);
+                });
+
+                window.setTimeout(function () {
+                    el.classList.add('wave');
+                }, 750);
+            }
+
+            function attachRipple(el) {
+                if (!el || reduceMotion) {
+                    return;
+                }
+                el.addEventListener('click', function (event) {
+                    var rect = el.getBoundingClientRect();
+                    var ripple = document.createElement('span');
+                    ripple.className = 'click-ripple';
+                    ripple.style.left = (event.clientX - rect.left) + 'px';
+                    ripple.style.top = (event.clientY - rect.top) + 'px';
+                    el.appendChild(ripple);
+                    window.setTimeout(function () {
+                        ripple.remove();
+                    }, 600);
+                });
+            }
+
+            splitTitle(document.querySelector('[data-animated-title]'));
+            document.querySelectorAll('[data-ripple], .post-content a').forEach(attachRipple);
+        })();
+    </script>
 </body>
 </html>
